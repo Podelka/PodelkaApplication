@@ -1,0 +1,241 @@
+﻿::-moz-selection {
+    background: #fc6060; 
+    color: #fff;
+}
+::-webkit-selection {
+    background: #fc6060;
+    color: #fff;
+}
+::selection {
+    background: #fc6060; 
+    color: #fff;
+}
+
+body {
+    font-family: PT Sans, Calibri, Segue Ui; 
+    margin: 0;
+}
+#bg {
+    position:fixed; 
+    top:-50%; 
+    left:-50%; 
+    width:200%; 
+    height:200%;
+}
+#bg img {
+    position:absolute; 
+    top:0; 
+    left:0; 
+    right:0; 
+    bottom:0; 
+    margin:auto; 
+    min-width:50%; 
+    min-height:50%;
+}
+
+/*--- Форма входа ---*/
+.container {
+    position: absolute; 
+    text-align: center; 
+    opacity: 0; 
+    transition: 1s;
+}
+.container h3 {
+	font-size: 30px;
+	color: #fff;
+	margin: 0 0 16px;
+	letter-spacing: 1px;
+	font-weight: 700;
+	text-shadow: 1px 1px 0px rgba(36,36,36,.4);
+	letter-spacing: -0.2px;
+}
+.container p.sub {
+    color: #f5f5ff; 
+    font-size: 11px; 
+    font-style: italic;
+}
+
+#regForm {
+	position: relative;
+	width: 280px;
+	height: 280px;
+	padding: 36px;
+	background: #fff;
+	border-radius: 4px;
+	z-index:1; 
+	box-shadow: 0 0 5px rgba(34, 34, 34, 0.3);
+	cursor: default;
+	transition: .7s;
+}
+#regForm label {
+    float: left; 
+    margin-bottom: 10px; 
+    font-size: 13px; 
+    color: #7a7a7a;
+}
+#regForm button {
+	background: none; 
+	border: 0; 
+	outline: 0; 
+	color: #7a7a7a; 
+	font-size: 20px; 
+	position: absolute; 
+	margin: 0; 
+	top: 0px; 
+	right: 5px;
+	transition: .3s;
+}
+#regForm button:hover {
+    color: #555; 
+    transition: .2s;
+}
+#regForm input[type=text], #regForm input[type=password], #regForm input[type=email] {
+	width: 248px;
+	height: 34px;
+	margin: 0 0 16px;
+	padding: 1px;
+	padding-left: 30px;
+	font-size: 12px;
+}
+#reg { 
+	background: #fc6060; 
+	padding: 12px 69px;
+	border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px;
+}
+#reg:hover{
+    background: #E25656;
+    transition: .2s;
+}
+#regForm input[type=submit], #regForm input[type=button] {
+	width: 280px; 
+	height: 40px; 
+	border: 0; 
+	outline: 0; 
+	background: #fc6060; 
+	border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px;
+	color: #fff; 
+	font-weight:700; 
+	font-size: 12px; 
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	transition: .3s;
+	cursor: pointer;
+	font-family: PT Sans;
+}
+#regForm input[type=submit]:hover, #regForm input[type=button]:hover {
+    background: #E25656; 
+    transition: .2s;
+}
+a#reg {
+	color: #fff!important; 
+	font-weight:700; 
+	font-size: 12px!important; 
+	text-transform:uppercase; 
+	letter-spacing: 1px; 
+	transition: .3s;
+	text-decoration:none;
+}
+
+#regForm a, .remCheck {
+    color: #7a7a7a; 
+    font-size: 13px; 
+    margin-bottom: 6px; 
+    transition: .3s;
+}
+#regForm a:hover {
+    color: #fc6060; 
+    transition: .2s;
+}
+#regForm a {
+    float: right;
+}
+
+input {
+    border: 1px solid #cecece;
+    transition: .2s;
+}
+input:focus {
+    border: 1px solid #fc6060;
+    outline: none;
+    transition: .5s;
+}
+
+#mail {
+    background-image:url(../img/icon/mail.png); 
+    background-repeat:no-repeat; 
+    background-position: 8px 10px;
+}
+#password {
+    background-image:url(../img/icon/lock.png); 
+    background-repeat:no-repeat; 
+    background-position: 8px 8px;
+}
+
+.remCheck {
+    float: left;
+}
+.hrText {
+    margin: 10px; 
+    color: #7a7a7a; 
+    font-style:italic; 
+    font-size: 14px; 
+    position: relative;
+}
+.hrText span {
+    background: #fff;
+    position: relative;
+    z-index: 5;
+    padding: 0 10px;
+}
+.hrText:after {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 1px;
+	background: #bababa;
+	position: absolute;
+	top: 9px;
+	z-index: 1;
+}
+
+.remCheck {
+    vertical-align: middle;
+}
+.remCheck input[type="checkbox"] {
+    margin: 2px 4px 0px 0px;
+}
+.textCheck {
+    float: left;
+}
+
+
+/*Я добавил*/
+.text-danger {
+    font-size: 10px; 
+    color: #fe7878; 
+    position: absolute; 
+    margin-top: -16px; 
+    left: 38px;
+}
+.validation-summary-errors {
+    background: rgba(255,50,50,.65); 
+    width: 352px; 
+    position: absolute; 
+    left: 0; 
+    top: 0px;
+    border-radius: 4px 4px 0px 0px;
+    color: #fff;
+    margin-top: 0;
+}
+.validation-summary-errors ul {
+    display: inline;
+}
+.validation-summary-errors ul > li {
+    display: block; 
+    -webkit-margin-before: -0.5em; 
+    -webkit-margin-after: -0.5em;
+}

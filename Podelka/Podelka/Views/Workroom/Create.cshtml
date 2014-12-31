@@ -1,0 +1,76 @@
+﻿@using Podelka.Models
+@model Podelka.Models.WorkroomProfileCreate
+@{
+    ViewBag.Title = "Создание мастерской";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div class="profileView clearfix">
+    <div class="center">
+        <div class="leftSidebar createSidebar createForm">
+            <h2>Открытие мастерской</h2>
+            <img src="~/Content/img/shop.png">
+        </div>
+
+
+        <div class="rightContent createBody">
+
+            @using (Html.BeginForm("Create", "Workroom", FormMethod.Post, new { @class = "createForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <img src="~/Content/img/280x280.gif">
+                
+                <div class="formName">
+                    @Html.TextBoxFor(m => m.Name, new { name = "nameWorkshop", placeholder = "Введите название мастерской" })<br />
+                    @Html.TextAreaFor(m => m.Description, new { placeholder = "Напишите пару слов о вашей деятельности.." })<br />
+                </div>
+
+                <div class="s123">
+                    <div class="formReg">
+                        <label for="regType">Тип регистрации:</label><br />
+                        @foreach (RegisterTypeModel item in Model.RegisterTypes)
+                        {
+                            @Html.RadioButtonFor(m => item.IsSelected, new { name = "regType" })
+                            @item.Name
+                            <br />
+                        }
+                        @*<input type="radio" name="regType" value="0" checked>Нет регистрации<br />
+                            <input type="radio" name="regType" value="1">Справка ремесленника<br />*@
+                    </div>
+
+                    <br />
+
+                    <div class="formPay">
+                        <label for="deliver">Способы оплаты:</label><br />
+                        @foreach (PayMethodModel item in Model.PayMethods)
+                        {
+                            @*Html.CheckBox("deliver", new { value = item.IsSelected, @checked = false });
+                                @item.Name
+                                <br />*@
+                            @Html.CheckBoxFor(m => item.IsSelected, new { name = "deliver" })
+                            @item.Name
+                            <br />
+                        }
+                        @*<input type="checkbox" name="deliver" value="1">Наличные<br />*@
+                    </div>
+
+                    <br />
+
+                    <div class="formDeliver">
+                        <label for="deliver">Способы доставки:</label><br />
+                        @foreach (DeliveryMethodModel item in Model.DeliveryMethods)
+                        {
+                            @Html.CheckBoxFor(m => item.IsSelected, new { name = "deliver" })
+                            @item.Name
+                            <br />
+                        }
+                    </div>
+
+                    <br />
+                </div>
+                <input type="submit" value="Создать" class="buttonCreate">
+            }
+        </div>
+    </div>
+</div>

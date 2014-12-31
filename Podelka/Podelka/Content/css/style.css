@@ -1,0 +1,719 @@
+﻿@charset "utf-8";
+::-moz-selection {
+    background: #fc6060; 
+    color: #fff;
+}
+::-webkit-selection {
+    background: #fc6060;
+    color: #fff;
+}
+::selection {
+    background: #fc6060; 
+    color: #fff;
+}
+
+/*--- Всплывающая подсказка ---*/
+.wrap_element {
+    position:relative; 
+    font-size: 12px; 
+    text-transform: none; 
+    font-weight: 100; 
+    color: #fff;
+}
+.wrap_element span {
+    opacity: 0;
+    position:absolute; 
+    top: -10px; 
+    right: 0px;
+    background: #5a5a5a;
+    padding: 5px 10px;
+    width: 98px;
+    overflow: auto;
+    text-align: center;
+    transition: .1s;
+    border-bottom: 2px solid #fc6060;
+}
+.wrap_element:hover span {
+    opacity: .9;
+}
+
+/*--- Основная часть ---*/
+body {
+    font-family: PT Sans, Calibri; 
+    margin: 0; 
+    padding: 0px; 
+    cursor: default; 
+    color: #2e2e2e;
+}
+button:focus, input[type="button"]:focus {
+    border: none; 
+    outline: none;
+}
+a {
+    color: inherit; 
+    text-decoration:none;
+}
+.center {
+    width: 1200px; 
+    padding: 0px 20px; 
+    margin: 0 auto; 
+    position: relative;
+}
+.clearfix:after{
+    content:''; 
+    display:table; 
+    clear:both;
+}
+button, input[type="submit"], input[type="button"]{
+	margin: 10px 0;
+	width: 240px; 
+	height: 40px; 
+	border: 0; 
+	outline: 0; 
+	background: #fc6060; 
+	border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px;
+	color: #fff; 
+	font-weight:700; 
+	font-size: 12px; 
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	transition: .3s;
+	cursor: pointer;
+	font-family: PT Sans, Calibri;
+}
+button:hover, input[type="submit"]:hover, input[type="button"]:hover {
+    background: #E25656; 
+    transition: .2s;
+}
+/*--- Главное меню ---*/
+.menuMain {
+    background: #fff; 
+    width: 100%; 
+    text-transform:lowercase;
+}
+.menuMain ul {
+    margin: 0; 
+    padding: 0;
+}
+.menuMain ul > li {
+    display: inline;
+}
+
+/*--- Первая строка меню ---*/
+.first.menuLevel {
+    color:#7a7a7a; 
+    font-size: 13px; 
+    height: 40px;
+}
+.first.menuLevel ul {
+    margin-left: 250px; 
+    padding: 12px 0; 
+    cursor: default;
+}
+.first.menuLevel ul > li {
+    margin-right: 40px; 
+    padding: 12px 0 11px;
+}
+.first.menuLevel ul > li > a {
+    padding: 12px 1px; 
+    transition: .3s
+}
+.first.menuLevel ul > li > a:hover {
+    color: #fc6060; 
+    transition: .1s;
+}
+
+/*--- Вторая строка меню ---*/
+.second.menuLevel {
+	color: #3a3a3a; 
+	font-size: 16px; 
+	font-weight: 700; 
+	text-transform:uppercase; 
+	height: 80px;
+	border-bottom: 1px solid #e9e9e9;
+	border-top: 1px solid #e9e9e9;
+	position: relative;
+}
+.second.menuLevel ul {
+    margin: 30px 0; 
+    margin-left: 70px; 
+    float: left;
+}
+.second.menuLevel ul > li {
+    margin-right: 50px; 
+    cursor: pointer; 
+    transition: .3s;
+}
+.second.menuLevel ul > li:hover {
+    color: #fc6060; 
+    transition: .1s;
+}
+.logo {
+    width: 180px; 
+    height: 40px; 
+    float: left; 
+    margin: 20px 0;
+}
+.mainButton {
+    float: right; 
+    width: 123px;
+}
+.addPost, .findButton, .logIn {
+	margin: 22px 0;
+	width: 36px;
+	height: 36px;
+	background-color: #fc6060;	
+	background-repeat: no-repeat;  
+	cursor: pointer;
+	transition: .3s;
+	margin-left: 5px;
+	position: relative;
+	float: left;
+}
+.addPost:hover, .findButton:hover, .logIn:hover {
+    background-color: #E25656; 
+    transition: .2s;
+}
+
+.logIn {
+    background-image: url(../img/login.png); 
+    background-position: 10px;
+}
+.addPost {
+    background-image: url(../img/add.png); 
+    background-position: 10px;
+}
+.findButton {
+    background-image:url(../img/find.png); 
+    background-position: 9.5px;
+}
+.findLine {
+    display: none; 
+    position: absolute; 
+    top: 22px; 
+    right: 56px;
+}
+.findLine > input {
+    height: 26px; 
+    outline: none; 
+    border: 4px solid #fc6060; 
+    padding-left: 4px;
+}
+.findLine > input[type="url"]:focus {
+    border: 4px solid #fc6060;
+}
+/*--- Третий уровень меню ---*/
+.third.menuLevel {
+    color: #5a5a5a; 
+    font-size: 13px; 
+    height: 50px; 
+    border-bottom: 1px solid #e9e9e9;
+}
+.third.menuLevel ul {
+    padding: 17px 0; 
+    display: inline-block;
+}
+.third.menuLevel ul > li {
+    padding-right: 40px;
+}
+.third.menuLevel ul > li:nth-last-child(1) {
+    padding-right: 0px;
+}
+.third.menuLevel ul > li > a {
+    transition: .3s; 
+    padding: 16px 0;
+}
+.third.menuLevel ul > li > a:hover {
+    color: #fc6060; 
+    transition: .1s;
+}
+.third.menuLevel ul > li  {
+	background-image: url(../img/menu.png);
+	background-repeat: no-repeat;
+	width: 14px;
+	height: 15px;
+	padding-left: 22px;
+}
+.third.menuLevel ul > li.clothing {
+	background-position: 0px -160px;
+}
+.third.menuLevel ul > li.man {
+	background-position: 0px -16px;
+}
+.third.menuLevel ul > li.gift {
+	background-position: 0px -31px;
+}
+.third.menuLevel ul > li.jewelry {
+	background-position: 0px -47px;
+}
+.third.menuLevel ul > li.accessory {
+	background-position: 0px -63px;
+}
+.third.menuLevel ul > li.child {
+	background-position: 0px -78px
+}
+.third.menuLevel ul > li.house {
+	background-position: 0px -95px;
+}
+.third.menuLevel ul > li.pets {
+	background-position: 0px -113px;
+}
+.third.menuLevel ul > li.stationery {
+	background-position: 0px -128px;
+}
+.third.menuLevel ul > li.care {
+	background-position: 0px -144px;
+}
+
+/*--- Главный контент ---*/
+.mainContent {
+	background: url(../img/back.jpg);
+	width: 100%;
+	height: 300px;
+	background-size: cover;
+}
+.mainContent h2 {
+	color: #fff;
+	font-size: 30px;
+	line-height: 40px;
+	font-weight: 100;
+	font-style:italic;
+	padding-top: 70px;
+	margin: 0;
+	margin-bottom: 14px;
+}
+.mainContent input[type="button"]{
+	width: 250px; 
+	height: 50px; 
+	background: none; 
+	border: 4px solid #fff;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px; 
+	cursor: pointer;
+	transition: .4s;
+}
+.mainContent button:hover {
+    background: rgba(255,255,255, .2); 
+    transition: .2s;
+}
+
+/*--- Страница отоброжения профиля ---*/
+.profileView {
+    background: #f5f5f5; 
+    padding-bottom: 20px; 
+    padding-top: 20px;
+}
+/*--- Левая сторона ---*/
+.leftSidebar { 
+	width: 300px; 
+	background: #fff; 
+	float: left; 
+	margin-right: 20px; 
+	text-align:center; 
+	color: #2e2e2e; 
+	outline: 1px #eaeaea solid;
+	padding-bottom: 10px;
+}
+.leftSidebar img { 
+    width: 300px; 
+    height: 300px;
+    margin-bottom: 5px;
+}
+.leftSidebar p {
+    margin: 10px 0;
+}
+.leftSidebar h3 {
+    margin: 5px 0 10px;
+}
+
+.sbName {
+    font-size: 18px; 
+    font-weight: 700;
+}
+.sbCity {
+    font-style:italic; 
+    font-size: 16px; 
+    font-weight: 700; 
+    color: #5a5a5a; 
+    padding-right: 18px;
+}
+p.sbCity {
+    margin-bottom: 14px;
+}
+.sbCity img {
+    width: 14px; 
+    height: 14px; 
+    margin-right: 4px;
+    margin-bottom: 0px;
+}
+.sbPhone, .sbSite, .sbSocial, .sbSkype {
+    text-align: left;  
+    width: 220px; 
+    font-size: 14px; 
+    padding: 0 40px;
+}
+.sbSite img, .sbSocial img, .sbSkype img {
+    width: 12px; 
+    height: 12px; 
+    margin-right: 4px;
+    margin-bottom: 0px;
+}
+
+.hrText {
+    color: #9a9a9a; 
+    font-style:italic; 
+    font-size: 14px; 
+    position: relative;
+}
+.hrText span {
+    background: #fff; 
+    position: relative;	
+    z-index: 5;	
+    padding: 0 10px;
+}
+.hrText:after {
+    content: '';	
+    display: block;
+    width: 100%; 
+    height: 1px; 
+    background: #eaeaea; 
+    position: absolute; 
+    top: 9px; 
+    z-index: 1;
+}
+
+.profileButton {
+    width: 240px; 
+    margin: 0px auto; 
+    transition: .2s; 
+    padding: 10px 0;
+}
+a.mailMakers {
+	background: none;
+	border: 2px solid #fc6060;
+	color: #fc6060;
+	margin: 0;
+	float: left;
+	padding: 8px 37px;
+	font-weight: 700;
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	border-radius: 0px 3px 3px 0px;
+	padding: 10px 35px;
+	height: 16px; width: 124px;
+}
+.mailSquare {
+    width: 40px; 
+    height: 40px; 
+    float: left; 
+    background-color: #fc6060; 
+    border-radius: 3px 0px 0px 3px;
+}
+.mailSquare .imageSquare {
+	background: url(../img/icon/mailProfile.png) no-repeat;  
+	transition: .3s; 
+	width: 20px; height: 16px; 
+	margin: 12px 11px; 
+	background-position: -10px 0;
+}
+.profileButton:hover .mailSquare .imageSquare {
+    background-position:0 0; 
+    transition: .2s;
+}
+.creatWorkroom {
+    border-radius: 3px!important; 
+    width: 164px!important;
+}
+.mailSquare .imageExit {
+    background: url(../img/icon/exitProfile.png) no-repeat;
+}
+
+.dashedHr {
+	border: 0;
+    border-bottom: 1px dashed #dedede;
+}
+
+h4.sbMaker {
+    margin: 6px;
+}
+.sbMakerAfter {
+    color: #9a9a9a; 
+    font-size: 12px;
+}
+p.sbAnotation {
+	margin: 0; 
+	font-size: 14px; 
+	font-style:italic; 
+	color: #7a7a7a; 
+	border-top: 1px #dedede dashed;
+	border-bottom: 1px #dedede dashed;
+	padding: 10px 24px;
+	margin-bottom: 10px;
+	text-align: justify;
+}
+
+
+/*--- Правая сторона ---*/
+.rightContent {
+    width: 880px; 
+    float: right;
+}
+
+.rightMenu {
+    width: 100%; 
+    height: 50px; 
+    background: #fff;
+}
+.rightMenu ul {
+    margin: 0; 
+    padding: 0; 
+    list-style-image: none; 
+    outline: 1px #eaeaea solid;
+}
+.rightMenu ul > li { 
+	margin: 0; 
+	font-size: 14px; 
+	text-transform:uppercase; 
+	font-weight: 700; 
+	letter-spacing: 1px;
+	transition: .3s;
+	cursor: pointer;
+	border-right: #efefef 1px solid;
+	display:inline-block;
+    margin-right: -5px;
+}
+.rightMenu ul > li:hover {
+    background: #efefef; 
+    transition: .1s;
+}
+.rightMenu ul > li.active {
+    background: #fc6060; 
+    color: #fff; 
+    cursor: default;
+}
+.rightMenu ul > li a {
+    display: block; 
+    width: 100px; 
+    padding: 16px 20px; 
+    text-align:center;
+}
+
+.workElement {
+    width: 280px; 
+    height: auto; 
+    outline: 1px solid #eaeaea; 
+    float: left; 
+    margin-top: 20px; 
+    margin-right:20px; 
+    background: #fff;
+}
+.workElement:nth-child(3n) {
+    margin-right: 0;
+}
+.workElement:nth-last-child(1) {
+    border-bottom: none;
+}
+.workInfo {
+    padding: 10px 20px;
+    width: 240px;
+}
+.workElement img {
+    margin-right: 20px; 
+    width: 280px; 
+    height: 280px;
+}
+.workElement h3 {
+    margin: 0; 
+    margin-bottom: 10px; 
+    font-size: 18px; 
+    text-align: center;
+}
+.workElement p {
+	margin: 0; 
+	font-size: 14px; 
+	text-align: center; 
+	font-style:italic; 
+	color: #7a7a7a; 
+	border-top: 1px #dedede dashed;
+	border-bottom: 1px #dedede dashed;
+	padding: 10px 0;
+}
+
+.rating {
+    text-align:center; 
+    margin: 10px 0;
+}
+.rating span {
+    font-size: 12px; 
+    font-weight: 700; 
+    margin-right: 10px; 
+    position: relative; 
+    top: -2px;
+}
+.rating span.up {
+    color: #3891C9;
+}
+.rating span.middle {
+    color: #7f7f7f;
+}
+.rating span.down {
+    color: #fc6060;
+}
+.ratingUp, .ratingMiddle, .ratingDown {
+	background-image: url(../img/rating.png); 
+	width: 14px;  
+	height: 14px;
+	display: inline-block;
+	margin-right: 4px;
+}
+.ratingUp {
+    background-position: 0 0; 
+}
+.ratingMiddle {
+    background-position: 0 -15px;
+}
+.ratingDown {
+    background-position: 0 -30px;
+}
+
+p.workPrice {
+    font-size: 16px!important; 
+    font-weight: 700; 
+    color: #3a3a3a!important; 
+    border: none!important; 
+    padding: 10px 0 0px;
+}
+
+/*--- Открытие мастерской ---*/
+.createBody {
+    background: #fff;  
+    outline: 1px solid #eaeaea; 
+    padding: 20px; 
+    width: 840px;
+}
+.createForm h2 {
+    margin: 10px 0; 
+    color: #3A3A3A;
+}
+.createForm {
+    color: #5a5a5a;
+    font-size: 14px;
+}
+textarea {
+    width: 380px;
+    height: 209px; 
+    resize: none; 
+    padding: 10px; 
+    font-size: 12px; 
+    margin-bottom: 20px;
+}
+.createBody input[type=text], .createBody input[type=password], .createBody input[type=email] {
+	width: 390px;
+	height: 34px;
+	margin: 0 0 10px;
+	padding-left: 10px;
+	font-size: 12px;
+}
+
+.leftSidebar.createForm {
+    padding: 0 20px; 
+    width: 260px; 
+    font-size: 13px;
+}
+.leftSidebar.createForm img {
+    width:200px; 
+    height: 200px; 
+    padding: 30px;
+}
+
+.createForm img {
+    float: left; 
+    margin-right: 20px; 
+    margin-bottom: 20px;
+}
+.createForm label {
+    font-weight: 700; 
+    margin-bottom: 10px; 
+    color: #3a3a3a; 
+    font-size: 16px;
+}
+.createBody .formReg {
+    float: left; 
+    margin-right: 100px;
+}
+.createBody .formPay {
+    float: left;
+    margin-right: 100px;
+}
+
+input, textarea {
+    border: 1px solid #cecece; 
+    transition: .2s; 
+}
+input:focus, textarea:focus {
+    border: 1px solid #fc6060;
+    outline: none; 
+    transition: .5s;
+}
+.s123 {
+    display: flex;
+}
+.buttonCreate {
+    float: right;
+    margin: 40px 0 10px!important;
+}
+
+/*--- Товары ---*/
+.productBody {
+    outline: 1px solid #eaeaea; 
+    background: #fff;
+}
+.productContent {
+    padding: 20px;
+}
+.productContent h1 {
+    margin: 10px 0 15px;
+}
+.productContent img {
+    width: 500px; 
+    height: 350px; 
+    margin-right: 20px; 
+    float: left; 
+    margin-bottom: 20px;
+}
+.productText {
+    width: 300px; 
+    float: left; 
+    line-height: 26px;
+}
+.productDescript {
+    font-style: italic;
+    line-height: initial;
+    font-size: 16px;
+    color: #5a5a5a;
+    text-align: justify;
+}
+
+.breadcrumbs {
+    font-size: 12px; 
+    text-transform:uppercase; 
+    color: #9a9a9a; 
+    word-spacing: 5px;
+}
+
+/*--- Подвал ---*/
+footer {
+    background: #3a3a3a;
+    color: #f5f5f5;
+    padding: 10px 0;
+    font-size: 12px;
+    text-align: right;
+}
+
+/*--- Дописка ---*/

@@ -1,0 +1,66 @@
+﻿@using Podelka.Models
+@model LoginModel
+
+@{
+    ViewBag.Title = "Войти";
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="windows-1251">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поделка.by | Уникальный каталог изделий ручной работы</title>
+    <link rel="stylesheet" href="~/Content/css/login.css">
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    @Scripts.Render("~/bundles/jquery")     @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>*@
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/main.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <div id="bg">
+        <img src="~/Content/img/registr.jpg" alt="">
+    </div>
+
+    <div class="container" id="container">
+        <h3>Добро пожаловать!</h3>
+        <div id="regForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                
+                <label>Введите данные для авторизации:</label>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.TextBoxFor(m => m.Email, new { id = "mail", placeholder = Html.DisplayNameFor(m => m.Email) })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                @Html.PasswordFor(m => m.Password, new { id = "password", placeholder = Html.DisplayNameFor(m => m.Password) })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                <div class="remCheck">
+                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "textCheck" })
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
+
+
+                @Html.ActionLink("Забыли пароль?", "ForgotPassword")<br />
+
+                <input type="submit" name="login" value="Войти"><br />
+
+                <p class="hrText"><span>Новый пользователь?</span></p>
+            }
+
+            @Html.ActionLink("Зарегистрироваться", "Register", null, new { id = "reg" })
+
+        </div>
+
+        <p class="sub">* передаваемая вами информация служит только для авторизации,<br />либо для обратной связи с вами.
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Категории";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@model Podelka.Models.CategoryModel
+
+<div class="center">
+    <h2>Изделия категории</h2>
+    @if (@Model.CategoryName != null)
+    {
+        <h2>@Model.CategoryName</h2>
+    }
+</div>
+

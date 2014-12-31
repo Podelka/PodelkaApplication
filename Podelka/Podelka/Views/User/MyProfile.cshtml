@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+@model Podelka.Models.UserProfileModel
+
+<div class="profileView clearfix">
+    
+    <div class="center">
+
+        <div class="leftSidebar">
+            <img class="sbAvater" src='~/Content/img/avatar.jpeg'>
+            <h3 class="sbName">@Model.FirstName @Model.SecondName</h3>
+            
+            @if(Model.City != null)
+            {
+                <p class="sbCity"><img src="~/Content/img/map.png">@Model.City</p>
+            }
+
+            @if(Model.Phone != null || Model.PersonalWebsite != null || Model.SocialNetwork != null || Model.Skype != null)
+            {
+                <p class="hrText"><span>Контакты</span></p>
+
+                if (Model.Phone != null)
+                {
+                    <p class="sbPhone">@Model.Phone</p> @*<p class="sbPhone">+375 29 666-55-44<br />+375 44 222-22-21<br />+375 33 654-98-98</p>*@
+                }
+                if (Model.PersonalWebsite != null)
+                {
+                    <p class="sbSite"><img src="~/Content/img/icon/site.png">@Model.PersonalWebsite</p>
+                }
+                if (Model.SocialNetwork != null)
+                {
+                    <p class="sbSocial"><img src="~/Content/img/icon/social.png">@Model.SocialNetwork</p>
+                }
+                if (Model.Skype != null)
+                {
+                    <p class="sbSkype"><img src="~/Content/img/icon/skype.png">@Model.Skype</p>
+                }
+            }                               
+            <hr class="dashedHr" />
+
+            <div class="profileButton clearfix">
+                @Html.ActionLink("Открыть мастерскую", "Create", "Workroom", null, new { @class = "mailMakers creatWorkroom" })
+            </div>
+
+            <div class="profileButton exitButton clearfix">
+                <div class="mailSquare"><div class="imageExit imageSquare"></div></div>
+                @Html.ActionLink("Выйти", "LogOff", "Account", null, new { @class = "mailMakers" })
+            </div>
+
+        </div>
+
+        <div class="rightContent">
+            <div class="rightMenu">
+                <ul>
+                    <li class="active"><a href="#">Мастерские</a></li>
+                    <li><a href="#">Заказы</a></li>
+                </ul>
+            </div>
+
+            @Html.Action("Workrooms", "User", new { id = Model.UserId })
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,245 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Podelka.Core.DataBase;
+using Podelka.Models;
+using System.Collections.ObjectModel;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+
+namespace Podelka.Controllers
+{
+    public class WorkroomController : Controller
+    {
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            var workrooms = new List<Workroom>();
+            using (var db = new Context())
+            {
+                workrooms = db.Workrooms.ToList();
+            }
+
+            if (workrooms != null)
+            {
+                var workroomsCollectoin = new Collection<WorkroomPreviewModel>();
+                foreach (var item in workrooms)
+                {
+                    var workroom = new WorkroomPreviewModel(item.WorkroomId, item.Name, item.Description, item.CountGood, item.CountMedium, item.CountBad);
+                    workroomsCollectoin.Add(workroom);
+                }
+                return View(workroomsCollectoin);
+            }
+            else
+            {
+                return View("Error");
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Profile(long? id)
+        {
+            if (id != null)
+            {
+                var workroom = new Workroom();
+
+                using (var db = new Context())
+                {
+                    workroom = db.Workrooms.Find(id);
+                    if (workroom != null)
+                    {
+                        db.Entry(workroom).Reference(w => w.User).Load();
+                    }
+                }
+
+                if (workroom != null)
+                {
+                    var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+                    if (userId != 0 && workroom.User.Id == userId)
+                    {
+                        return RedirectToAction("MyProfile", "Workroom", new { id = id });
+                    }
+                    else
+                    {
+                        var user = new UserProfileModel(workroom.UserId, workroom.User.FirstName, workroom.User.SecondName, workroom.User.Email, workroom.User.City, workroom.User.Skype, workroom.User.SocialNetwork, workroom.User.PersonalWebsite, workroom.User.Phone);
+
+                        var model = new WorkroomProfileModel(workroom.WorkroomId, workroom.UserId, workroom.Name, workroom.Description, workroom.CountGood, workroom.CountMedium, workroom.CountBad, user);
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    return View("Error"); //Не найдена мастерская с данным идентификатором (id)
+                }
+            }
+            else
+            {
+                return View("Error"); //В ссылке отсутвует идентификатор мастерской (id)
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult MyProfile(long? id)
+        {
+            if (id != null)
+            {
+                var workroom = new Workroom();
+
+                using (var db = new Context())
+                {
+                    workroom = db.Workrooms.Find(id);
+                    if (workroom != null)
+                    {
+                        db.Entry(workroom).Reference(w => w.User).Load();
+                    }
+                }
+
+                if (workroom != null)
+                {
+                    var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+                    if (userId != 0 && workroom.User.Id == userId)
+                    {
+                        var user = new UserProfileModel(workroom.UserId, workroom.User.FirstName, workroom.User.SecondName, null, workroom.User.City, workroom.User.Skype, workroom.User.SocialNetwork, workroom.User.PersonalWebsite, workroom.User.Phone);
+
+                        var model = new WorkroomProfileModel(workroom.WorkroomId, workroom.UserId, workroom.Name, workroom.Description, workroom.CountGood, workroom.CountMedium, workroom.CountBad, user);
+                        return View(model);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Profile", "Workroom", new { id = id });
+                    }
+                }
+                else
+                {
+                    return View("Error"); //Не найдена мастерская с данным идентификатором (id)
+                }
+            }
+            else
+            {
+                return View("Error"); //В ссылке отсутвует идентификатор мастерской (id)
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult Create()
+        {
+            var registerTypeWorkroomDb = new List<RegisterTypeWorkroom>();
+            var payMethodsDb = new List<PayMethod>();
+            var deliveryMethodsDb = new List<DeliveryMethod>();
+
+            using (var db = new Context())
+            {
+                registerTypeWorkroomDb = db.RegisterTypeWorkrooms.ToList();
+                payMethodsDb = db.PayMethods.ToList();
+                deliveryMethodsDb = db.DeliveryMethods.ToList();
+            }
+                
+            var registerTypeModel = new Collection<RegisterTypeModel>();
+            foreach (var item in registerTypeWorkroomDb)
+            {
+                var regType = new RegisterTypeModel(item.RegisterTypeWorkroomId, item.Name);
+                registerTypeModel.Add(regType);
+            }
+                
+            var payMethodsModel = new Collection<PayMethodModel>();
+            foreach (var item in payMethodsDb)
+            {
+                var payMet = new PayMethodModel(item.PayMethodId, item.Name);
+                payMethodsModel.Add(payMet);
+            }
+
+            var deliveryMethodsModel = new Collection<DeliveryMethodModel>();
+            foreach (var item in deliveryMethodsDb)
+            {
+                var deliveryMet = new DeliveryMethodModel(item.DeliveryMethodId, item.Name);
+                deliveryMethodsModel.Add(deliveryMet);
+            }
+
+            var model = new WorkroomProfileCreate(null, null, registerTypeModel, payMethodsModel, deliveryMethodsModel);
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(WorkroomProfileCreate model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+                var workroom = new Workroom
+                {
+                    UserId = userId,
+                    RegisterTypeWorkroomId = 1,
+                    Name = model.Name,
+                    Description = model.Description,
+                    CountGood = 0,
+                    CountMedium = 0,
+                    CountBad = 0,
+                    DateRegistration = DateTime.Now
+                };
+
+                using (var db = new Context())
+                {
+                    db.Workrooms.Add(workroom);
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("Profile", "Workroom", new { id = workroom.WorkroomId });
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Products(long? id)
+        {
+            if (id != null)
+            {
+                var workroom = new Workroom();
+
+                using (var db = new Context())
+                {
+                    workroom = db.Workrooms.Find(id);
+                    if (workroom != null)
+                    {
+                        db.Entry(workroom).Collection(w => w.Products).Load();
+                    }
+                }
+
+                if (workroom != null)
+                {
+                    var productsCollection = new Collection<ProductPreviewModel>();
+
+                    if (workroom.Products != null)
+                    {
+                        foreach (var item in workroom.Products)
+                        {
+                            var product = new ProductPreviewModel(item.ProductId, item.Name, item.Description, item.Price);
+                            productsCollection.Add(product);
+                        }
+                    }
+
+                    return View(productsCollection);
+                }
+                else
+                {
+                    return View("Error"); //Не найдена мастерская с данным идентификатором (id)
+                }
+            }
+            else
+            {
+                return View("Error"); //В ссылке отсутвует идентификатор мастерской (id)
+            }
+        }
+    }
+} 

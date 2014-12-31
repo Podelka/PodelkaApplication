@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div class="mainContent">
+    <div class="center">
+        <h2>Каталог мастеров ручной работы.<br />Хотите уникальное изделие?</h2>
+        <input type="button" value="Опубликовать заказ" onclick="location.href='@Url.Action("Create", "Order")'" class="mainContent" />
+    </div>
+</div>
