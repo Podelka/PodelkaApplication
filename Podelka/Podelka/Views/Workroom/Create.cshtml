@@ -31,12 +31,9 @@
                         <label for="regType">Тип регистрации:</label><br />
                         @foreach (RegisterTypeModel item in Model.RegisterTypes)
                         {
-                            @Html.RadioButtonFor(m => item.IsSelected, new { name = "regType" })
-                            @item.Name
+                            @Html.RadioButtonFor(m => m.RegisterTypeId, item.RegisterTypeId) @item.Name
                             <br />
                         }
-                        @*<input type="radio" name="regType" value="0" checked>Нет регистрации<br />
-                            <input type="radio" name="regType" value="1">Справка ремесленника<br />*@
                     </div>
 
                     <br />

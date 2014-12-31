@@ -77,6 +77,7 @@ namespace Podelka.Models
 
         public string Name { get; set; }
         public string Description { get; set; }
+        public byte RegisterTypeId { get; set; }
         public ICollection<RegisterTypeModel> RegisterTypes { get; set; }
         public ICollection<PayMethodModel> PayMethods { get; set; }
         public ICollection<DeliveryMethodModel> DeliveryMethods { get; set; }
@@ -88,12 +89,10 @@ namespace Podelka.Models
         {
             RegisterTypeId = registerTypeId;
             Name = name;
-            IsSelected = true;
         }
 
         public byte RegisterTypeId { get; set; }
         public string Name { get; set; }
-        public bool IsSelected { get; set; }
     }
 
     public class PayMethodModel

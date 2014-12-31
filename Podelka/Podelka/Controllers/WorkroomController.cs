@@ -129,21 +129,21 @@ namespace Podelka.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            var registerTypeWorkroomDb = new List<RegisterTypeWorkroom>();
+            var workroomRegisterTypesDb = new List<WorkroomRegisterType>();
             var payMethodsDb = new List<PayMethod>();
             var deliveryMethodsDb = new List<DeliveryMethod>();
 
             using (var db = new Context())
             {
-                registerTypeWorkroomDb = db.RegisterTypeWorkrooms.ToList();
+                workroomRegisterTypesDb = db.WorkroomRegisterTypes.ToList();
                 payMethodsDb = db.PayMethods.ToList();
                 deliveryMethodsDb = db.DeliveryMethods.ToList();
             }
                 
             var registerTypeModel = new Collection<RegisterTypeModel>();
-            foreach (var item in registerTypeWorkroomDb)
+            foreach (var item in workroomRegisterTypesDb)
             {
-                var regType = new RegisterTypeModel(item.RegisterTypeWorkroomId, item.Name);
+                var regType = new RegisterTypeModel(item.WorkroomRegisterTypeId, item.Name);
                 registerTypeModel.Add(regType);
             }
                 
@@ -176,7 +176,7 @@ namespace Podelka.Controllers
                 var workroom = new Workroom
                 {
                     UserId = userId,
-                    RegisterTypeWorkroomId = 1,
+                    RegisterTypeId = model.RegisterTypeId,
                     Name = model.Name,
                     Description = model.Description,
                     CountGood = 0,

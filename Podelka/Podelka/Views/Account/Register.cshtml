@@ -52,7 +52,7 @@
                 @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "position-right", id = "podpass", placeholder = Html.DisplayNameFor(m => m.ConfirmPassword) })
                 @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
 
-                <p class="hrText"><span>Дополнительно</span></p>
+                @*<p class="hrText"><span>Дополнительно</span></p>*@
 
                 @Html.TextBoxFor(m => m.PersonalWebsite, new { @class = "position-left", id = "site", placeholder = Html.DisplayNameFor(m => m.PersonalWebsite) })
 

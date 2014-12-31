@@ -20,7 +20,7 @@ namespace Podelka.Core.DataBase
             return new Context();
         }
 
-        public DbSet<RegisterTypeWorkroom> RegisterTypeWorkrooms { get; set; }
+        public DbSet<WorkroomRegisterType> WorkroomRegisterTypes { get; set; }
         public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
         public DbSet<WorkroomDeliveryMethod> WorkroomDeliveryMethods { get; set; }
         public DbSet<PayMethod> PayMethods { get; set; }

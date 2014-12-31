@@ -175,7 +175,7 @@
     <Compile Include="Core\DataBase\PayMethod.cs" />
     <Compile Include="Core\DataBase\Context.cs" />
     <Compile Include="Core\DataBase\Product.cs" />
-    <Compile Include="Core\DataBase\RegisterTypeWorkroom.cs" />
+    <Compile Include="Core\DataBase\WorkroomRegisterType.cs" />
     <Compile Include="Core\DataBase\Workroom.cs" />
     <Compile Include="Core\DataBase\WorkroomDeliveryMethod.cs" />
     <Compile Include="Core\DataBase\WorkroomPayMethod.cs" />
@@ -183,6 +183,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412311541563_InitialCreate.cs" />
+    <Compile Include="Migrations\201412311541563_InitialCreate.Designer.cs">
+      <DependentUpon>201412311541563_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412311545521_TestMigrateDB.cs" />
+    <Compile Include="Migrations\201412311545521_TestMigrateDB.Designer.cs">
+      <DependentUpon>201412311545521_TestMigrateDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\WorkroomViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
@@ -312,6 +321,12 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201412311541563_InitialCreate.resx">
+      <DependentUpon>201412311541563_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412311545521_TestMigrateDB.resx">
+      <DependentUpon>201412311545521_TestMigrateDB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\DisplayNamesValidation.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DisplayNamesValidation.en.Designer.cs</LastGenOutput>
