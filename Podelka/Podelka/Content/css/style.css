@@ -34,7 +34,7 @@
     border-bottom: 2px solid #fc6060;
 }
 .wrap_element:hover span {
-    opacity: .9;
+    opacity: 1;
 }
 
 /*--- Основная часть ---*/
@@ -506,7 +506,7 @@ p.sbAnotation {
 
 .workElement {
     width: 280px; 
-    height: auto; 
+    height: 500px; 
     outline: 1px solid #eaeaea; 
     float: left; 
     margin-top: 20px; 
@@ -543,6 +543,8 @@ p.sbAnotation {
 	border-top: 1px #dedede dashed;
 	border-bottom: 1px #dedede dashed;
 	padding: 10px 0;
+    height: 52px;
+    overflow: auto;
 }
 
 .rating {
@@ -588,6 +590,7 @@ p.workPrice {
     color: #3a3a3a!important; 
     border: none!important; 
     padding: 10px 0 0px;
+    height: auto;
 }
 
 /*--- Открытие мастерской ---*/
