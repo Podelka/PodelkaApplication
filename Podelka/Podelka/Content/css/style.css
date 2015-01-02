@@ -32,6 +32,7 @@
     text-align: center;
     transition: .1s;
     border-bottom: 2px solid #fc6060;
+    outline: 1px solid #fff;
 }
 .wrap_element:hover span {
     opacity: 1;
@@ -282,13 +283,11 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
     padding-top: 90px;
     margin: 0;
     line-height: 40px;
+    margin-bottom: 4px;
 }
 .mainContent input[type="button"] {
-    display: inline-block;
     padding: 7px 15px;
-    font-size: 12px;
     color: #fff;
-    text-shadow: none;
     border: 1px solid #fff;
     border-radius: 5px;
     background: none;

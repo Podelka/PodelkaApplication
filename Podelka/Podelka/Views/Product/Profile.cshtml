@@ -40,19 +40,19 @@
 
                 if (Model.Workroom.User.Phone != null)
                 {
-                    <p class="sbPhone">@Model.Workroom.User.Phone</p> @*<p class="sbPhone">+375 29 666-55-44<br />+375 44 222-22-21<br />+375 33 654-98-98</p>*@
+                    <div class="sbPhone">@Model.Workroom.User.Phone</div> @*<p class="sbPhone">+375 29 666-55-44<br />+375 44 222-22-21<br />+375 33 654-98-98</p>*@
                 }
                 if (Model.Workroom.User.PersonalWebsite != null)
                 {
-                    <p class="sbSite"><img src="~/Content/img/icon/site.png">@Model.Workroom.User.PersonalWebsite</p>
+                    <div class="sbSite"><img src="~/Content/img/icon/site.png"><a href="http://@Model.Workroom.User.PersonalWebsite">@Model.Workroom.User.PersonalWebsite</a></div>
                 }
                 if (Model.Workroom.User.SocialNetwork != null)
                 {
-                    <p class="sbSocial"><img src="~/Content/img/icon/social.png">@Model.Workroom.User.SocialNetwork</p>
+                    <div class="sbSocial"><img src="~/Content/img/icon/social.png"><a href="http://@Model.Workroom.User.SocialNetwork">@Model.Workroom.User.SocialNetwork</a></div>
                 }
                 if (Model.Workroom.User.Skype != null)
                 {
-                    <p class="sbSkype"><img src="~/Content/img/icon/skype.png"><a href="skype:@Model.Workroom.User.Skype?call">@Model.Workroom.User.Skype</a></p>
+                    <div class="sbSkype"><img src="~/Content/img/icon/skype.png"><a href="skype:@Model.Workroom.User.Skype?call">@Model.Workroom.User.Skype</a></div>
                 }
             }
             <hr class="dashedHr" />
