@@ -66,10 +66,16 @@
         @Html.Partial("_MenuLevelThird")
     </div>
     @RenderBody()
-    <footer>
+    <footer class="clearfix">
         <div class="center">
-            © 2014-2015 Поделка.by | MDK production <br />
-            <a href="#">info@podelka.by</a>
+            <div class="footerLeft">
+                <img src="~/Content/img/logo_footer.png" />
+                <p>Поделка - предмет, изготовленный ручным способом.<br/>Белорусский каталог изделий ручной работы.</p>
+            </div>
+            <div class="footerRight">
+                © 2015 Поделка | podelka.by<br />
+                Обратная связь: <a href="#">info@podelka.by</a>
+            </div>
         </div>
     </footer>
     @RenderSection("scripts", required: false)

@@ -51,8 +51,10 @@
 
                 @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "position-right", id = "podpass", placeholder = Html.DisplayNameFor(m => m.ConfirmPassword) })
                 @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                
+                <div class="clearfix"></div>
+                <p class="hrText"><span>Дополнительно</span></p>
 
-                @*<p class="hrText"><span>Дополнительно</span></p>*@
 
                 @Html.TextBoxFor(m => m.PersonalWebsite, new { @class = "position-left", id = "site", placeholder = Html.DisplayNameFor(m => m.PersonalWebsite) })
 
@@ -61,7 +63,8 @@
                 @Html.TextBoxFor(m => m.Skype, new { @class = "position-left", id = "skype", placeholder = Html.DisplayNameFor(m => m.Skype) })
 
                 @Html.TextBoxFor(m => m.Phone, new { @class = "position-right", id = "phone", placeholder = Html.DisplayNameFor(m => m.Phone) })
-
+                   
+                <div class="clearfix"></div>
                 <p class="regAddText"><font color="#fc6060">*</font> дополнительная информация не обязательна.</p>
                 <input type="submit" name="login" value="Продолжить"><br />
             }

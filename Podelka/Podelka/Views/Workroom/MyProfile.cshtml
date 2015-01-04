@@ -22,8 +22,7 @@
 
             <p class="sbAnotation">@Model.Description</p>
 
-            <span class="sbMakerAfter"> @Html.ActionLink("Владелец мастерской", "Profile", "User", new { id = Model.UserId }, null) </span>
-            @*<span class="sbMakerAfter">Владелец мастерской</span>*@
+            <span class="sbMakerAfter">Владелец мастерской</span>
 
             <h4 class="sbMaker"> @Html.ActionLink(Model.User.FirstName + " " + Model.User.SecondName, "Profile", "User", new { id = Model.UserId }, null) </h4>
             @*<h4 class="sbMaker">@Model.User.FirstName @Model.User.SecondName</h4>*@
