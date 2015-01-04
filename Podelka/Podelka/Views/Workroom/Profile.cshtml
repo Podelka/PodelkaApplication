@@ -7,35 +7,25 @@
 
 <div class="profileView clearfix">
     <div class="center">
-
         <div class="leftSidebar">
             <img class="sbAvater" src='~/Content/img/first_workshop.jpg'>
             <span class="sbMakerAfter">Мастерская</span>
-
             <h3 class="sbName">"@Model.Name"</h3>
-
             <div class="rating">
                 <div class="ratingUp"></div><span class="up">@Model.CountGood</span>
                 <div class="ratingMiddle"></div><span class="middle">@Model.CountMedium</span>
                 <div class="ratingDown"></div><span class="down">@Model.CountBad</span>
             </div>
-
             <p class="sbAnotation">@Model.Description</p>
-
             <span class="sbMakerAfter">Владелец мастерской</span>
-
             <h4 class="sbMaker"> @Html.ActionLink(Model.User.FirstName + " " + Model.User.SecondName, "Profile", "User", new { id = Model.UserId }, null) </h4>
-            @*<h4 class="sbMaker">@Model.User.FirstName @Model.User.SecondName</h4>*@
-
             @if (Model.User.City != null)
             {
                 <p class="sbCity"><img src="~/Content/img/map.png">@Model.User.City</p>
             }
-
             @if (Model.User.Phone != null || Model.User.PersonalWebsite != null || Model.User.SocialNetwork != null || Model.User.Skype != null)
             {
                 <p class="hrText"><span>Контакты</span></p>
-
                 if (Model.User.Phone != null)
                 {
                     <div class="sbPhone">@Model.User.Phone</div> @*<p class="sbPhone">+375 29 666-55-44<br />+375 44 222-22-21<br />+375 33 654-98-98</p>*@
@@ -54,13 +44,11 @@
                 }
             }
             <hr class="dashedHr" />
-
             <div class="profileButton  clearfix">
                 <div class="mailSquare"><div class="imageSquare"></div></div>
                 <a class="mailMakers" href="mailto:@Model.User.Email">Написать письмо</a>
             </div>
-</div>
-
+        </div>
         <div class="rightContent">
             <div class="rightMenu">
                 <ul>
@@ -72,6 +60,5 @@
                 @Html.Action("Products", "Workroom", new { id = Model.WorkroomId })
             </div>
         </div>
-
     </div>
 </div>

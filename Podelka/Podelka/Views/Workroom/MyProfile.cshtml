@@ -7,56 +7,44 @@
 
 <div class="profileView clearfix">
     <div class="center">
-
         <div class="leftSidebar">
             <img class="sbAvater" src='~/Content/img/first_workshop.jpg'>
             <span class="sbMakerAfter">Мастерская</span>
-
             <h3 class="sbName">"@Model.Name"</h3>
-
             <div class="rating">
                 <div class="ratingUp"></div><span class="up">@Model.CountGood</span>
                 <div class="ratingMiddle"></div><span class="middle">@Model.CountMedium</span>
                 <div class="ratingDown"></div><span class="down">@Model.CountBad</span>
             </div>
-
             <p class="sbAnotation">@Model.Description</p>
-
             <span class="sbMakerAfter">Владелец мастерской</span>
-
             <h4 class="sbMaker"> @Html.ActionLink(Model.User.FirstName + " " + Model.User.SecondName, "Profile", "User", new { id = Model.UserId }, null) </h4>
-            @*<h4 class="sbMaker">@Model.User.FirstName @Model.User.SecondName</h4>*@
-
             @if (Model.User.City != null)
             {
                 <p class="sbCity"><img src="~/Content/img/map.png">@Model.User.City</p>
             }
-
             @if (Model.User.Phone != null || Model.User.PersonalWebsite != null || Model.User.SocialNetwork != null || Model.User.Skype != null)
             {
                 <p class="hrText"><span>Контакты</span></p>
-
                 if (Model.User.Phone != null)
                 {
-                    <p class="sbPhone">@Model.User.Phone</p> @*<p class="sbPhone">+375 29 666-55-44<br />+375 44 222-22-21<br />+375 33 654-98-98</p>*@
+                    <div class="sbPhone">@Model.User.Phone</div> @*<p class="sbPhone">+375 29 666-55-44<br />+375 44 222-22-21<br />+375 33 654-98-98</p>*@
                 }
                 if (Model.User.PersonalWebsite != null)
                 {
-                    <p class="sbSite"><img src="~/Content/img/icon/site.png">@Model.User.PersonalWebsite</p>
+                    <div class="sbSite"><img src="~/Content/img/icon/site.png"><a href="http://@Model.User.PersonalWebsite">@Model.User.PersonalWebsite</a></div>
                 }
                 if (Model.User.SocialNetwork != null)
                 {
-                    <p class="sbSocial"><img src="~/Content/img/icon/social.png">@Model.User.SocialNetwork</p>
+                    <div class="sbSocial"><img src="~/Content/img/icon/social.png"><a href="http://@Model.User.SocialNetwork">@Model.User.SocialNetwork</a></div>
                 }
                 if (Model.User.Skype != null)
                 {
-                    <p class="sbSkype"><img src="~/Content/img/icon/skype.png">@Model.User.Skype</p>
+                    <div class="sbSkype"><img src="~/Content/img/icon/skype.png">@Model.User.Skype</div>
                 }
             }
             <hr class="dashedHr" />
-
         </div>
-
         <div class="rightContent">
             <div class="rightMenu">
                 <ul>

@@ -269,7 +269,8 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
 
 /*--- Главный контент ---*/
 .mainContent {
-	background: #5a5a5a;
+    background: url(../img/back.jpg);
+	/*background: #5a5a5a;*/
 	width: 100%;
 	height: 300px;
 	background-size: cover;
@@ -753,5 +754,3 @@ footer a:hover {
     float: right;
     text-align: right;
 }
-
-/*--- Дописка ---*/
