@@ -55,8 +55,9 @@
                     <li><a href="#">Заказы</a></li>
                 </ul>
             </div>
-            
-            @Html.Action("Workrooms", "User", new { id = Model.UserId } )
+            <div class="rightBody">
+                @Html.Action("Workrooms", "User", new { id = Model.UserId } )
+            </div>
         </div>
 
     </div>

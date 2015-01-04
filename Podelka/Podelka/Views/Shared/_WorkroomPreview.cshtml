@@ -1,0 +1,23 @@
+﻿@model ICollection<Podelka.Models.WorkroomPreviewModel>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <div class="workElement">
+            <img src="~/Content/img/first_workshop.jpg">
+            <div class="workInfo">
+                <h3>"@item.Name"</h3>
+                <div class="rating">
+                    <div class="ratingUp"></div><span class="up">@item.CountGood</span>
+                    <div class="ratingMiddle"></div><span class="middle">@item.CountMedium</span>
+                    <div class="ratingDown"></div><span class="down">@item.CountBad</span>
+                </div>
+                <p>@item.Description</p>
+                <input type="button" value="Подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
+            </div>
+            <div class="workData">
+            </div>
+        </div>
+    }
+}

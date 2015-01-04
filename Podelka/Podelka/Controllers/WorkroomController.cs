@@ -35,7 +35,7 @@ namespace Podelka.Controllers
             }
             else
             {
-                return View("Error");
+                return View("_Error");
             }
         }
 
@@ -58,70 +58,28 @@ namespace Podelka.Controllers
 
                 if (workroom != null)
                 {
+                    var user = new UserProfileModel(workroom.UserId, workroom.User.FirstName, workroom.User.SecondName, workroom.User.Email, workroom.User.City, workroom.User.Skype, workroom.User.SocialNetwork, workroom.User.PersonalWebsite, workroom.User.Phone);
+
+                    var model = new WorkroomProfileModel(workroom.WorkroomId, workroom.UserId, workroom.Name, workroom.Description, workroom.CountGood, workroom.CountMedium, workroom.CountBad, user);
+                        
                     var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                     if (userId != 0 && workroom.User.Id == userId)
                     {
-                        return RedirectToAction("MyProfile", "Workroom", new { id = id });
+                        return View("MyProfile", model);
                     }
                     else
                     {
-                        var user = new UserProfileModel(workroom.UserId, workroom.User.FirstName, workroom.User.SecondName, workroom.User.Email, workroom.User.City, workroom.User.Skype, workroom.User.SocialNetwork, workroom.User.PersonalWebsite, workroom.User.Phone);
-
-                        var model = new WorkroomProfileModel(workroom.WorkroomId, workroom.UserId, workroom.Name, workroom.Description, workroom.CountGood, workroom.CountMedium, workroom.CountBad, user);
-                        return View(model);
+                        return View("Profile", model);
                     }
                 }
                 else
                 {
-                    return View("Error"); //Не найдена мастерская с данным идентификатором (id)
+                    return View("_Error"); //Не найдена мастерская с данным идентификатором (id)
                 }
             }
             else
             {
-                return View("Error"); //В ссылке отсутвует идентификатор мастерской (id)
-            }
-        }
-
-        [HttpGet]
-        [Authorize]
-        public ActionResult MyProfile(long? id)
-        {
-            if (id != null)
-            {
-                var workroom = new Workroom();
-
-                using (var db = new Context())
-                {
-                    workroom = db.Workrooms.Find(id);
-                    if (workroom != null)
-                    {
-                        db.Entry(workroom).Reference(w => w.User).Load();
-                    }
-                }
-
-                if (workroom != null)
-                {
-                    var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
-                    if (userId != 0 && workroom.User.Id == userId)
-                    {
-                        var user = new UserProfileModel(workroom.UserId, workroom.User.FirstName, workroom.User.SecondName, null, workroom.User.City, workroom.User.Skype, workroom.User.SocialNetwork, workroom.User.PersonalWebsite, workroom.User.Phone);
-
-                        var model = new WorkroomProfileModel(workroom.WorkroomId, workroom.UserId, workroom.Name, workroom.Description, workroom.CountGood, workroom.CountMedium, workroom.CountBad, user);
-                        return View(model);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Profile", "Workroom", new { id = id });
-                    }
-                }
-                else
-                {
-                    return View("Error"); //Не найдена мастерская с данным идентификатором (id)
-                }
-            }
-            else
-            {
-                return View("Error"); //В ссылке отсутвует идентификатор мастерской (id)
+                return View("_Error"); //В ссылке отсутвует идентификатор мастерской (id)
             }
         }
 
@@ -199,7 +157,7 @@ namespace Podelka.Controllers
             }
         }
 
-        [HttpGet]
+        [ChildActionOnly]
         [AllowAnonymous]
         public ActionResult Products(long? id)
         {
@@ -229,16 +187,16 @@ namespace Podelka.Controllers
                         }
                     }
 
-                    return View(productsCollection);
+                    return PartialView("_ProductPreview", productsCollection);
                 }
                 else
                 {
-                    return View("Error"); //Не найдена мастерская с данным идентификатором (id)
+                    return View("_Error"); //Не найдена мастерская с данным идентификатором (id)
                 }
             }
             else
             {
-                return View("Error"); //В ссылке отсутвует идентификатор мастерской (id)
+                return View("_Error"); //В ссылке отсутвует идентификатор мастерской (id)
             }
         }
     }

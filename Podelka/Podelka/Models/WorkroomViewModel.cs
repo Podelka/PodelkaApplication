@@ -101,7 +101,6 @@ namespace Podelka.Models
         {
             PayMethodId = payMethodId;
             Name = name;
-            IsSelected = true;
         }
 
         public byte PayMethodId { get; set; }

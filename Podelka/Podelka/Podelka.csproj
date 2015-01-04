@@ -297,7 +297,7 @@
     <Content Include="Views\Workroom\Profile.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Product\Category.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Shared\_MenuLevelThird.cshtml" />
     <Content Include="Views\Shared\_LayoutMain.cshtml" />
     <Content Include="Views\User\!AddPhoneNumber.cshtml" />
@@ -313,8 +313,8 @@
     <Content Include="Views\Product\Profile.cshtml" />
     <Content Include="Views\User\MyProfile.cshtml" />
     <Content Include="Views\Product\MyProfile.cshtml" />
-    <Content Include="Views\User\Workrooms.cshtml" />
-    <Content Include="Views\Workroom\Products.cshtml" />
+    <Content Include="Views\Shared\_WorkroomPreview.cshtml" />
+    <Content Include="Views\Shared\_ProductPreview.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -323,22 +323,29 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201412311541563_InitialCreate.resx">
       <DependentUpon>201412311541563_InitialCreate.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412311545521_TestMigrateDB.resx">
       <DependentUpon>201412311545521_TestMigrateDB.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DisplayNamesValidation.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DisplayNamesValidation.en.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DisplayNamesValidation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DisplayNamesValidation.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\ErrorMessagesValidation.en.resx" />
+    <EmbeddedResource Include="Resources\ErrorMessagesValidation.en.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ErrorMessagesValidation.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessagesValidation.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

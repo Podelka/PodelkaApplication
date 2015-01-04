@@ -32,73 +32,29 @@ namespace Podelka.Controllers
 
                 if (product != null)
                 {
+                    var user = new UserProfileModel(product.Workroom.UserId, product.Workroom.User.FirstName, product.Workroom.User.SecondName, product.Workroom.User.Email, product.Workroom.User.City, product.Workroom.User.Skype, product.Workroom.User.SocialNetwork, product.Workroom.User.PersonalWebsite, product.Workroom.User.Phone);
+                    var workroom = new WorkroomProfileModel(product.Workroom.WorkroomId, product.Workroom.UserId, product.Workroom.Name, product.Workroom.Description, product.Workroom.CountGood, product.Workroom.CountMedium, product.Workroom.CountBad, user);
+
+                    var model = new ProductProfileModel(product.ProductId, product.WorkroomId, product.Name, product.Description, product.Price, product.StatusReady, product.Material, product.Size, product.Weight, workroom);
+
                     var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                     if (userId != 0 && product.Workroom.User.Id == userId)
                     {
-                        return RedirectToAction("MyProfile", "Product", new { id = id });
+                        return View("MyProfile", model);
                     }
                     else
                     {
-                        var user = new UserProfileModel(product.Workroom.UserId, product.Workroom.User.FirstName, product.Workroom.User.SecondName, product.Workroom.User.Email, product.Workroom.User.City, product.Workroom.User.Skype, product.Workroom.User.SocialNetwork, product.Workroom.User.PersonalWebsite, product.Workroom.User.Phone);
-                        var workroom = new WorkroomProfileModel(product.Workroom.WorkroomId, product.Workroom.UserId, product.Workroom.Name, product.Workroom.Description, product.Workroom.CountGood, product.Workroom.CountMedium, product.Workroom.CountBad, user);
-
-                        var model = new ProductProfileModel(product.ProductId, product.WorkroomId, product.Name, product.Description, product.Price, product.StatusReady, product.Material, product.Size, product.Weight, workroom);
-                        return View(model);
-                    }
+                        return View("Profile", model);
+                    }  
                 }
                 else
                 {
-                    return View("Error");
+                    return View("_Error");
                 }
             }
             else
             {
-                return View("Error");
-            }
-        }
-
-        [HttpGet]
-        [Authorize]
-        public ActionResult MyProfile(long? id)
-        {
-            if (id != null)
-            {
-                var product = new Product();
-                
-                using (var db = new Context())
-                {
-                    product = db.Products.Find(id);
-                    if (product != null)
-                    {
-                        db.Entry(product).Reference(w => w.Workroom).Load();
-                        db.Entry(product.Workroom).Reference(w => w.User).Load();
-                    }
-                }
-
-                if (product != null)
-                {
-                    var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
-                    if (userId != 0 && product.Workroom.User.Id == userId)
-                    {
-                        var user = new UserProfileModel(product.Workroom.UserId, product.Workroom.User.FirstName, product.Workroom.User.SecondName, null, product.Workroom.User.City, product.Workroom.User.Skype, product.Workroom.User.SocialNetwork, product.Workroom.User.PersonalWebsite, product.Workroom.User.Phone);
-                        var workroom = new WorkroomProfileModel(product.Workroom.WorkroomId, product.Workroom.UserId, product.Workroom.Name, product.Workroom.Description, product.Workroom.CountGood, product.Workroom.CountMedium, product.Workroom.CountBad, user);
-
-                        var model = new ProductProfileModel(product.ProductId, product.WorkroomId, product.Name, product.Description, product.Price, product.StatusReady, product.Material, product.Size, product.Weight, workroom);
-                        return View(model);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Profile", "Product", new { id = id });
-                    }
-                }
-                else
-                {
-                    return View("Error");
-                }
-            }
-            else
-            {
-                return View("Error");
+                return View("_Error");
             }
         }
 

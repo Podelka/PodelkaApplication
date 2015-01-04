@@ -35,48 +35,30 @@ namespace Podelka.Controllers
         {
             if (id != null)
             {
-                var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
-                if (userId != 0 && id == userId)
-                {
-                    return RedirectToAction("MyProfile", "User");
-                }
-                else
-                {
-                    var user = UserManager.FindById((long)id);
+                var user = UserManager.FindById((long)id);
 
-                    if (user != null)
+                if (user != null)
+                {
+                    var model = new UserProfileModel(user.Id, user.FirstName, user.SecondName, user.Email, user.City, user.Skype, user.SocialNetwork, user.PersonalWebsite, user.Phone);
+                        
+                    var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+                    if (userId != 0 && id == userId)
                     {
-                        var model = new UserProfileModel(user.Id, user.FirstName, user.SecondName, user.Email, user.City, user.Skype, user.SocialNetwork, user.PersonalWebsite, user.Phone);
-                        return View(model);
+                        return View("MyProfile", model);
                     }
                     else
                     {
-                        return View("Error"); //Не найден пользователь с данным идентификатором (id)
+                        return View("Profile", model);
                     }
+                }
+                else
+                {
+                    return View("_Error"); //Не найден пользователь с данным идентификатором (id)
                 }
             }
             else
             {
-                return View("Error"); //В ссылке отсутвует идентификатор пользователя (id)
-            }
-        }
-
-        [HttpGet]
-        [Authorize]
-        public ActionResult MyProfile()
-        {
-            var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
-            
-            var user = UserManager.FindById(userId);
-
-            if (user != null)
-            {
-                var model = new UserProfileModel(user.Id, user.FirstName, user.SecondName, user.Email, user.City, user.Skype, user.SocialNetwork, user.PersonalWebsite, user.Phone);
-                return View(model);
-            }
-            else
-            {
-                return View("Error"); //Не найден пользователь с данным идентификатором (id)
+                return View("_Error"); //В ссылке отсутвует идентификатор пользователя (id)
             }
         }
 
@@ -134,18 +116,13 @@ namespace Podelka.Controllers
             }
         }
 
-        [HttpGet]
+        [ChildActionOnly]
         [AllowAnonymous]
         public ActionResult Workrooms(long? id)
         {
             if (id != null)
             {
                 var user = UserManager.FindById((long)id);
-
-                if (user != null)
-                {
-                    user.Workrooms.Any();
-                }
 
                 if (user != null)
                 {
@@ -158,17 +135,16 @@ namespace Podelka.Controllers
                             workroomCollection.Add(workroom);
                         }
                     }
-
-                    return View(workroomCollection);
+                    return PartialView("_WorkroomPreview", workroomCollection);
                 }
                 else
                 {
-                    return View("Error"); //Не найден пользователь с данным идентификатором (id)
+                    return View("_Error"); //Не найден пользователь с данным идентификатором (id)
                 }
             }
             else
             {
-                return View("Error"); //В ссылке отсутвует идентификатор пользователя (id)
+                return View("_Error"); //В ссылке отсутвует идентификатор пользователя (id)
             }
         }
 
@@ -217,7 +193,7 @@ namespace Podelka.Controllers
         //    var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
         //    var code = await UserManager.GenerateChangePhoneNumberTokenAsync(userId, phoneNumber);
         //    // Send an SMS through the SMS provider to verify the phone number
-        //    return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+        //    return phoneNumber == null ? View("_Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         //}
 
         //[HttpPost]
@@ -329,7 +305,7 @@ namespace Podelka.Controllers
         //    var user = await UserManager.FindByIdAsync(userId);
         //    if (user == null)
         //    {
-        //        return View("Error");
+        //        return View("_Error");
         //    }
         //    var userLogins = await UserManager.GetLoginsAsync(userId);
         //    var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();

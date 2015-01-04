@@ -1,8 +1,9 @@
-﻿@model Podelka.Models.WorkroomProfileModel
-@{
+﻿@{
     ViewBag.Title = "Мастерская";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
+
+@model Podelka.Models.WorkroomProfileModel
 
 <div class="profileView clearfix">
     <div class="center">
@@ -64,9 +65,9 @@
                     <li><a href="#">Отзывы</a></li>
                 </ul>
             </div>
-
-            @Html.Action("Products", "Workroom", new { id = Model.WorkroomId })
+            <div class="rightBody">
+                @Html.Action("Products", "Workroom", new { id = Model.WorkroomId })
+            </div>
         </div>
-
     </div>
 </div>

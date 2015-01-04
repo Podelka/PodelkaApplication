@@ -2,18 +2,14 @@
 <html>
 <head>
     <meta charset="windows-1251">
-    <title>Поделка.by | Уникальный каталог изделий ручной работы</title>
-    <link rel="stylesheet" href="~/Content/css/style.css"> @*@Styles.Render("~/Content/cssMain")*@
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=1240, user-scalable " />
-    @Scripts.Render("~/bundles/jquery")     @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>*@
-    <script src="~/Scripts/main.js" type="text/javascript"></script>
+    <title>Поделка.by | Уникальный каталог изделий ручной работы</title>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    @Styles.Render("~/Content/css/css_only_style")    
+    @Scripts.Render("~/bundles/jqueryMin_main")     @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>*@  @*<script src="~/Scripts/main.js" type="text/javascript"></script>*@
 </head>
-
 <body>
-
-    <div class="menuMain">
-
+    <div class="menuMain">       
         <div class="menuLevel first">
             <div class="center">
                 <ul>
@@ -25,17 +21,13 @@
                 </ul>
             </div>
         </div>
-
-        <div class="menuLevel second">
-            
-            <div class="center">
-                
+        <div class="menuLevel second">           
+            <div class="center">               
                 <div class="logo">
                     <a href="@Url.Action("Index", "Home")">
                         <img src="@Url.Content("~/Content/img/logo.png")" />
                     </a>
                 </div>
-
                 <ul>
                     <li>@Html.ActionLink("Заказы", "Index", "Order")</li>
                     <li>@Html.ActionLink("Мастера", "Index", "Workroom")</li>
@@ -44,23 +36,20 @@
                     <li>@Html.ActionLink("Конкурсы", "Index", "Contest")</li>
                     <li>@Html.ActionLink("Блог", "Index", "Blog")</li>
                 </ul>
-
                 <div class="mainButton">
                     <div class="wrap_element">
                         <span>Поиск по сайту</span>
                         <a id="findButton"><div class="findButton"></div></a>
                     </div>
-
                     <div class="wrap_element">
                         <span>Оформить заказ</span>
                         <a href="@Url.Action("Create", "Order")"><div class="addPost" id="addPost"></div></a>
                     </div>
-
                     <div class="wrap_element">
                         @if (Request.IsAuthenticated)
                         {
                             <span>Личный профиль</span>
-                            <a href="@Url.Action("MyProfile", "User")"><div class="logIn"></div></a>
+                            <a href="@Url.Action("Profile", "User", new { id = Convert.ToInt64((Html.Action("GetUserId", "Account")).ToString()) })"><div class="logIn"></div></a>
                         }
                         else
                         {
@@ -68,28 +57,21 @@
                             <a href="@Url.Action("Login", "Account", new { returnUrl = Request.RawUrl })"><div class="logIn"></div></a>
                         }
                     </div>
-
                     <div class="findLine">
                         <input type="url">
                     </div>
                 </div>
             </div>
         </div>
-
         @Html.Partial("_MenuLevelThird")
-
     </div>
-
     @RenderBody()
-
     <footer>
         <div class="center">
             © 2014-2015 Поделка.by | MDK production <br />
             <a href="#">info@podelka.by</a>
         </div>
     </footer>
-
     @RenderSection("scripts", required: false)
-
 </body>
 </html>

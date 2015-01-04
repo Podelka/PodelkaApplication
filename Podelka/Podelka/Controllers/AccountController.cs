@@ -61,6 +61,14 @@ namespace Podelka.Controllers
             }
         }
 
+        [ChildActionOnly]
+        [Authorize]
+        public ActionResult GetUserId()
+        {
+            var userId = HttpContext.User.Identity.GetUserId();
+            return Content(userId);
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -179,7 +187,7 @@ namespace Podelka.Controllers
         {
             if (userId == null || code == null)
             {
-                return View("Error");  //В адресной строке отсутвуют необходимые параметры (идентификатор пользователя(id) и/или секретный код)
+                return View("_Error");  //В адресной строке отсутвуют необходимые параметры (идентификатор пользователя(id) и/или секретный код)
             }
             
             var result = await UserManager.ConfirmEmailAsync((long)userId, code);
@@ -190,7 +198,7 @@ namespace Podelka.Controllers
             }
             else
             {
-                return View("Error"); //отдельную вьюшку можно сделать, чтобы показывало, что произошла ошибка подтверждения email - а
+                return View("_Error"); //отдельную вьюшку можно сделать, чтобы показывало, что произошла ошибка подтверждения email - а
             }
         }
 
@@ -239,7 +247,7 @@ namespace Podelka.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            return code == null ? View("Error") : View();
+            return code == null ? View("_Error") : View();
         }
 
         [HttpPost]
