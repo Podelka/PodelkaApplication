@@ -1,0 +1,28 @@
+﻿@model Podelka.Models.UserProfileModel
+
+            @if (Model.City != null)
+            {
+                <p class="sbCity"><img src="~/Content/img/map.png">@Model.City</p>
+            }
+            @if (Model.Phone != null || Model.PersonalWebsite != null || Model.SocialNetwork != null || Model.Skype != null)
+            {
+                <p class="hrText"><span>Контакты</span></p>
+
+                if (Model.Phone != null)
+                {
+                    <div class="sbPhone">@Model.Phone</div> @*<p class="sbPhone">+375 29 666-55-44<br />+375 44 222-22-21<br />+375 33 654-98-98</p>*@
+                }
+                if (Model.PersonalWebsite != null)
+                {
+                    <div class="sbSite"><img src="~/Content/img/icon/site.png"><a href="http://@Model.PersonalWebsite">@Model.PersonalWebsite</a></div>
+                }
+                if (Model.SocialNetwork != null)
+                {
+                    <div class="sbSocial"><img src="~/Content/img/icon/social.png"><a href="http://@Model.SocialNetwork">@Model.SocialNetwork</a></div>
+                }
+                if (Model.Skype != null)
+                {
+                    <div class="sbSkype"><img src="~/Content/img/icon/skype.png">@Model.Skype</div>
+                }
+            }
+            <hr class="dashedHr" />

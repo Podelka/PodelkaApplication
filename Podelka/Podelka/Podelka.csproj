@@ -264,7 +264,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
-    <Content Include="Views\Workroom\MyProfile.cshtml">
+    <Content Include="Views\Workroom\PersonalProfile.cshtml">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Web.config" />
@@ -312,10 +312,14 @@
     <Content Include="Views\Order\Create.cshtml" />
     <Content Include="Views\User\ChangeProfile.cshtml" />
     <Content Include="Views\Product\Profile.cshtml" />
-    <Content Include="Views\User\MyProfile.cshtml" />
-    <Content Include="Views\Product\MyProfile.cshtml" />
+    <Content Include="Views\User\PersonalProfile.cshtml" />
+    <Content Include="Views\Product\PersonalProfile.cshtml" />
     <Content Include="Views\Shared\_WorkroomPreview.cshtml" />
     <Content Include="Views\Shared\_ProductPreview.cshtml" />
+    <Content Include="Views\Shared\_InfoWorkroomPersonal.cshtml" />
+    <Content Include="Views\Shared\_InfoWorkroomGuest.cshtml" />
+    <Content Include="Views\Shared\_ContactsUserGuest.cshtml" />
+    <Content Include="Views\Shared\_ContactsUserPersonal.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

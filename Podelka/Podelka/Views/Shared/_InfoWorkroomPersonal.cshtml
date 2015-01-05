@@ -1,0 +1,11 @@
+﻿@model Podelka.Models.WorkroomProfileModel
+
+            <div class="rating">
+                <div class="ratingUp"></div><span class="up">@Model.CountGood</span>
+                <div class="ratingMiddle"></div><span class="middle">@Model.CountMedium</span>
+                <div class="ratingDown"></div><span class="down">@Model.CountBad</span>
+            </div>
+            <p class="sbAnotation">@Model.Description</p>
+            <span class="sbMakerAfter">Владелец мастерской</span>
+            <h4 class="sbMaker"> @Html.ActionLink(Model.User.FirstName + " " + Model.User.SecondName, "Profile", "User", new { id = Model.UserId }, null) </h4>
+            @Html.Partial("_ContactsUserPersonal", Model.User)

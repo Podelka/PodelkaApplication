@@ -40,7 +40,7 @@ namespace Podelka.Controllers
                     var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                     if (userId != 0 && product.Workroom.User.Id == userId)
                     {
-                        return View("MyProfile", model);
+                        return View("PersonalProfile", model);
                     }
                     else
                     {
