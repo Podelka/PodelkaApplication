@@ -30,12 +30,13 @@
     width: 98px;
     overflow: auto;
     text-align: center;
-    transition: .1s;
+    transition: .3s;
     border-bottom: 2px solid #fc6060;
     outline: 1px solid #fff;
 }
 .wrap_element:hover span {
     opacity: 1;
+    transition: 0s;
 }
 
 /*--- Основная часть ---*/
@@ -290,7 +291,6 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
     padding: 7px 15px;
     color: #fff;
     border: 1px solid #fff;
-    border-radius: 5px;
     background: none;
     transition: .3s;
 }
@@ -301,7 +301,7 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
     transition: .1s;
 }
 
-/*--- Страница отоброжения профиля ---*/
+/*--- Страница отоброжения ---*/
 .profileView {
     background: #f2f2f2; 
     padding-bottom: 20px; 
@@ -457,6 +457,9 @@ p.sbAnotation {
 	padding: 10px 24px;
 	margin-bottom: 10px;
 	text-align: justify;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
 }
 p.uLabel {
     font-size: 10px;
@@ -483,7 +486,7 @@ p.uLabel {
     margin: 0; 
     padding: 0; 
     list-style-image: none; 
-    box-shadow: 0px 2px 3px rgba(0,0,0,.02);
+    box-shadow: 0 2px 2px rgba(0,0,0,.02);
 }
 .rightMenu ul > li { 
 	margin: 0; 
@@ -491,14 +494,14 @@ p.uLabel {
 	text-transform:uppercase; 
 	font-weight: 700; 
 	letter-spacing: 1px;
-	transition: .3s;
+	transition: .2s;
 	cursor: pointer;
-	border-right: #efefef 1px solid;
+	border-right: #ededed 1px solid;
 	display:inline-block;
     margin-right: -5px;
 }
 .rightMenu ul > li:hover {
-    background: #efefef; 
+    color: #fc6060; 
     transition: .1s;
 }
 .rightMenu ul > li.active {
@@ -552,20 +555,23 @@ p.uLabel {
 	border-top: 1px #dedede dashed;
 	border-bottom: 1px #dedede dashed;
 	padding: 10px 0;
-    height: 52px;
+    height: 54px;
     overflow: auto;
+    text-align: justify;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
 }
 
 .rating {
     text-align:center; 
-    margin: 10px 0;
+    margin: -3px 0 12px;
 }
 .rating span {
     font-size: 12px; 
     font-weight: 700; 
     margin-right: 10px; 
     position: relative; 
-    top: -2px;
 }
 .rating span.up {
     color: #3891C9;
@@ -582,6 +588,7 @@ p.uLabel {
 	height: 14px;
 	display: inline-block;
 	margin-right: 4px;
+    vertical-align: middle; 
 }
 .ratingUp {
     background-position: 0 0; 
@@ -600,6 +607,7 @@ p.workPrice {
     border: none!important; 
     padding: 10px 0 0px;
     height: auto;
+    text-align: center;
 }
 
 /*--- Открытие мастерской ---*/
@@ -710,6 +718,9 @@ input:focus, textarea:focus {
     font-size: 16px;
     color: #5a5a5a;
     text-align: justify;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
 }
 
 .breadcrumbs {
