@@ -4,20 +4,32 @@
 {
     foreach (var item in Model)
     {
-        <div class="workElement">
+        <div class="workroomPreview">
             <img src="~/Content/img/first_workshop.jpg">
-            <div class="workInfo">
+            <div class="workroomInfo">
                 <h3>@item.Name</h3>
                 <div class="rating">
                     <div class="ratingUp"></div><span class="up">@item.CountGood</span>
                     <div class="ratingMiddle"></div><span class="middle">@item.CountMedium</span>
                     <div class="ratingDown"></div><span class="down">@item.CountBad</span>
                 </div>
+
+                <div class="smallButton mail"></div>
+                <div class="smallButton review"></div>
+                <div class="smallButton profile"></div>
+                <input type="button" class="bigButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
+
                 <p>@item.Description</p>
-                <input type="button" value="Подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
+                <h4>Последние товары:</h4>
+                <div class="lastProduct">
+                    <img src="~/Content/img/90x90.gif">
+                    <img src="~/Content/img/90x90.gif">
+                    <img src="~/Content/img/90x90.gif">
+                    <img src="~/Content/img/90x90.gif">
+                </div>
+                @*<input type="button" value="Подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />*@
             </div>
-            <div class="workData">
-            </div>
+            
         </div>
     }
 }

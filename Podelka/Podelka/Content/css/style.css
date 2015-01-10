@@ -25,7 +25,7 @@
     position:absolute; 
     top: -10px; 
     right: 0px;
-    background: #5a5a5a;
+    background: #3a3a3a;
     padding: 5px 10px;
     width: 98px;
     overflow: auto;
@@ -129,7 +129,7 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
 
 /*--- Вторая строка меню ---*/
 .second.menuLevel {
-	color: #3a3a3a; 
+	color: #2a2a2a; 
 	font-size: 16px; 
 	font-weight: 700; 
 	text-transform:uppercase; 
@@ -207,7 +207,7 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
 }
 /*--- Третий уровень меню ---*/
 .third.menuLevel {
-    color: #5a5a5a; 
+    color: #3a3a3a; 
     font-size: 13px; 
     height: 50px; 
     border-bottom: 1px solid #eaeaea;
@@ -306,7 +306,7 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
 
 /*--- Страница отоброжения ---*/
 .profileView {
-    background: #f2f2f2; 
+    background: #f1f1f1; 
     padding-bottom: 20px; 
     padding-top: 20px;
 }
@@ -318,7 +318,7 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
 	margin-right: 20px; 
 	text-align:center; 
 	color: #2e2e2e; 
-	box-shadow: 0px 2px 3px rgba(0,0,0,.02);
+	box-shadow: 0 1px 2px rgba(0,0,0,.05);
 	padding-bottom: 10px;
     position: relative;
 }
@@ -342,7 +342,7 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
     font-style:italic; 
     font-size: 16px; 
     font-weight: 700; 
-    color: #5a5a5a; 
+    color: #3a3a3a; 
     padding-right: 18px;
 }
 .sbCity {
@@ -484,12 +484,13 @@ p.uLabel {
     width: 100%; 
     height: 50px; 
     background: #fff;
+    margin-bottom: 20px;
 }
 .rightMenu ul {
     margin: 0; 
     padding: 0; 
     list-style-image: none; 
-    box-shadow: 0 2px 2px rgba(0,0,0,.02);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
 .rightMenu ul > li { 
 	margin: 0; 
@@ -522,9 +523,9 @@ p.uLabel {
 .workElement {
     width: 280px; 
     height: 500px; 
-    box-shadow: 0px 2px 3px rgba(0,0,0,.02);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
     float: left; 
-    margin-top: 20px; 
+    margin-bottom: 20px; 
     margin-right:20px; 
     background: #fff;
 }
@@ -577,13 +578,15 @@ p.uLabel {
     position: relative; 
 }
 .rating span.up {
-    color: #3891C9;
+    /*color: #3891C9;*/
+    color: #7f7f7f;
 }
 .rating span.middle {
     color: #7f7f7f;
 }
 .rating span.down {
-    color: #fc6060;
+    /*color: #fc6060;*/
+    color: #7f7f7f;
 }
 .ratingUp, .ratingMiddle, .ratingDown {
 	background-image: url(../img/rating.png); 
@@ -606,7 +609,7 @@ p.uLabel {
 p.workPrice {
     font-size: 16px!important; 
     font-weight: 700; 
-    color: #3a3a3a!important; 
+    color: #2a2a2a!important; 
     border: none!important; 
     padding: 10px 0 0px;
     height: auto;
@@ -616,16 +619,16 @@ p.workPrice {
 /*--- Открытие мастерской ---*/
 .createBody {
     background: #fff;  
-    box-shadow: 0px 2px 3px rgba(0,0,0,.02);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
     padding: 20px; 
     width: 840px;
 }
 .createForm h2 {
     margin: 10px 0; 
-    color: #3A3A3A;
+    color: #2a2a2a;
 }
 .createForm {
-    color: #5a5a5a;
+    color: #3a3a3a;
     font-size: 14px;
 }
 textarea {
@@ -663,7 +666,7 @@ textarea {
 .createForm label {
     font-weight: 700; 
     margin-bottom: 10px; 
-    color: #3a3a3a; 
+    color: #2a2a2a; 
     font-size: 16px;
 }
 .createBody .formReg {
@@ -694,7 +697,7 @@ input:focus, textarea:focus {
 
 /*--- Товары ---*/
 .productBody {
-    box-shadow: 0px 2px 3px rgba(0,0,0,.02);
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
     background: #fff;
 }
 .productContent {
@@ -719,7 +722,7 @@ input:focus, textarea:focus {
     font-style: italic;
     line-height: initial;
     font-size: 16px;
-    color: #5a5a5a;
+    color: #3a3a3a;
     text-align: justify;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
@@ -735,7 +738,7 @@ input:focus, textarea:focus {
 
 /*--- Подвал ---*/
 footer {
-    background: #3a3a3a;
+    background: #2a2a2a;
     color: #f5f5f5;
     padding: 16px 0;
     font-size: 14px;
@@ -766,3 +769,84 @@ footer a:hover {
     float: right;
     text-align: right;
 }
+
+/*--- Workroom Preview ---*/
+.workroomPreview {  
+    width: 390px;
+    padding: 20px;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.workroomPreview:nth-child(2n) {
+    margin-right: 0px;
+}
+.workroomPreview img {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.workroomPreview h3 {
+    margin: 0;
+    margin-bottom: 5px;
+    color: #2a2a2a;
+}
+.workroomPreview h4 {
+    margin: 10px 0;
+    font-size: 16px;
+}
+.workroomPreview p {
+    font-size: 14px;
+    color: #5a5a5a;
+    clear: both;
+    border-top: 1px #dedede dashed;
+    border-bottom: 1px #dedede dashed;
+    padding: 10px 0px;
+    font-style: italic;
+    text-align: justify;
+    margin: 0;
+    height: 55px;
+    overflow: hidden;
+}
+.workroomPreview .rating {
+    text-align: left;
+    margin: 0;
+    margin-bottom: 10px;
+}
+.lastProduct img{
+    width: 90px;
+    height: 90px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 0px;
+}
+.lastProduct img:nth-child(4) {
+    margin-right: 0px;
+}
+.smallButton {
+    width: 40px; 
+    height: 40px; 
+    background: #fc6060; 
+    float: left; 
+    margin-right: 5px;
+}
+.smallButton.mail {
+    background-image: url(../img/mail.png);
+    background-repeat: no-repeat; 
+    background-position: 12px;
+}
+.smallButton.review {
+    background-image: url(../img/review.png);
+    background-repeat: no-repeat; 
+    background-position: 12px 14px;
+}
+.smallButton.profile {
+    background-image: url(../img/login.png);
+    background-repeat: no-repeat; 
+    background-position: 12px;
+}
+input.bigButton {float: right; width: 135px; height: 40px; background: #fc6060; margin: 0px; border-radius: 0px;}

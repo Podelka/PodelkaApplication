@@ -24,7 +24,8 @@
                     @Html.TextBoxFor(m => m.Name, new { name = "nameWorkshop", placeholder = "Введите название мастерской" })
                     @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })<br />
 
-                    @Html.TextAreaFor(m => m.Description, new { placeholder = "Напишите пару слов о вашей деятельности.." })
+                    @Html.TextAreaFor(m => m.Description, new { placeholder = "Напишите пару слов о вашей деятельности..", maxlength = "176"
+ })
                     @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })<br />
                 </div>
 

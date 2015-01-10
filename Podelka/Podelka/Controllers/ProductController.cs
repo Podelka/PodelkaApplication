@@ -101,6 +101,10 @@ namespace Podelka.Controllers
                 {
                     categoryName = "Средства по уходу";
                 }
+                if (categoryId == 10)
+                {
+                    categoryName = "Другое";
+                }
                 var model = new CategoryModel(categoryName);
                 return View(model);
             }

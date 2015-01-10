@@ -253,6 +253,7 @@
     <Content Include="Content\img\registr.jpg" />
     <Content Include="Content\img\second_workshop.jpg" />
     <Content Include="Content\img\shop.png" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -320,6 +321,8 @@
     <Content Include="Views\Shared\_InfoWorkroomGuest.cshtml" />
     <Content Include="Views\Shared\_ContactsUserGuest.cshtml" />
     <Content Include="Views\Shared\_ContactsUserPersonal.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
