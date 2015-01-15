@@ -3,6 +3,7 @@
 <head>
     <meta charset="windows-1251">
     <meta name="viewport" content="width=1240, user-scalable " />
+    @RenderSection("MetaKeywords", required: false)
     <title>Поделка.by | Уникальный каталог изделий ручной работы</title>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     @Styles.Render("~/Content/css/css_only_style")    
@@ -43,18 +44,18 @@
                     </div>
                     <div class="wrap_element">
                         <span>Оформить заказ</span>
-                        <a href="@Url.Action("Create", "Order")"><div class="addPost" id="addPost"></div></a>
+                        @Html.ActionLink(" ", "Create", "Order", null, new { @class = "addPost" })
                     </div>
                     <div class="wrap_element">
                         @if (Request.IsAuthenticated)
                         {
                             <span>Личный профиль</span>
-                            <a href="@Url.Action("Profile", "User", new { id = Convert.ToInt64((Html.Action("GetUserId", "Account")).ToString()) })"><div class="logIn"></div></a>
+                            @Html.ActionLink(" ", "Profile", "User", new { id = Convert.ToInt64((Html.Action("GetUserId", "Account")).ToString()) }, new { @class = "logIn" })
                         }
                         else
                         {
                             <span>Войти на сайт</span>
-                            <a href="@Url.Action("Login", "Account", new { returnUrl = Request.RawUrl })"><div class="logIn"></div></a>
+                            @Html.ActionLink(" ", "Login", "Account", new { returnUrl = Request.RawUrl }, new { @class = "logIn" })
                         }
                     </div>
                     <div class="findLine">
@@ -63,7 +64,21 @@
                 </div>
             </div>
         </div>
-        @Html.Partial("_MenuLevelThird")
+        <div class="menuLevel third">
+            <div class="center">
+                <ul>
+                    <li class="clothing">@Html.ActionLink("Одежда", "Section", "Product", new { id = 1 }, null)</li>
+                    <li class="jewelry">@Html.ActionLink("Украшения", "Section", "Product", new { id = 2 }, null)</li>
+                    <li class="accessory">@Html.ActionLink("Аксессуары", "Section", "Product", new { id = 3 }, null)</li>
+                    <li class="gift">@Html.ActionLink("На подарок", "Section", "Product", new { id = 4 }, null)</li>
+                    <li class="child">@Html.ActionLink("Для детей", "Section", "Product", new { id = 5 }, null)</li>
+                    <li class="house">@Html.ActionLink("Для дома", "Section", "Product", new { id = 6 }, null)</li>
+                    <li class="pets">@Html.ActionLink("Для животных", "Section", "Product", new { id = 7 }, null)</li>
+                    <li class="stationery">@Html.ActionLink("Канцелярские товары", "Section", "Product", new { id = 8 }, null)</li>
+                    <li class="care">@Html.ActionLink("Средства по уходу", "Section", "Product", new { id = 9 }, null)</li>
+                </ul>
+            </div>
+        </div>
     </div>
     @RenderBody()
     <footer class="clearfix">

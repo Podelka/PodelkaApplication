@@ -2,78 +2,60 @@
     ViewBag.Title = "Создание мастерской";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
-
-@model Podelka.Models.WorkroomProfileCreate
-
-<div class="profileView clearfix">
-    <div class="center">
-        <div class="leftSidebar createSidebar createForm">
-            <h2>Открытие мастерской</h2>
-            <img src="~/Content/img/shop.png">
-        </div>
-
-        <div class="rightContent createBody">
-
-            @using (Html.BeginForm("Create", "Workroom", FormMethod.Post, new { @class = "createForm" }))
-            {
-                @Html.AntiForgeryToken()
-
-                <img src="~/Content/img/280x280.gif">
-                
-                <div class="formName">
-                    @Html.TextBoxFor(m => m.Name, new { name = "nameWorkshop", placeholder = "Введите название мастерской" })
-                    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })<br />
-
-                    @Html.TextAreaFor(m => m.Description, new { placeholder = "Напишите пару слов о вашей деятельности.." })
-                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })<br />
-                </div>
-
-                <div class="s123">
-                    <div class="formReg">
-                        <label for="regType">Тип регистрации:</label><br />
-                        @foreach (var item in Model.RegisterTypes)
-                        {
-                            @Html.RadioButtonFor(m => m.RegisterTypeId, item.RegisterTypeId) @item.Name
-                            <br />
-                        }
+@model Podelka.Models.WorkroomCreateModel
+    <div class="profileView clearfix">
+        <div class="center">
+            <div class="leftSidebar createSidebar createForm">
+                <h2>Открытие мастерской</h2>
+                <img src="~/Content/img/shop.png">
+            </div>
+            <div class="rightContent createBody">
+                @using (Html.BeginForm("Create", "Workroom", FormMethod.Post, new { @class = "createForm" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <img src="~/Content/img/280x280.gif">              
+                    <div class="formName">
+                        @Html.TextBoxFor(m => m.Name, new { placeholder = "Введите название мастерской" })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })<br />
+                        @Html.TextAreaFor(m => m.Description, new { placeholder = "Напишите пару слов о вашей деятельности.." })
+                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })<br />
                     </div>
-
-                    <br />
-
-                    <div class="formPay">
-                        <label for="deliver">Способы оплаты:</label><br />
-                        @foreach (var item in Model.PayMethods)
-                        {
-                            @*Html.CheckBox("deliver", new { value = item.IsSelected, @checked = false });
-                                @item.Name
-                                <br />*@
-                            @Html.CheckBoxFor(m => item.IsSelected, new { name = "deliver" })
-                            @item.Name
-                            <br />
-                        }
-                        @*<input type="checkbox" name="deliver" value="1">Наличные<br />*@
+                    <div class="s123">
+                        @Html.DropDownListFor(m => m.SelectedSection, new SelectList(Model.Sections, "SectionId", "Name"))
+                        @Html.ValidationMessageFor(m => m.SelectedSection, "", new { @class = "text-danger" })<br />
+                        <div class="formReg">
+                            <label for="regType">Тип регистрации:</label><br />
+                            @foreach (var item in Model.RegisterTypes)
+                            {                                                       
+                                @Html.RadioButtonFor(m => m.SelectedRegisterType, item.RegisterTypeId) 
+                                @item.Name <br />
+                            }
+                            @Html.ValidationMessageFor(m => m.SelectedRegisterType, "", new { @class = "text-danger" })<br />
+                        </div>
+                        <br />
+                        <div class="formPay">
+                            <label for="deliver">Способы оплаты:</label><br />
+                            @Html.CheckBoxListFor(m => m.SelectedPayGroups, m => m.PayMethods, pay => pay.PayMethodId, pay => pay.Name, pay => pay.IsSelected, MvcCheckBoxList.Model.Position.Vertical)
+                            @Html.ValidationMessageFor(m => m.SelectedPayGroups, "", new { @class = "text-danger" })<br />
+                        </div>
+                        <br />
+                        <div class="formDeliver">
+                            <label for="deliver">Способы доставки:</label><br />
+                            @Html.CheckBoxListFor(m => m.SelectedDeliveryGroups, m => m.DeliveryMethods, delivery => delivery.DeliveryMethodId, delivery => delivery.Name, delivery => delivery.IsSelected, MvcCheckBoxList.Model.Position.Vertical)
+                            @Html.ValidationMessageFor(m => m.SelectedDeliveryGroups, "", new { @class = "text-danger" })<br />
+                        </div>
+                        <br />
                     </div>
-
-                    <br />
-
-                    <div class="formDeliver">
-                        <label for="deliver">Способы доставки:</label><br />
-                        @foreach (var item in Model.DeliveryMethods)
-                        {
-                            @Html.CheckBoxFor(m => item.IsSelected, new { name = "deliver" })
-                            @item.Name
-                            <br />
-                        }
-                    </div>
-
-                    <br />
-                </div>
-                <input type="submit" value="Создать" class="buttonCreate">
-            }
+                    @Html.ActionLink("Прочитайте правила открытия мастерской", "Rules", "Home")<br />
+                    @Html.CheckBoxFor(m => m.AgreeRules)
+                    @Html.LabelFor(m => m.AgreeRules)
+                    @Html.ValidationMessageFor(m => m.AgreeRules, "", new { @class = "text-danger" })<br />
+                    <input type="submit" name="buttonCreate" id="buttonCreate" value="Создать" class="buttonCreate" style="display:none;">
+                }
+            </div>
         </div>
     </div>
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryValidate")
 }

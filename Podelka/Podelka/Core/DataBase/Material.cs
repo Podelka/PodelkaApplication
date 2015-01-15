@@ -5,9 +5,12 @@ using System.Web;
 
 namespace Podelka.Core.DataBase
 {
-    public class WorkroomRegisterType       
+    public class Material
     {
-        public byte WorkroomRegisterTypeId { get; set; }
+
+        public short MaterialId { get; set; }
         public string Name { get; set; }
+
+        public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }
     }
 }

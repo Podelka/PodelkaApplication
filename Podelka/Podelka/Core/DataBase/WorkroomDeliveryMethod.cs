@@ -15,7 +15,7 @@ namespace Podelka.Core.DataBase
         public byte DeliveryMethodId { get; set; }
         public string Description { get; set; }
 
-        public virtual DeliveryMethod DeliveryMethod { get; set; }
         public virtual Workroom Workroom { get; set; }
+        public virtual DeliveryMethod DeliveryMethod { get; set; }
     }
 }

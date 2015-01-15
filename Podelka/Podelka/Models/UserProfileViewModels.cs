@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Podelka.Resources;
+using System;
 
 namespace Podelka.Models
 {
@@ -10,10 +11,9 @@ namespace Podelka.Models
     {
         public UserProfileModel()
         {
-
         }
 
-        public UserProfileModel(long userId, string firstName, string secondName, string email, string city, string skype, string socialNetwork, string personalWebsite, string phone)
+        public UserProfileModel(long userId, string firstName, string secondName, string email, string city, string skype, string socialNetwork, string personalWebsite, string phone, DateTime dateRegistration)
         {
             UserId = userId;
             FirstName = firstName;
@@ -24,6 +24,7 @@ namespace Podelka.Models
             SocialNetwork = socialNetwork;
             PersonalWebsite = personalWebsite;
             Phone = phone;
+            DateRegistration = dateRegistration;
         }
 
         public long UserId { get; set; }
@@ -35,13 +36,13 @@ namespace Podelka.Models
         public string SocialNetwork { get; set; }
         public string PersonalWebsite { get; set; }
         public string Phone { get; set; }
+        public DateTime DateRegistration { get; set; }
     }
     
     public class UserProfileChangeModel
     {
         public UserProfileChangeModel()
         {
-
         }
 
         public UserProfileChangeModel(string firstName, string secondName, string email, string phone, string skype, string socialNetwork, string personalWebsite, string city)

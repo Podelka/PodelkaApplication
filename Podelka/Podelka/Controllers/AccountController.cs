@@ -154,7 +154,8 @@ namespace Podelka.Controllers
                     Skype = model.Skype,
                     SocialNetwork = model.SocialNetwork,
                     PersonalWebsite = model.PersonalWebsite,
-                    City = model.City
+                    City = model.City,
+                    DateRegistration = DateTime.Today
                 };
 
                 var result = await UserManager.CreateAsync(user, model.Password);

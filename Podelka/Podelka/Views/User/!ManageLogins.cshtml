@@ -2,12 +2,9 @@
     ViewBag.Title = "Manage your external logins";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @model Podelka.Models.ManageLoginsViewModel
 @using Microsoft.Owin.Security
-
 <h2>@ViewBag.Title.</h2>
-
 <p class="text-success">@ViewBag.StatusMessage</p>
 @if (Model.CurrentLogins.Count > 0)
 {

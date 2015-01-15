@@ -22,3 +22,13 @@ $(window).on('load , resize', function createSize(){
 	$('.container').css({'left':(doc_w-cont_w)/2});
 	$('.container').css({'opacity':1});
 });
+
+$(function() {
+    $('#AgreeRules').click(function () {
+    if ($(this).is(':checked')) {
+        $('#buttonCreate').show()
+    } else {
+        $('#buttonCreate').hide()
+    }
+});
+});

@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Категории";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@model ICollection<Podelka.Models.ProductPreviewModel>
+<div class="profileView clearfix">
+    <div class="center">
+        <div class="rightContent">
+            @Html.Partial("_ProductPreview", Model)
+        </div>
+    </div>
+</div>

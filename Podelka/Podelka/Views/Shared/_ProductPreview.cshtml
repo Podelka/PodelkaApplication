@@ -1,5 +1,4 @@
 ﻿@model ICollection<Podelka.Models.ProductPreviewModel>
-
 @if (Model != null)
 {
     foreach (var item in Model)
@@ -9,7 +8,11 @@
             <div class="workInfo">
                 <h3>@item.Name</h3>
                 <p>@item.Description</p>
-                <p class="workPrice">@item.Price бел.руб</p>
+                @if (item.Price != null)
+                {
+                    double Price = (double)item.Price;
+                    <p class="workPrice">@Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) бел.руб</p>
+                }
                 <input type="button" value="Подробнее" onclick="location.href='@Url.Action("Profile", "Product", new { id = item.ProductId })'" />
             </div>
         </div>

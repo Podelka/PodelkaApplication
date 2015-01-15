@@ -21,6 +21,13 @@ namespace Podelka.Controllers
             using (var db = new Context())
             {
                 workrooms = db.Workrooms.ToList();
+                if (workrooms != null)
+                {
+                    foreach(var item in workrooms)
+                    {
+                        db.Entry(item).Reference(i => i.User).Load();
+                    }
+                }
             }
 
             if (workrooms != null)
@@ -28,7 +35,7 @@ namespace Podelka.Controllers
                 var workroomsCollectoin = new Collection<WorkroomPreviewModel>();
                 foreach (var item in workrooms)
                 {
-                    var workroom = new WorkroomPreviewModel(item.WorkroomId, item.Name, item.Description, item.CountGood, item.CountMedium, item.CountBad);
+                    var workroom = new WorkroomPreviewModel(item.WorkroomId, item.UserId, item.User.Email, item.Name, item.Description, item.CountGood, item.CountMedium, item.CountBad);
                     workroomsCollectoin.Add(workroom);
                 }
                 return View(workroomsCollectoin);
@@ -58,9 +65,9 @@ namespace Podelka.Controllers
 
                 if (workroom != null)
                 {
-                    var user = new UserProfileModel(workroom.UserId, workroom.User.FirstName, workroom.User.SecondName, workroom.User.Email, workroom.User.City, workroom.User.Skype, workroom.User.SocialNetwork, workroom.User.PersonalWebsite, workroom.User.Phone);
+                    var user = new UserProfileModel(workroom.UserId, workroom.User.FirstName, workroom.User.SecondName, workroom.User.Email, workroom.User.City, workroom.User.Skype, workroom.User.SocialNetwork, workroom.User.PersonalWebsite, workroom.User.Phone, workroom.User.DateRegistration);
 
-                    var model = new WorkroomProfileModel(workroom.WorkroomId, workroom.UserId, workroom.Name, workroom.Description, workroom.CountGood, workroom.CountMedium, workroom.CountBad, user);
+                    var model = new WorkroomProfileModel(workroom.WorkroomId, workroom.UserId, workroom.Name, workroom.Description, workroom.CountGood, workroom.CountMedium, workroom.CountBad, workroom.DateCreate, user);
                         
                     var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                     if (userId != 0 && workroom.User.Id == userId)
@@ -87,46 +94,57 @@ namespace Podelka.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            var workroomRegisterTypesDb = new List<WorkroomRegisterType>();
+            var workroomRegisterTypesDb = new List<RegisterTypeWorkroom>();
             var payMethodsDb = new List<PayMethod>();
             var deliveryMethodsDb = new List<DeliveryMethod>();
+            var sectionsDb = new List<Section>();
 
             using (var db = new Context())
             {
                 workroomRegisterTypesDb = db.WorkroomRegisterTypes.ToList();
                 payMethodsDb = db.PayMethods.ToList();
                 deliveryMethodsDb = db.DeliveryMethods.ToList();
+                sectionsDb = db.Sections.ToList();
             }
-                
-            var registerTypeModel = new Collection<RegisterTypeModel>();
+
+            var registerTypeDbModel = new List<RegisterTypeDbModel>();
             foreach (var item in workroomRegisterTypesDb)
             {
-                var regType = new RegisterTypeModel(item.WorkroomRegisterTypeId, item.Name);
-                registerTypeModel.Add(regType);
+                var regType = new RegisterTypeDbModel(item.WorkroomRegisterTypeId, item.Name);
+                registerTypeDbModel.Add(regType);
             }
-                
-            var payMethodsModel = new Collection<PayMethodModel>();
+
+            var sectionDbModel = new List<SectionDbModel>();
+            var defaultSection = new SectionDbModel(0, "Выберите раздел мастерской");
+            sectionDbModel.Add(defaultSection);
+            foreach (var item in sectionsDb)
+            {
+                var section = new SectionDbModel(item.SectionId, item.Name);
+                sectionDbModel.Add(section);
+            }
+
+            var payMethodsModel = new Collection<PayMethodDbModel>();
             foreach (var item in payMethodsDb)
             {
-                var payMet = new PayMethodModel(item.PayMethodId, item.Name);
+                var payMet = new PayMethodDbModel(item.PayMethodId, item.Name);
                 payMethodsModel.Add(payMet);
             }
 
-            var deliveryMethodsModel = new Collection<DeliveryMethodModel>();
+            var deliveryMethodsModel = new Collection<DeliveryMethodDbModel>();
             foreach (var item in deliveryMethodsDb)
             {
-                var deliveryMet = new DeliveryMethodModel(item.DeliveryMethodId, item.Name);
+                var deliveryMet = new DeliveryMethodDbModel(item.DeliveryMethodId, item.Name);
                 deliveryMethodsModel.Add(deliveryMet);
             }
 
-            var model = new WorkroomProfileCreate(null, null, registerTypeModel, payMethodsModel, deliveryMethodsModel);
+            var model = new WorkroomCreateModel(registerTypeDbModel, sectionDbModel, payMethodsModel, deliveryMethodsModel);
             return View(model);
         }
 
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(WorkroomProfileCreate model)
+        public ActionResult Create(WorkroomCreateModel model)
         {
             if (ModelState.IsValid)
             {
@@ -134,18 +152,41 @@ namespace Podelka.Controllers
                 var workroom = new Workroom
                 {
                     UserId = userId,
-                    RegisterTypeId = model.RegisterTypeId,
+                    WorkroomRegisterTypeId = model.SelectedRegisterType,
+                    SectionId = model.SelectedSection,
                     Name = model.Name,
                     Description = model.Description,
+                    ResultRating = 0,
                     CountGood = 0,
                     CountMedium = 0,
                     CountBad = 0,
-                    DateRegistration = DateTime.Now
+                    DateCreate = DateTime.Now
                 };
 
                 using (var db = new Context())
                 {
                     db.Workrooms.Add(workroom);
+
+                    foreach (var item in model.SelectedPayGroups)
+                    {
+                        var workroomPayMethod = new WorkroomPayMethod
+                        {
+                            WorkroomId = workroom.WorkroomId,
+                            PayMethodId = (byte)item
+                        };
+                        db.WorkroomPayMethods.Add(workroomPayMethod);
+                    }
+
+                    foreach (var item in model.SelectedDeliveryGroups)
+                    {
+                        var workroomDeliveryMethod = new WorkroomDeliveryMethod
+                        {
+                            WorkroomId = workroom.WorkroomId,
+                            DeliveryMethodId = (byte)item
+                        };
+                        db.WorkroomDeliveryMethods.Add(workroomDeliveryMethod);
+                    }
+
                     db.SaveChanges();
                 }
 
@@ -154,6 +195,77 @@ namespace Podelka.Controllers
             else
             {
                 return View(model);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Methods(long? id)      
+        {
+            if (id != null)
+            {
+                var workroom = new Workroom();
+
+                using (var db = new Context())
+                {
+                    workroom = db.Workrooms.Find(id);
+                    if (workroom != null)
+                    {
+                        db.Entry(workroom).Collection(w => w.WorkroomPayMethods).Load();
+                        if (workroom.WorkroomPayMethods != null)
+                        {
+                            foreach (var item in workroom.WorkroomPayMethods)
+                            {
+                                db.Entry(item).Reference(w=>w.PayMethod).Load();
+                            }
+                        }
+                        
+                        db.Entry(workroom).Collection(w => w.WorkroomDeliveryMethods).Load();
+                        if (workroom.WorkroomDeliveryMethods != null)
+                        {
+                            foreach (var item in workroom.WorkroomDeliveryMethods)
+                            {
+                                db.Entry(item).Reference(w => w.DeliveryMethod).Load();
+                            }
+                        }
+                    }
+                }
+
+                if (workroom != null)
+                {
+                    var payMethodsModel = new Collection<PayMethodModel>();
+
+                    if (workroom.WorkroomPayMethods != null)
+                    {
+                        foreach (var item in workroom.WorkroomPayMethods)
+                        {
+                            var payMet = new PayMethodModel(item.PayMethod.Name);
+                            payMethodsModel.Add(payMet);
+                        }
+                    }
+
+                    var deliveryMethodsModel = new Collection<DeliveryMethodModel>();
+
+                    if (workroom.WorkroomDeliveryMethods != null)
+                    {
+                        foreach (var item in workroom.WorkroomDeliveryMethods)
+                        {
+                            var deliveryMet = new DeliveryMethodModel(item.DeliveryMethod.Name);
+                            deliveryMethodsModel.Add(deliveryMet);
+                        }
+                    }
+
+                    var model = new WorkroomMethodsModel(payMethodsModel, deliveryMethodsModel);
+
+                    return View(model);
+                }
+                else
+                {
+                    return View("_Error"); //Не найдена мастерская с данным идентификатором (id)
+                }
+            }
+            else
+            {
+                return View("_Error"); //В ссылке отсутвует идентификатор мастерской (id)
             }
         }
 
@@ -182,7 +294,7 @@ namespace Podelka.Controllers
                     {
                         foreach (var item in workroom.Products)
                         {
-                            var product = new ProductPreviewModel(item.ProductId, item.Name, item.Description, item.Price);
+                            var product = new ProductPreviewModel(item.ProductId, item.Name, item.Description, item.Price, item.PriceDiscount);
                             productsCollection.Add(product);
                         }
                     }

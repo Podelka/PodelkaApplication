@@ -3,6 +3,9 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 @model Podelka.Models.ProductProfileModel
+@section MetaKeywords {
+    <meta name="keywords" content="@Model.KeyWords">
+}
     <div class="profileView clearfix">
         <div class="center">
             <div class="leftSidebar">
@@ -13,21 +16,33 @@
             </div>
             <div class="rightContent productBody clearfix">
                 <div class="productContent">
-                    <span class="breadcrumbs">Главная / Подарки / Игрушки / Кот-муркот</span>
+                    <span class="breadcrumbs">@Html.ActionLink(Model.SectionName, "Section", "Product", new { id = Model.SectionId }, null) / @Model.CategoryName / @Model.Name</span>
                     <h1>@Model.Name</h1>
                     <div class="productInfo">
                         <img src="~/Content/img/500x350.gif">
                         <div class="productText">
-                            <strong>Цена:</strong> @Model.Price бел.руб<br />
-                            <strong>Состояние:</strong> @Model.StatusReady
+                            @if (Model.Price != null)
+                            {
+                                @*@{
+                                    string str = @"(/(\d)(?=(\d\d\d)+([^\d]|$))/g)";
+                                    Price.Replace(str, "$1 ");
+                                }*@
+                                double Price = (double)Model.Price;
+                                <strong>Цена:</strong> @Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) @:бел.руб<br />
+                            }
+                            <strong>Состояние:</strong> @Model.StatusReady<br />
+                            @if (Model.Gender != null)
+                            {
+                                <strong>Пол:</strong> @Model.Gender
+                            }
                             <hr class="dashedHr" />
                             <div class="productDescript">
                                 @Model.Description
                             </div>
                             <hr class="dashedHr" />
-                            <strong>Материалы:</strong> @Model.Material<br />
+                            <strong>Материалы:</strong> @Model.Materials<br />
                             <strong>Габариты:</strong> @Model.Size см<br />
-                            <strong>Вес:</strong> @Model.Weight г<br />
+                            <strong>Масса:</strong> @Model.Weight г<br />
                         </div>
                     </div>
                 </div>

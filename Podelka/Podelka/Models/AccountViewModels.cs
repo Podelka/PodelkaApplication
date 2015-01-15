@@ -1,4 +1,5 @@
-﻿using Podelka.Resources;
+﻿using Podelka.AttributeValidation;
+using Podelka.Resources;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -64,6 +65,9 @@ namespace Podelka.Models
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Phone")]
         public string Phone { get; set; }
 
+        [MustBeTrue(ErrorMessage = "Вы обязаны согласиться с правилами, чтобы зарегестрироваться")]
+        [Display(Name = "Я согласен с этими правилами")]
+        public bool AgreeRules { get; set; }
     }
 
     public class ForgotPasswordModel

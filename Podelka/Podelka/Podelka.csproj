@@ -40,6 +40,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcCheckBoxList">
+      <HintPath>..\packages\MvcCheckBoxList.1.4.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -158,6 +161,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="AttributeValidation\MustBeTrueAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
@@ -171,11 +175,19 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Core\AppDbInitializer.cs" />
     <Compile Include="Core\DataBase\ApplicationUser.cs" />
+    <Compile Include="Core\DataBase\Category.cs" />
     <Compile Include="Core\DataBase\DeliveryMethod.cs" />
+    <Compile Include="Core\DataBase\GenderTypeProduct.cs" />
+    <Compile Include="Core\DataBase\Material.cs" />
     <Compile Include="Core\DataBase\PayMethod.cs" />
     <Compile Include="Core\DataBase\Context.cs" />
+    <Compile Include="Core\DataBase\Phone.cs" />
     <Compile Include="Core\DataBase\Product.cs" />
-    <Compile Include="Core\DataBase\WorkroomRegisterType.cs" />
+    <Compile Include="Core\DataBase\ProductMaterial.cs" />
+    <Compile Include="Core\DataBase\Section.cs" />
+    <Compile Include="Core\DataBase\StatusReadyProduct.cs" />
+    <Compile Include="Core\DataBase\RegisterTypeWorkroom.cs" />
+    <Compile Include="Core\DataBase\TypePhone.cs" />
     <Compile Include="Core\DataBase\Workroom.cs" />
     <Compile Include="Core\DataBase\WorkroomDeliveryMethod.cs" />
     <Compile Include="Core\DataBase\WorkroomPayMethod.cs" />
@@ -183,16 +195,53 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201412311541563_InitialCreate.cs" />
-    <Compile Include="Migrations\201412311541563_InitialCreate.Designer.cs">
-      <DependentUpon>201412311541563_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201501062200398_InitialCreate.cs" />
+    <Compile Include="Migrations\201501062200398_InitialCreate.Designer.cs">
+      <DependentUpon>201501062200398_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201412311545521_TestMigrateDB.cs" />
-    <Compile Include="Migrations\201412311545521_TestMigrateDB.Designer.cs">
-      <DependentUpon>201412311545521_TestMigrateDB.cs</DependentUpon>
+    <Compile Include="Migrations\201501062205390_First migration.cs" />
+    <Compile Include="Migrations\201501062205390_First migration.Designer.cs">
+      <DependentUpon>201501062205390_First migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501071323371_Change last add.cs" />
+    <Compile Include="Migrations\201501071323371_Change last add.Designer.cs">
+      <DependentUpon>201501071323371_Change last add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501071706168_Chanhe last add 5.cs" />
+    <Compile Include="Migrations\201501071706168_Chanhe last add 5.Designer.cs">
+      <DependentUpon>201501071706168_Chanhe last add 5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501071735032_Add.cs" />
+    <Compile Include="Migrations\201501071735032_Add.Designer.cs">
+      <DependentUpon>201501071735032_Add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501071738403_Add2.cs" />
+    <Compile Include="Migrations\201501071738403_Add2.Designer.cs">
+      <DependentUpon>201501071738403_Add2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501091342259_Add gender to section.cs" />
+    <Compile Include="Migrations\201501091342259_Add gender to section.Designer.cs">
+      <DependentUpon>201501091342259_Add gender to section.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501111227455_add mig.cs" />
+    <Compile Include="Migrations\201501111227455_add mig.Designer.cs">
+      <DependentUpon>201501111227455_add mig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501122058046_Foreign key.cs" />
+    <Compile Include="Migrations\201501122058046_Foreign key.Designer.cs">
+      <DependentUpon>201501122058046_Foreign key.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501122100018_Foreign key2.cs" />
+    <Compile Include="Migrations\201501122100018_Foreign key2.Designer.cs">
+      <DependentUpon>201501122100018_Foreign key2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501151117271_KeyWords.cs" />
+    <Compile Include="Migrations\201501151117271_KeyWords.Designer.cs">
+      <DependentUpon>201501151117271_KeyWords.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\SetВaseListsTablesModels.cs" />
     <Compile Include="Models\WorkroomViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\UserProfileViewModels.cs" />
@@ -297,9 +346,8 @@
     <Content Include="Views\Lesson\Index.cshtml" />
     <Content Include="Views\Workroom\Profile.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
-    <Content Include="Views\Product\Category.cshtml" />
+    <Content Include="Views\Product\Section.cshtml" />
     <Content Include="Views\Shared\_Error.cshtml" />
-    <Content Include="Views\Shared\_MenuLevelThird.cshtml" />
     <Content Include="Views\Shared\_LayoutMain.cshtml" />
     <Content Include="Views\User\!AddPhoneNumber.cshtml" />
     <Content Include="Views\User\!ChangePassword.cshtml" />
@@ -320,19 +368,48 @@
     <Content Include="Views\Shared\_InfoWorkroomGuest.cshtml" />
     <Content Include="Views\Shared\_ContactsUserGuest.cshtml" />
     <Content Include="Views\Shared\_ContactsUserPersonal.cshtml" />
+    <Content Include="Views\Workroom\Methods.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201412311541563_InitialCreate.resx">
-      <DependentUpon>201412311541563_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201501062200398_InitialCreate.resx">
+      <DependentUpon>201501062200398_InitialCreate.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412311545521_TestMigrateDB.resx">
-      <DependentUpon>201412311545521_TestMigrateDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201501062205390_First migration.resx">
+      <DependentUpon>201501062205390_First migration.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501071323371_Change last add.resx">
+      <DependentUpon>201501071323371_Change last add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501071706168_Chanhe last add 5.resx">
+      <DependentUpon>201501071706168_Chanhe last add 5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501071735032_Add.resx">
+      <DependentUpon>201501071735032_Add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501071738403_Add2.resx">
+      <DependentUpon>201501071738403_Add2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501091342259_Add gender to section.resx">
+      <DependentUpon>201501091342259_Add gender to section.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501111227455_add mig.resx">
+      <DependentUpon>201501111227455_add mig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501122058046_Foreign key.resx">
+      <DependentUpon>201501122058046_Foreign key.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501122100018_Foreign key2.resx">
+      <DependentUpon>201501122100018_Foreign key2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501151117271_KeyWords.resx">
+      <DependentUpon>201501151117271_KeyWords.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\DisplayNamesValidation.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

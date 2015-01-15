@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Podelka.AttributeValidation;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,10 +12,9 @@ namespace Podelka.Models
     {
         public WorkroomProfileModel()
         {
-
         }
 
-        public WorkroomProfileModel(long workroomId, long userId, string name, string description, short countGood, short countMedium, short countBad, UserProfileModel user)
+        public WorkroomProfileModel(long workroomId, long userId, string name, string description, int countGood, int countMedium, int countBad, DateTime dateCreate, UserProfileModel user)
         {
             WorkroomId = workroomId;
             UserId = userId;
@@ -21,6 +23,7 @@ namespace Podelka.Models
             CountGood = countGood;
             CountMedium = countMedium;
             CountBad = countBad;
+            DateCreate = dateCreate;
             User = user;
         }
         
@@ -28,9 +31,10 @@ namespace Podelka.Models
         public long UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public short CountGood { get; set; }
-        public short CountMedium { get; set; }
-        public short CountBad { get; set; }
+        public int CountGood { get; set; }
+        public int CountMedium { get; set; }
+        public int CountBad { get; set; }
+        public DateTime DateCreate { get; set; }
         public UserProfileModel User { get; set; }
     }
 
@@ -38,12 +42,13 @@ namespace Podelka.Models
     {
         public WorkroomPreviewModel()
         {
-
         }
 
-        public WorkroomPreviewModel(long workroomId, string name, string description, short countGood, short countMedium, short countBad)
+        public WorkroomPreviewModel(long workroomId, long userId, string email, string name, string description, int countGood, int countMedium, int countBad)
         {
             WorkroomId = workroomId;
+            UserId = userId;
+            Email = email;
             Name = name;
             Description = description;
             CountGood = countGood;
@@ -52,72 +57,94 @@ namespace Podelka.Models
         }
 
         public long WorkroomId { get; set; }
+        public long UserId { get; set; }
+        public string Email { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public short CountGood { get; set; }
-        public short CountMedium { get; set; }
-        public short CountBad { get; set; }
+        public int CountGood { get; set; }
+        public int CountMedium { get; set; }
+        public int CountBad { get; set; }
     }
 
-    public class WorkroomProfileCreate
+    public class WorkroomCreateModel
     {
-        public WorkroomProfileCreate()
+        public WorkroomCreateModel()
         {
-
+            RegisterTypes = new Collection<RegisterTypeDbModel>();
+            PayMethods = new Collection<PayMethodDbModel>();
+            DeliveryMethods = new Collection<DeliveryMethodDbModel>();
         }
 
-        public WorkroomProfileCreate(string name, string description, ICollection<RegisterTypeModel> registerTypes, ICollection<PayMethodModel> payMethods, ICollection<DeliveryMethodModel> deliveryMethods)
+        public WorkroomCreateModel(ICollection<RegisterTypeDbModel> registerTypes, ICollection<SectionDbModel> sections, ICollection<PayMethodDbModel> payMethods, ICollection<DeliveryMethodDbModel> deliveryMethods)
         {
-            Name = name;
-            Description = description;
             RegisterTypes = registerTypes;
+            Sections = sections;
             PayMethods = payMethods;
             DeliveryMethods = deliveryMethods;
         }
 
+        [Required(ErrorMessage = "Введите название мастерской")]
+        [Display(Name = "Название мастерской")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Введите описание мастерской")]
+        [Display(Name = "Описание мастерской")]
         public string Description { get; set; }
-        public byte RegisterTypeId { get; set; }
-        public ICollection<RegisterTypeModel> RegisterTypes { get; set; }
-        public ICollection<PayMethodModel> PayMethods { get; set; }
-        public ICollection<DeliveryMethodModel> DeliveryMethods { get; set; }
-    }
 
-    public class RegisterTypeModel
-    {
-        public RegisterTypeModel(byte registerTypeId, string name)
-        {
-            RegisterTypeId = registerTypeId;
-            Name = name;
-        }
+        [Required(ErrorMessage = "Выберите тип регистрации")]
+        [Display(Name = "Тип регистрации")]
+        public byte SelectedRegisterType { get; set; }
+        public ICollection<RegisterTypeDbModel> RegisterTypes { get; set; }
 
-        public byte RegisterTypeId { get; set; }
-        public string Name { get; set; }
+        [Required(ErrorMessage = "Выберите раздел")]
+        [Display(Name = "Раздел")]
+        public byte SelectedSection { get; set; }
+        public ICollection<SectionDbModel> Sections { get; set; }
+
+        [Required(ErrorMessage = "Выберите способы оплаты")]
+        [Display(Name = "Способы оплаты")]
+        public int[] SelectedPayGroups { get; set; }
+        public ICollection<PayMethodDbModel> PayMethods { get; set; }
+
+        [Required(ErrorMessage = "Выберите способы доставки")]
+        [Display(Name = "Способы доставки")]
+        public int[] SelectedDeliveryGroups { get; set; }     
+        public ICollection<DeliveryMethodDbModel> DeliveryMethods { get; set; }
+
+        [MustBeTrue(ErrorMessage = "Вы обязаны согласиться с правилами, чтобы открыть мастерскую")]
+        [Display(Name = "Я согласен с этими правилами")]
+        public bool AgreeRules { get; set; }
     }
 
     public class PayMethodModel
     {
-        public PayMethodModel(byte payMethodId, string name)
+        public PayMethodModel(string name)
         {
-            PayMethodId = payMethodId;
             Name = name;
         }
 
-        public byte PayMethodId { get; set; }
         public string Name { get; set; }
-        public bool IsSelected { get; set; }
     }
 
     public class DeliveryMethodModel
     {
-        public DeliveryMethodModel(byte deliveryMethodId, string name)
+        public DeliveryMethodModel(string name)
         {
-            DeliveryMethodId = deliveryMethodId;
             Name = name;
         }
 
-        public byte DeliveryMethodId { get; set; }
         public string Name { get; set; }
-        public bool IsSelected { get; set; }
+    }
+
+    public class WorkroomMethodsModel
+    {
+        public WorkroomMethodsModel(ICollection<PayMethodModel> payMethods, ICollection<DeliveryMethodModel> deliveryMethods)
+        {
+            PayMethods = payMethods;
+            DeliveryMethods = deliveryMethods;
+        }
+
+        public ICollection<PayMethodModel> PayMethods { get; set; }
+        public ICollection<DeliveryMethodModel> DeliveryMethods { get; set; }
     }
 }

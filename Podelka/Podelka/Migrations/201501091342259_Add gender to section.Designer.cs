@@ -7,13 +7,13 @@ namespace Podelka.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class TestMigrateDB : IMigrationMetadata
+    public sealed partial class Addgendertosection : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(TestMigrateDB));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Addgendertosection));
         
         string IMigrationMetadata.Id
         {
-            get { return "201412311545521_TestMigrateDB"; }
+            get { return "201501091342259_Add gender to section"; }
         }
         
         string IMigrationMetadata.Source

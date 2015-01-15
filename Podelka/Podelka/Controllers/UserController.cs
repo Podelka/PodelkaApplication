@@ -39,7 +39,7 @@ namespace Podelka.Controllers
 
                 if (user != null)
                 {
-                    var model = new UserProfileModel(user.Id, user.FirstName, user.SecondName, user.Email, user.City, user.Skype, user.SocialNetwork, user.PersonalWebsite, user.Phone);
+                    var model = new UserProfileModel(user.Id, user.FirstName, user.SecondName, user.Email, user.City, user.Skype, user.SocialNetwork, user.PersonalWebsite, user.Phone, user.DateRegistration);
                         
                     var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                     if (userId != 0 && id == userId)
@@ -131,7 +131,7 @@ namespace Podelka.Controllers
                     {
                         foreach (var item in user.Workrooms)
                         {
-                            var workroom = new WorkroomPreviewModel(item.WorkroomId, item.Name, item.Description, item.CountGood, item.CountMedium, item.CountBad);
+                            var workroom = new WorkroomPreviewModel(item.WorkroomId, item.UserId, item.User.Email, item.Name, item.Description, item.CountGood, item.CountMedium, item.CountBad);
                             workroomCollection.Add(workroom);
                         }
                     }

@@ -30,12 +30,13 @@
     width: 98px;
     overflow: auto;
     text-align: center;
-    transition: .1s;
+    transition: .3s;
     border-bottom: 2px solid #fc6060;
     outline: 1px solid #fff;
 }
 .wrap_element:hover span {
     opacity: 1;
+    transition: 0s;
 }
 
 /*--- Основная часть ---*/
@@ -133,8 +134,8 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
 	font-weight: 700; 
 	text-transform:uppercase; 
 	height: 80px;
-	border-bottom: 1px solid #e9e9e9;
-	border-top: 1px solid #e9e9e9;
+	border-bottom: 1px solid #eaeaea;
+	border-top: 1px solid #eaeaea;
 	position: relative;
 }
 .second.menuLevel ul {
@@ -209,14 +210,14 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
     color: #5a5a5a; 
     font-size: 13px; 
     height: 50px; 
-    border-bottom: 1px solid #e9e9e9;
+    border-bottom: 1px solid #eaeaea;
 }
 .third.menuLevel ul {
     padding: 17px 0; 
     display: inline-block;
 }
 .third.menuLevel ul > li {
-    padding-right: 40px;
+    padding-right: 31px;
 }
 .third.menuLevel ul > li:nth-last-child(1) {
     padding-right: 0px;
@@ -234,37 +235,40 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
 	background-repeat: no-repeat;
 	width: 14px;
 	height: 15px;
-	padding-left: 22px;
+	padding-left: 20px;
 }
 .third.menuLevel ul > li.clothing {
-	background-position: 0px -160px;
+	background-position: 0px -169px;
 }
 .third.menuLevel ul > li.man {
 	background-position: 0px -16px;
 }
 .third.menuLevel ul > li.gift {
-	background-position: 0px -31px;
+	background-position: 0px -33px;
 }
 .third.menuLevel ul > li.jewelry {
-	background-position: 0px -47px;
+	background-position: 0px -49px;
 }
 .third.menuLevel ul > li.accessory {
-	background-position: 0px -63px;
+	background-position: 0px -67px;
 }
 .third.menuLevel ul > li.child {
-	background-position: 0px -78px
+	background-position: 0px -84px
 }
 .third.menuLevel ul > li.house {
-	background-position: 0px -95px;
+	background-position: 0px -101px;
 }
 .third.menuLevel ul > li.pets {
-	background-position: 0px -113px;
+	background-position: 0px -119px;
 }
 .third.menuLevel ul > li.stationery {
-	background-position: 0px -128px;
+	background-position: 0px -136px;
 }
 .third.menuLevel ul > li.care {
-	background-position: 0px -144px;
+	background-position: 0px -153px;
+}
+.third.menuLevel ul > li.other {
+	background-position: 0px -185px;
 }
 
 /*--- Главный контент ---*/
@@ -290,7 +294,6 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
     padding: 7px 15px;
     color: #fff;
     border: 1px solid #fff;
-    border-radius: 5px;
     background: none;
     transition: .3s;
 }
@@ -301,9 +304,9 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
     transition: .1s;
 }
 
-/*--- Страница отоброжения профиля ---*/
+/*--- Страница отоброжения ---*/
 .profileView {
-    background: #f5f5f5; 
+    background: #f2f2f2; 
     padding-bottom: 20px; 
     padding-top: 20px;
 }
@@ -315,8 +318,7 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
 	margin-right: 20px; 
 	text-align:center; 
 	color: #2e2e2e; 
-	outline: 1px #eaeaea solid;
-    border-bottom: 1px #eaeaea solid;
+	box-shadow: 0px 2px 3px rgba(0,0,0,.02);
 	padding-bottom: 10px;
     position: relative;
 }
@@ -458,6 +460,9 @@ p.sbAnotation {
 	padding: 10px 24px;
 	margin-bottom: 10px;
 	text-align: justify;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
 }
 p.uLabel {
     font-size: 10px;
@@ -484,7 +489,7 @@ p.uLabel {
     margin: 0; 
     padding: 0; 
     list-style-image: none; 
-    outline: 1px #eaeaea solid;
+    box-shadow: 0 2px 2px rgba(0,0,0,.02);
 }
 .rightMenu ul > li { 
 	margin: 0; 
@@ -492,14 +497,14 @@ p.uLabel {
 	text-transform:uppercase; 
 	font-weight: 700; 
 	letter-spacing: 1px;
-	transition: .3s;
+	transition: .2s;
 	cursor: pointer;
-	border-right: #efefef 1px solid;
+	border-right: #ededed 1px solid;
 	display:inline-block;
     margin-right: -5px;
 }
 .rightMenu ul > li:hover {
-    background: #efefef; 
+    color: #fc6060; 
     transition: .1s;
 }
 .rightMenu ul > li.active {
@@ -517,7 +522,7 @@ p.uLabel {
 .workElement {
     width: 280px; 
     height: 500px; 
-    outline: 1px solid #eaeaea; 
+    box-shadow: 0px 2px 3px rgba(0,0,0,.02);
     float: left; 
     margin-top: 20px; 
     margin-right:20px; 
@@ -553,20 +558,23 @@ p.uLabel {
 	border-top: 1px #dedede dashed;
 	border-bottom: 1px #dedede dashed;
 	padding: 10px 0;
-    height: 52px;
+    height: 54px;
     overflow: auto;
+    text-align: justify;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
 }
 
 .rating {
     text-align:center; 
-    margin: 10px 0;
+    margin: -3px 0 12px;
 }
 .rating span {
     font-size: 12px; 
     font-weight: 700; 
     margin-right: 10px; 
     position: relative; 
-    top: -2px;
 }
 .rating span.up {
     color: #3891C9;
@@ -583,6 +591,7 @@ p.uLabel {
 	height: 14px;
 	display: inline-block;
 	margin-right: 4px;
+    vertical-align: middle; 
 }
 .ratingUp {
     background-position: 0 0; 
@@ -601,12 +610,13 @@ p.workPrice {
     border: none!important; 
     padding: 10px 0 0px;
     height: auto;
+    text-align: center;
 }
 
 /*--- Открытие мастерской ---*/
 .createBody {
     background: #fff;  
-    outline: 1px solid #eaeaea; 
+    box-shadow: 0px 2px 3px rgba(0,0,0,.02);
     padding: 20px; 
     width: 840px;
 }
@@ -684,7 +694,7 @@ input:focus, textarea:focus {
 
 /*--- Товары ---*/
 .productBody {
-    outline: 1px solid #eaeaea; 
+    box-shadow: 0px 2px 3px rgba(0,0,0,.02);
     background: #fff;
 }
 .productContent {
@@ -711,6 +721,9 @@ input:focus, textarea:focus {
     font-size: 16px;
     color: #5a5a5a;
     text-align: justify;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
 }
 
 .breadcrumbs {
@@ -727,7 +740,6 @@ footer {
     padding: 16px 0;
     font-size: 14px;
     height: 40px;
-    border-top: 5px solid #323232;
 }
 footer img {
     float: left;
@@ -754,3 +766,16 @@ footer a:hover {
     float: right;
     text-align: right;
 }
+/*--- НОВОЕ ---*/
+.rightContentBlockSmall {width: 280px; float: left; margin-right: 20px;}
+.rightContentBlockBig {width: 500px; float: left;}
+img.leftImg {width: 200px; height: 200px;}
+.rightContentBlockSmall input[type="text"] {width: 269px; margin-bottom: 10px;}
+.rightContentBlockSmall img {margin-bottom: 10px;}
+.rightContentBlockBig textarea {width: 479px!important; height: 80px; margin-bottom: 10px;}
+
+input[type="text"].sizeProduct {width: 40px; float: left; margin-right: 10px;}
+.sizeLabel {float: left; margin-right: 10px;}
+
+.rightContentBlockBig select {width: 365px; border: none; }
+.rightContentBlockBig select:focus {outline: 0px; border: 2px solid: #fc6060; }
