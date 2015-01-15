@@ -77,6 +77,22 @@ namespace Podelka.Models
         public double? PriceDiscount { get; set; }
     }
 
+    public class ProductSmallPreviewModel
+    {
+        public ProductSmallPreviewModel()
+        {
+        }
+
+        public ProductSmallPreviewModel(long productId, string name)
+        {
+            ProductId = productId;
+            Name = name;
+        }
+
+        public long ProductId { get; set; }
+        public string Name { get; set; }
+    }
+
     public class ProductCreateModel
     {
         public ProductCreateModel()

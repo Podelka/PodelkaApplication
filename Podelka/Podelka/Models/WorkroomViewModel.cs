@@ -44,7 +44,7 @@ namespace Podelka.Models
         {
         }
 
-        public WorkroomPreviewModel(long workroomId, long userId, string email, string name, string description, int countGood, int countMedium, int countBad)
+        public WorkroomPreviewModel(long workroomId, long userId, string email, string name, string description, int countGood, int countMedium, int countBad, byte viewType, ICollection<ProductSmallPreviewModel> lastProducts)
         {
             WorkroomId = workroomId;
             UserId = userId;
@@ -54,6 +54,8 @@ namespace Podelka.Models
             CountGood = countGood;
             CountMedium = countMedium;
             CountBad = countBad;
+            ViewType = viewType;
+            LastProducts = lastProducts;
         }
 
         public long WorkroomId { get; set; }
@@ -64,6 +66,8 @@ namespace Podelka.Models
         public int CountGood { get; set; }
         public int CountMedium { get; set; }
         public int CountBad { get; set; }
+        public byte ViewType { get; set; }
+        public ICollection<ProductSmallPreviewModel> LastProducts { get; set; }
     }
 
     public class WorkroomCreateModel

@@ -18,6 +18,7 @@ namespace Podelka.Controllers
         public ActionResult Index()
         {
             var workrooms = new List<Workroom>();
+
             using (var db = new Context())
             {
                 workrooms = db.Workrooms.ToList();
@@ -26,16 +27,40 @@ namespace Podelka.Controllers
                     foreach(var item in workrooms)
                     {
                         db.Entry(item).Reference(i => i.User).Load();
+                        db.Entry(item).Collection(i => i.Products).Load();
                     }
                 }
             }
 
             if (workrooms != null)
             {
+                var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+                byte viewType;
                 var workroomsCollectoin = new Collection<WorkroomPreviewModel>();
+
                 foreach (var item in workrooms)
                 {
-                    var workroom = new WorkroomPreviewModel(item.WorkroomId, item.UserId, item.User.Email, item.Name, item.Description, item.CountGood, item.CountMedium, item.CountBad);
+                    if (item.UserId == userId)
+                    {
+                        viewType = 2;
+                    }
+                    else
+                    {
+                        viewType = 1;
+                    }
+
+                    var lastProductsCollection = new Collection<ProductSmallPreviewModel>();
+                    var products = item.Products.OrderByDescending(p => p.ProductId).Take(4);
+                    if (products != null)
+                    {
+                        foreach (var product in products)
+                        {
+                            var lastProduct = new ProductSmallPreviewModel(product.ProductId, product.Name);
+                            lastProductsCollection.Add(lastProduct);
+                        }
+                    }
+
+                    var workroom = new WorkroomPreviewModel(item.WorkroomId, item.UserId, item.User.Email, item.Name, item.Description, item.CountGood, item.CountMedium, item.CountBad, viewType, lastProductsCollection);
                     workroomsCollectoin.Add(workroom);
                 }
                 return View(workroomsCollectoin);
@@ -305,6 +330,20 @@ namespace Podelka.Controllers
                 {
                     return View("_Error"); //Не найдена мастерская с данным идентификатором (id)
                 }
+            }
+            else
+            {
+                return View("_Error"); //В ссылке отсутвует идентификатор мастерской (id)
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult Review(long? id)
+        {
+            if (id != null)
+            {
+                return View();
             }
             else
             {

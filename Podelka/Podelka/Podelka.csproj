@@ -370,6 +370,7 @@
     <Content Include="Views\Shared\_ContactsUserPersonal.cshtml" />
     <Content Include="Views\Workroom\Methods.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Workroom\Review.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

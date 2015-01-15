@@ -52,11 +52,14 @@ namespace Podelka.Controllers
                     var workroom = new WorkroomProfileModel(product.Workroom.WorkroomId, product.Workroom.UserId, product.Workroom.Name, product.Workroom.Description, product.Workroom.CountGood, product.Workroom.CountMedium, product.Workroom.CountBad, product.Workroom.DateCreate, user);
 
                     var materialsSB = new StringBuilder();
-                    foreach(var item in product.ProductMaterials)
+                    if (product.ProductMaterials != null && product.ProductMaterials.Any())
                     {
-                        materialsSB.Append(item.Material.Name).Append(", ");
+                        foreach (var item in product.ProductMaterials)
+                        {
+                            materialsSB.Append(item.Material.Name).Append(", ");
+                        }
+                        materialsSB.Remove(materialsSB.Length - 2, 2);
                     }
-                    materialsSB.Remove(materialsSB.Length - 2, 2);
 
                     var model = new ProductProfileModel(product.ProductId, product.WorkroomId, product.Category.SectionId, product.Category.Section.Name, product.CategoryId, product.Category.Name, product.Name, product.Description, product.KeyWords, product.Price, product.PriceDiscount, product.ProductStatusReady.Name, genderTypeProduct.Name, materialsSB.ToString(), product.Size, product.Weight, product.DateCreate, workroom);
 
@@ -244,6 +247,44 @@ namespace Podelka.Controllers
                 return View(model);
             }
         }
+
+        //[Authorize]
+        //[HttpPost]
+        //public ActionResult Favorite(long? id)
+        //{
+        //    if (id != null)
+        //    {
+        //        using (var db = new Context())
+        //        {
+        //            var product = db.Products.Find(id);
+        //            if (product != null)
+        //            {
+        //                var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+        //                var favorite = db.BookMark.Where(p => p.ProductId == id && p.UserId == userId).FirstOrDefault();
+        //                if(favorite == null)
+        //                {
+        //                    var fovoriteNew = new BookMark
+        //                    {
+        //                        ProductId = id,
+        //                        UserId = userId
+        //                    };
+        //                    db.BookMarks.Add(fovoriteNew);
+        //                    db.SaveChanges();
+        //                }
+        //                return RedirectToAction("Index", "Home");
+        //            }
+        //            else
+        //            {
+        //                //удалили изделие
+        //                return RedirectToAction("Index", "Home");
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return View("_Error"); //В ссылке отсутвует идентификатор изделия (id)
+        //    }
+        //}
 
         [HttpGet]
         [AllowAnonymous]

@@ -126,12 +126,34 @@ namespace Podelka.Controllers
 
                 if (user != null)
                 {
+                    var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+                    byte viewType;
+                    if(id == userId)
+                    {
+                        viewType = 4;
+                    }
+                    else
+                    {
+                        viewType = 3;
+                    }
+
                     var workroomCollection = new Collection<WorkroomPreviewModel>();
                     if (user.Workrooms != null)
                     {
                         foreach (var item in user.Workrooms)
                         {
-                            var workroom = new WorkroomPreviewModel(item.WorkroomId, item.UserId, item.User.Email, item.Name, item.Description, item.CountGood, item.CountMedium, item.CountBad);
+                            var lastProductsCollection = new Collection<ProductSmallPreviewModel>();
+                            var products = item.Products.OrderByDescending(p => p.ProductId).Take(4);
+                            if (products != null)
+                            {
+                                foreach (var product in products)
+                                {
+                                    var lastProduct = new ProductSmallPreviewModel(product.ProductId, product.Name);
+                                    lastProductsCollection.Add(lastProduct);
+                                }
+                            }
+
+                            var workroom = new WorkroomPreviewModel(item.WorkroomId, item.UserId, item.User.Email, item.Name, item.Description, item.CountGood, item.CountMedium, item.CountBad, viewType, lastProductsCollection);
                             workroomCollection.Add(workroom);
                         }
                     }

@@ -2,9 +2,11 @@
     ViewBag.Title = "Подтверждение email";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
-<h2>@ViewBag.Title</h2>
-<div>
-    <p>
-        Спасибо за подтверждение вашей электронной почты. Пожалуйста, @Html.ActionLink("нажмите здесь, чтобы Войти", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-    </p>
+<div class="center">
+    <h2>@ViewBag.Title</h2>
+    <div>
+        <p>
+            Спасибо за подтверждение вашей электронной почты. Пожалуйста, @Html.ActionLink("нажмите здесь, чтобы Войти", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        </p>
+    </div>
 </div>
