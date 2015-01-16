@@ -19,6 +19,7 @@ namespace Podelka.Core.DataBase
             return new Context();
         }
 
+        public DbSet<Bookmark> Bookmarks { get; set; }
         public DbSet<TypePhone> TypePhones { get; set; }
         public DbSet<Phone> Phones { get; set; }
         public DbSet<Workroom> Workrooms { get; set; }
@@ -34,5 +35,21 @@ namespace Podelka.Core.DataBase
         public DbSet<Material> Materials { get; set; }
         public DbSet<ProductMaterial> ProductMaterials { get; set; }
         public DbSet<StatusReadyProduct> StatusReadyProducts { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Workroom>()
+            .HasRequired(f => f.Section)
+            .WithRequiredDependent()
+            .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Workroom>()
+            .HasRequired(f => f.User)
+            .WithRequiredDependent()
+            .WillCascadeOnDelete(false);
+
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
+
     }
 }

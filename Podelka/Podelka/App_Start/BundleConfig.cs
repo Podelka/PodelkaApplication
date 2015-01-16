@@ -14,8 +14,9 @@ namespace Podelka
             bundles.Add(new ScriptBundle("~/bundles/jqueryValidate").Include(
                         "~/Scripts/jquery.validate*"));
 
-            bundles.Add(new StyleBundle("~/Content/css/css_only_style").Include(
-                      "~/Content/css/style.css"));
+            bundles.Add(new StyleBundle("~/Content/css/css_style_font-awesome")
+                .Include("~/Content/css/style.css")
+                .Include("~/Content/css/font-awesome.css"));
 
             BundleTable.EnableOptimizations = true;
         }

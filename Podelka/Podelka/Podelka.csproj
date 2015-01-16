@@ -175,6 +175,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Core\AppDbInitializer.cs" />
     <Compile Include="Core\DataBase\ApplicationUser.cs" />
+    <Compile Include="Core\DataBase\Bookmark.cs" />
     <Compile Include="Core\DataBase\Category.cs" />
     <Compile Include="Core\DataBase\DeliveryMethod.cs" />
     <Compile Include="Core\DataBase\GenderTypeProduct.cs" />
@@ -195,51 +196,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201501062200398_InitialCreate.cs" />
-    <Compile Include="Migrations\201501062200398_InitialCreate.Designer.cs">
-      <DependentUpon>201501062200398_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501062205390_First migration.cs" />
-    <Compile Include="Migrations\201501062205390_First migration.Designer.cs">
-      <DependentUpon>201501062205390_First migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501071323371_Change last add.cs" />
-    <Compile Include="Migrations\201501071323371_Change last add.Designer.cs">
-      <DependentUpon>201501071323371_Change last add.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501071706168_Chanhe last add 5.cs" />
-    <Compile Include="Migrations\201501071706168_Chanhe last add 5.Designer.cs">
-      <DependentUpon>201501071706168_Chanhe last add 5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501071735032_Add.cs" />
-    <Compile Include="Migrations\201501071735032_Add.Designer.cs">
-      <DependentUpon>201501071735032_Add.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501071738403_Add2.cs" />
-    <Compile Include="Migrations\201501071738403_Add2.Designer.cs">
-      <DependentUpon>201501071738403_Add2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501091342259_Add gender to section.cs" />
-    <Compile Include="Migrations\201501091342259_Add gender to section.Designer.cs">
-      <DependentUpon>201501091342259_Add gender to section.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501111227455_add mig.cs" />
-    <Compile Include="Migrations\201501111227455_add mig.Designer.cs">
-      <DependentUpon>201501111227455_add mig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501122058046_Foreign key.cs" />
-    <Compile Include="Migrations\201501122058046_Foreign key.Designer.cs">
-      <DependentUpon>201501122058046_Foreign key.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501122100018_Foreign key2.cs" />
-    <Compile Include="Migrations\201501122100018_Foreign key2.Designer.cs">
-      <DependentUpon>201501122100018_Foreign key2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501151117271_KeyWords.cs" />
-    <Compile Include="Migrations\201501151117271_KeyWords.Designer.cs">
-      <DependentUpon>201501151117271_KeyWords.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\SetВaseListsTablesModels.cs" />
     <Compile Include="Models\WorkroomViewModel.cs" />
@@ -264,46 +220,43 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\PodelkaDatabase.mdf" />
-    <Content Include="App_Data\PodelkaDatabase_log.ldf">
-      <DependentUpon>PodelkaDatabase.mdf</DependentUpon>
-    </Content>
+    <Content Include="Content\css\font-awesome.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\register.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\img\205x205.gif" />
     <Content Include="Content\img\280x280.gif" />
     <Content Include="Content\img\3th_workshop.jpg" />
     <Content Include="Content\img\500x350.gif" />
-    <Content Include="Content\img\add.png" />
+    <Content Include="Content\img\90x90.gif" />
     <Content Include="Content\img\avatar.jpeg" />
     <Content Include="Content\img\back.jpg" />
-    <Content Include="Content\img\backToMenu.png" />
-    <Content Include="Content\img\find.png" />
     <Content Include="Content\img\first_workshop.jpg" />
-    <Content Include="Content\img\icon\city.png" />
+    <Content Include="Content\img\icon\add.png" />
+    <Content Include="Content\img\icon\backToMenu.png" />
     <Content Include="Content\img\icon\exitProfile.png" />
-    <Content Include="Content\img\icon\key.png" />
-    <Content Include="Content\img\icon\lastname.png" />
-    <Content Include="Content\img\icon\lock.png" />
+    <Content Include="Content\img\icon\find.png" />
+    <Content Include="Content\img\icon\login.png" />
     <Content Include="Content\img\icon\mail.png" />
     <Content Include="Content\img\icon\mailProfile.png" />
+    <Content Include="Content\img\icon\map.png" />
+    <Content Include="Content\img\icon\menu.png" />
+    <Content Include="Content\img\icon\rating.png" />
+    <Content Include="Content\img\icon\review.png" />
+    <Content Include="Content\img\icon\shopicon.png" />
     <Content Include="Content\img\images.jpg" />
-    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\logo.svg" />
     <Content Include="Content\img\logo_footer.png" />
-    <Content Include="Content\img\menu.png" />
-    <Content Include="Content\img\icon\name.png" />
-    <Content Include="Content\img\icon\phone.png" />
-    <Content Include="Content\img\icon\site.png" />
-    <Content Include="Content\img\icon\skype.png" />
-    <Content Include="Content\img\icon\social.png" />
-    <Content Include="Content\img\login.png" />
-    <Content Include="Content\img\map.png" />
-    <Content Include="Content\img\rating.png" />
     <Content Include="Content\img\registr.jpg" />
     <Content Include="Content\img\second_workshop.jpg" />
     <Content Include="Content\img\shop.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -363,55 +316,23 @@
     <Content Include="Views\User\PersonalProfile.cshtml" />
     <Content Include="Views\Product\PersonalProfile.cshtml" />
     <Content Include="Views\Shared\_WorkroomPreview.cshtml" />
-    <Content Include="Views\Shared\_ProductPreview.cshtml" />
     <Content Include="Views\Shared\_InfoWorkroomPersonal.cshtml" />
     <Content Include="Views\Shared\_InfoWorkroomGuest.cshtml" />
     <Content Include="Views\Shared\_ContactsUserGuest.cshtml" />
     <Content Include="Views\Shared\_ContactsUserPersonal.cshtml" />
+    <Content Include="Views\Shared\_ProductPreviewFour.cshtml" />
     <Content Include="Views\Workroom\Methods.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Shared\_ProductPreview.cshtml" />
     <Content Include="Views\Workroom\Review.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201501062200398_InitialCreate.resx">
-      <DependentUpon>201501062200398_InitialCreate.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501062205390_First migration.resx">
-      <DependentUpon>201501062205390_First migration.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501071323371_Change last add.resx">
-      <DependentUpon>201501071323371_Change last add.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501071706168_Chanhe last add 5.resx">
-      <DependentUpon>201501071706168_Chanhe last add 5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501071735032_Add.resx">
-      <DependentUpon>201501071735032_Add.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501071738403_Add2.resx">
-      <DependentUpon>201501071738403_Add2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501091342259_Add gender to section.resx">
-      <DependentUpon>201501091342259_Add gender to section.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501111227455_add mig.resx">
-      <DependentUpon>201501111227455_add mig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501122058046_Foreign key.resx">
-      <DependentUpon>201501122058046_Foreign key.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501122100018_Foreign key2.resx">
-      <DependentUpon>201501122100018_Foreign key2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501151117271_KeyWords.resx">
-      <DependentUpon>201501151117271_KeyWords.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\DisplayNamesValidation.en.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DisplayNamesValidation.en.Designer.cs</LastGenOutput>

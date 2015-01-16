@@ -36,7 +36,7 @@
                 <p>@item.Description</p>
                 @if (item.LastProducts != null && item.LastProducts.Any())
                 { 
-                    <h4>Последние товары:</h4>
+                    <h4>Последние изделия:</h4>
                     <div class="lastProduct">
                         @foreach (var product in item.LastProducts)
                         {
@@ -46,7 +46,7 @@
                 }
                 else
                 {
-                    <h4>Товары отсутсвуют</h4>
+                    <h4>Изделия отсутсвуют</h4>
                 }
             </div>
         </div>

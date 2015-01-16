@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Data.Entity;
 
 namespace Podelka.Controllers
 {
@@ -248,43 +249,51 @@ namespace Podelka.Controllers
             }
         }
 
-        //[Authorize]
-        //[HttpPost]
-        //public ActionResult Favorite(long? id)
-        //{
-        //    if (id != null)
-        //    {
-        //        using (var db = new Context())
-        //        {
-        //            var product = db.Products.Find(id);
-        //            if (product != null)
-        //            {
-        //                var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
-        //                var favorite = db.BookMark.Where(p => p.ProductId == id && p.UserId == userId).FirstOrDefault();
-        //                if(favorite == null)
-        //                {
-        //                    var fovoriteNew = new BookMark
-        //                    {
-        //                        ProductId = id,
-        //                        UserId = userId
-        //                    };
-        //                    db.BookMarks.Add(fovoriteNew);
-        //                    db.SaveChanges();
-        //                }
-        //                return RedirectToAction("Index", "Home");
-        //            }
-        //            else
-        //            {
-        //                //удалили изделие
-        //                return RedirectToAction("Index", "Home");
-        //            }
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return View("_Error"); //В ссылке отсутвует идентификатор изделия (id)
-        //    }
-        //}
+        [HttpGet]
+        [Authorize]
+        public ActionResult Favorite(long? id, string returnUrl)
+        {
+            if (id != null)
+            {
+                using (var db = new Context())
+                {
+                    var product = db.Products.Find(id);
+                    if (product != null)
+                    {
+                        var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+                        var favorite = db.Bookmarks.Where(p => p.ProductId == id && p.UserId == userId).FirstOrDefault();
+                        if (favorite != null)
+                        {
+                            favorite.DateAdd = DateTime.Now;
+                            db.Entry(favorite).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            var fovoriteNew = new Bookmark
+                            {
+                                UserId = userId,
+                                ProductId = (long)id,
+                                DateAdd = DateTime.Now
+                            };
+                            db.Bookmarks.Add(fovoriteNew);
+                            db.SaveChanges();
+                        }
+
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        //удалили изделие
+                        return Redirect(returnUrl);
+                    }
+                }
+            }
+            else
+            {
+                return Redirect(returnUrl); //В ссылке отсутвует идентификатор изделия (id)
+            }
+        }
 
         [HttpGet]
         [AllowAnonymous]

@@ -10,11 +10,14 @@
             <span class="sbMakerAfter">Мастерская</span>
             <h3 class="sbName">@Model.Name</h3>
             @Html.Partial("_InfoWorkroomPersonal", Model)
+            <div class="profileButton clearfix">
+                @Html.ActionLink("Добавить изделие", "Create", "Product", new { id = Model.WorkroomId }, new { @class = "mailMakers creatWorkroom" })
+            </div>
         </div>
         <div class="rightContent">
             <div class="rightMenu">
                 <ul>
-                    <li class="active"><a href="#">Товары</a></li>
+                    <li class="active"><a href="#">Изделия</a></li>
                     <li><a href="#">Отзывы</a></li>
                 </ul>
             </div>

@@ -22,7 +22,7 @@ namespace Podelka.Core.DataBase
        
         public virtual ApplicationUser User { get; set; }
         public virtual RegisterTypeWorkroom RegisterTypeWorkroom { get; set; }
-        public virtual Section Section { get; set; }
+        public virtual Section Section { get; set; } //Introducing FOREIGN KEY constraint 'FK_dbo.Workrooms_dbo.Sections_SectionId' on table 'Workrooms' may cause cycles or multiple cascade paths.
         public virtual ICollection<WorkroomDeliveryMethod> WorkroomDeliveryMethods { get; set; }
         public virtual ICollection<WorkroomPayMethod> WorkroomPayMethods { get; set; }
         public virtual ICollection<Product> Products { get; set; }

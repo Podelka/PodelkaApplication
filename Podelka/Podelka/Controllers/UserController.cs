@@ -170,6 +170,34 @@ namespace Podelka.Controllers
             }
         }
 
+        [ChildActionOnly]
+        [Authorize]
+        public ActionResult Bookmarks()
+        {
+            var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+            var user = UserManager.FindById(userId);
+
+            if (user != null)
+            {
+                var productsCollection = new Collection<ProductPreviewModel>();
+
+                if (user.Bookmarks != null)
+                {
+                    foreach (var item in user.Bookmarks)
+                    {
+                        var product = new ProductPreviewModel(item.Product.ProductId, item.Product.Name, item.Product.Price, item.Product.PriceDiscount);
+                        productsCollection.Add(product);
+                    }
+                }
+
+                return PartialView("_ProductPreview", productsCollection);
+            }
+            else
+            {
+                return View("_Error"); //Не найдена пользователь с данным идентификатором (id)
+            }
+        }
+
 
 
 

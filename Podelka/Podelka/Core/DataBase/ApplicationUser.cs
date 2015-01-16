@@ -24,7 +24,8 @@ namespace Podelka.Core.DataBase
 
         public virtual ICollection<Phone> Phones { get; set; }
         public virtual ICollection<Workroom> Workrooms { get; set; }
-
+        public virtual ICollection<Bookmark> Bookmarks { get; set; }
+        
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

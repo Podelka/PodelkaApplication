@@ -1,7 +1,7 @@
 ﻿@model Podelka.Models.UserProfileModel
         @if (Model.City != null)
         {
-            <p class="sbCity"><img src="~/Content/img/map.png">@Model.City</p>
+            <p class="sbCity"><img src="~/Content/img/icon/map.png">@Model.City</p>
         }
         @if (Model.Phone != null || Model.PersonalWebsite != null || Model.SocialNetwork != null || Model.Skype != null)
         {
@@ -12,15 +12,15 @@
             }
             if (Model.PersonalWebsite != null)
             {
-                <div class="sbSite"><img src="~/Content/img/icon/site.png"><a href="http://@Model.PersonalWebsite">@Model.PersonalWebsite</a></div>
+                <div class="sbSite"><i class="fa fa-globe fa-pr fa-fw"></i><a href="http://@Model.PersonalWebsite">@Model.PersonalWebsite</a></div>
             }
             if (Model.SocialNetwork != null)
             {
-                <div class="sbSocial"><img src="~/Content/img/icon/social.png"><a href="http://@Model.SocialNetwork">@Model.SocialNetwork</a></div>
+                <div class="sbSocial"><i class="fa fa-users fa-pr fa-fw"></i><a href="http://@Model.SocialNetwork">@Model.SocialNetwork</a></div>
             }
             if (Model.Skype != null)
             {
-                <div class="sbSkype"><img src="~/Content/img/icon/skype.png"><a href="skype:@Model.Skype?call">@Model.Skype</a></div>
+                <div class="sbSkype"><i class="fa fa-skype fa-pr fa-fw"></i><a href="skype:@Model.Skype?call">@Model.Skype</a></div>
             }
         }
                 <hr class="dashedHr" />

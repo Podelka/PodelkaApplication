@@ -1,33 +1,51 @@
-body {
-	font-family: PT Sans, Calibri, Segue Ui; 
-	margin: 0;
+::-moz-selection {
+    background: #fc6060; 
+    color: #fff;
+}
+::-webkit-selection {
+    background: #fc6060;
+    color: #fff;
+}
+::selection {
+    background: #fc6060; 
+    color: #fff;
 }
 
-::-moz-selection {background: #fc6060; color: #fff;}
-::-webkit-selection {background: #fc6060;color: #fff;}
-::selection {background: #fc6060; color: #fff;}
+body {
+    font-family: PT Sans, Calibri, Segue Ui; 
+    margin: 0;
+}
 #bg {
-        position:fixed;
-        top:-50%;
-        left:-50%;
-        width:200%;
-        height:200%;
+    position:fixed; 
+    top:-50%; 
+    left:-50%; 
+    width:200%; 
+    height:200%;
 }
 #bg img {
-        position:absolute;
-        top:0;
-        left:0;
-        right:0;
-        bottom:0;
-        margin:auto;
-        min-width:50%;
-        min-height:50%;
+    position:absolute; 
+    top:0; 
+    left:0; 
+    right:0; 
+    bottom:0; 
+    margin:auto; 
+    min-width:50%; 
+    min-height:50%;
+}
+
+.clearfix:after{
+    content:''; 
+    display:table; 
+    clear:both;
 }
 
 /*--- Форма входа ---*/
 
-.container {position: absolute; opacity: 0; transition: 1s;}
-
+.container {
+    position: absolute; 
+    opacity: 0; 
+    transition: 1s;
+}
 .container h3 {
 	font-size: 30px;
 	color: #fff;
@@ -38,12 +56,17 @@ body {
 	letter-spacing: -0.2px;
 	text-align: center; 
 }
-
-.container p.sub {color: #f5f5ff; font-size: 11px; font-style: italic; text-align: center; }
+.container p.sub {
+    color: #f5f5ff; 
+    font-size: 11px; 
+    font-style: italic; 
+    text-align: center; 
+}
 
 #regForm {
 	position: relative;
 	width: 570px;
+    height: 360px;
 	padding: 36px;
 	background: #fff;
 	border-radius: 4px;
@@ -53,7 +76,12 @@ body {
 	transition: .7s;
 	padding-bottom: 46px;
 }
-#regForm label {float: left; margin-bottom: 10px; font-size: 14px; color: #3a3a3a;}
+#regForm label {
+    float: left; 
+    margin-bottom: 10px; 
+    font-size: 14px; 
+    color: #3a3a3a;
+}
 #regForm button {
 	background: none; 
 	border: 0; 
@@ -66,18 +94,29 @@ body {
 	right: 5px;
 	transition: .3s;
 }
-#regForm button:hover {color: #555; transition: .2s;}
-input {	border: 1px solid #cecece; transition: .2s;}
-input:focus {border: 1px solid #fc6060; outline: none; transition: .5s;}
+#regForm button:hover {
+    color: #555; 
+    transition: .2s;
+}
+input {
+    border: 1px solid #cecece;
+    transition: .2s;
+}
+input:focus {
+    border: 1px solid #fc6060; 
+    outline: none; 
+    transition: .5s;
+}
 #regForm input[type=text], #regForm input[type=password], #regForm input[type=email], #regForm input[type=url]{
-	width: 248px;
+	width: 230px;
 	height: 34px;
-	margin: 0 0 10px;
 	padding: 1px;
-	padding-left: 30px;
+	padding-left: 10px;
 	font-size: 12px;
 }
-#regForm input[type=password] {margin: 0;}
+#regForm input[type=password] {
+    margin: 0;
+}
 #regForm input[type=submit], #regForm input[type=button] {
 	width: 280px; 
 	height: 40px; 
@@ -96,27 +135,54 @@ input:focus {border: 1px solid #fc6060; outline: none; transition: .5s;}
 	cursor: pointer;
 	font-family: PT Sans;
 	float: right;
+    margin-top: 10px;
 }
-input:nth-child(2n) {float: right;}
-#regForm input[type=submit]:hover, #regForm input[type=button]:hover {background: #E25656; transition: .2s;}
-#regForm p.regText {text-align: left; font-size: 14px; color: #3a3a3a; margin: 0; margin-bottom: 10px;}
-#regForm p.regAddText {float: left; margin-bottom: 10px; font-size: 11px; font-style: italic; color: #7a7a7a; margin: 0;}
 
-#mail {background-image:url(../img/icon/mail.png); background-repeat:no-repeat; background-position: 8px 10px;}
-#password {background-image:url(../img/icon/lock.png); background-repeat:no-repeat; background-position: 8px 8px;}
-#name {background-image:url(../img/icon/name.png); background-repeat:no-repeat; background-position: 8px 10px;}
-#lastname {background-image:url(../img/icon/lastname.png); background-repeat:no-repeat; background-position: 8px 10px;}
-#site {background-image:url(../img/icon/site.png); background-repeat:no-repeat; background-position: 8px 10px;}
-#social {background-image:url(../img/icon/social.png); background-repeat:no-repeat; background-position: 8px 11px;}
-#skype {background-image:url(../img/icon/skype.png); background-repeat:no-repeat; background-position: 8px 10px;}
-#phone {background-image:url(../img/icon/phone.png); background-repeat:no-repeat; background-position: 8px 10px;}
-#podpass {background-image:url(../img/icon/key.png); background-repeat:no-repeat; background-position: 8px 11px;}
-#city {background-image:url(../img/icon/city.png); background-repeat:no-repeat; background-position: 8px 10px;}
+.position-right {
+    float: right;
+}
+.position-left {
+    float: left;
+}
+#regForm input[type=submit]:hover, #regForm input[type=button]:hover {
+    background: #E25656; 
+    transition: .2s;
+}
+#regForm p.regText {
+    text-align: left; 
+    font-size: 14px; 
+    color: #3a3a3a; 
+    margin: 0; 
+    margin-bottom: 10px;
+}
+#regForm p.regAddText {
+    float: left; 
+    margin-bottom: 10px; 
+    font-size: 11px; 
+    font-style: italic; 
+    color: #7a7a7a; 
+    margin: 0; 
+    margin-top: 10px;
+}
 
-.remCheck {float: left;}
-.hrText {margin: 10px; color: #7a7a7a; font-style:italic; font-size: 14px; position: relative;text-align: center;}
-.hrText span {background: #fff;	position: relative;	z-index: 5;	padding: 0 10px;}
-
+.remCheck {
+    float: left;
+}
+.hrText {
+    margin: 0px;
+    margin-bottom: 16px;
+    color: #7a7a7a;
+    font-style:italic;
+    font-size: 14px;
+    position: relative;
+    text-align: center;
+}
+.hrText span {
+    background: #fff;
+    position: relative;
+    z-index: 5;
+    padding: 0 10px;
+}
 .hrText:after {
 	content: '';
 	display: block;
@@ -128,9 +194,67 @@ input:nth-child(2n) {float: right;}
 	z-index: 1;
 }
 
-#regForm a, .remCheck {color: #7a7a7a; font-size: 13px; margin-bottom: 22px; transition: .3s;}
-#regForm a:hover {color: #fc6060; transition: .2s;}
-#regForm a {float: right;}
-.remCheck {vertical-align: middle;}
-.remCheck input[type="checkbox"] {margin: 2px 4px 0px 0px;}
-.textCheck {float: left;}
+#regForm a, .remCheck {
+    color: #7a7a7a;
+    font-size: 13px;
+    margin-bottom: 22px;
+    transition: .3s;
+}
+#regForm a:hover {
+    color: #fc6060; 
+    transition: .2s;
+}
+#regForm a {
+    float: right;
+}
+.remCheck {
+    vertical-align: middle;
+}
+.remCheck input[type="checkbox"] {
+        margin: 2px 4px 0px 0px;
+}
+.textCheck {
+    float: left;
+}
+
+
+/*Я добавил*/
+.text-danger {
+    font-size: 10px;
+    color: #B94A48;
+    position: absolute;
+    margin-top: 38px;
+    border-radius: 3px;
+}
+.text-danger span[for="name"], .text-danger span[for="mail"], .text-danger span[for="password"] {
+    position: absolute;
+    width: 286px;
+    top: -38px;
+}
+.text-danger span[for="lastname"], .text-danger span[for="city"], .text-danger span[for="podpass"]  {
+    position: absolute;
+    width: 286px;
+    text-align: right;
+    left: -5px;
+    top: -38px;
+}
+
+.block-input {
+    width: 280px;
+    height: 38px;
+    margin-bottom: 16px;
+}
+.block-icon {
+    float: left;
+    clear: left;
+    height: 36px;
+    width: 36px;
+    border: 1px solid #cecece;
+    background: #f3f3f3;
+    border-right: none;
+    text-align: center;
+}
+.block-icon i {
+    padding-top: 12px;
+    color: #bebebe;
+}

@@ -1,16 +1,49 @@
-﻿body {font-family: PT Sans, Calibri, Segue Ui; margin: 0;}
+﻿::-moz-selection {
+    background: #fc6060; 
+    color: #fff;
+}
+::-webkit-selection {
+    background: #fc6060;
+    color: #fff;
+}
+::selection {
+    background: #fc6060; 
+    color: #fff;
+}
 
-::-moz-selection {background: #fc6060; color: #fff;}
-::-webkit-selection {background: #fc6060;color: #fff;}
-::selection {background: #fc6060; color: #fff;}
-
-#bg {position:fixed; top:-50%; left:-50%; width:200%; height:200%;}
-#bg img {position:absolute; top:0; left:0; right:0; bottom:0; margin:auto; min-width:50%; min-height:50%;}
+body {
+    font-family: PT Sans, Calibri, Segue Ui; 
+    margin: 0;
+}
+#bg {
+    position:fixed; 
+    top:-50%; 
+    left:-50%; 
+    width:200%; 
+    height:200%;
+}
+#bg img {
+    position:absolute; 
+    top:0; 
+    left:0; 
+    right:0; 
+    bottom:0; 
+    margin:auto; 
+    min-width:50%; 
+    min-height:50%;
+}
+.clearfix:after{
+    content:''; 
+    display:table; 
+    clear:both;
+}
 
 /*--- Форма входа ---*/
-
-.container {position: absolute; text-align: center; opacity: 0; transition: 1s;}
-
+.container {
+    position: absolute;
+    opacity: 0; 
+    transition: 1s;
+}
 .container h3 {
 	font-size: 30px;
 	color: #fff;
@@ -19,14 +52,19 @@
 	font-weight: 700;
 	text-shadow: 1px 1px 0px rgba(36,36,36,.4);
 	letter-spacing: -0.2px;
+    text-align: center; 
 }
-
-.container p.sub {color: #f5f5ff; font-size: 11px; font-style: italic;}
+.container p.sub {
+    color: #f5f5ff; 
+    font-size: 11px; 
+    font-style: italic;
+    text-align: center;
+}
 
 #regForm {
 	position: relative;
 	width: 280px;
-	height: 280px;
+	height: 270px;
 	padding: 36px;
 	background: #fff;
 	border-radius: 4px;
@@ -35,7 +73,12 @@
 	cursor: default;
 	transition: .7s;
 }
-#regForm label {float: left; margin-bottom: 10px; font-size: 14px; color: #3a3a3a;}
+#regForm p.input-data {
+    font-size: 13px; 
+    color: #7a7a7a;
+    margin: 0;
+    margin-bottom: 10px;
+}
 #regForm button {
 	background: none; 
 	border: 0; 
@@ -48,16 +91,17 @@
 	right: 5px;
 	transition: .3s;
 }
-#regForm button:hover {color: #555; transition: .2s;}
-input {	border: 1px solid #cecece; transition: .2s;}
-input:focus {border: 1px solid #fc6060; outline: none; transition: .5s;}
+#regForm button:hover {
+    color: #555; 
+    transition: .2s;
+}
 #regForm input[type=text], #regForm input[type=password], #regForm input[type=email] {
-	width: 248px;
+    width: 230px;
 	height: 34px;
-	margin: 0 0 10px;
 	padding: 1px;
-	padding-left: 30px;
+	padding-left: 10px;
 	font-size: 12px;
+    float: left;
 }
 #reg { 
 	background: #fc6060; 
@@ -66,17 +110,10 @@ input:focus {border: 1px solid #fc6060; outline: none; transition: .5s;}
 	-moz-border-radius: 3px; 
 	-webkit-border-radius: 3px;
 }
-#reg:hover{background: #E25656; transition: .2s;}
-a#reg {
-	color: #fff!important; 
-	font-weight:700; 
-	font-size: 12px!important; 
-	text-transform:uppercase; 
-	letter-spacing: 1px; 
-	transition: .3s;
-	text-decoration:none;
+#reg:hover{
+    background: #E25656;
+    transition: .2s;
 }
-
 #regForm input[type=submit], #regForm input[type=button] {
 	width: 280px; 
 	height: 40px; 
@@ -95,15 +132,61 @@ a#reg {
 	cursor: pointer;
 	font-family: PT Sans;
 }
+#regForm input[type=submit]:hover, #regForm input[type=button]:hover {
+    background: #E25656; 
+    transition: .2s;
+}
+a#reg {
+	color: #fff!important; 
+	font-weight:700; 
+	font-size: 12px!important; 
+	text-transform:uppercase; 
+	letter-spacing: 1px; 
+	transition: .3s;
+	text-decoration:none;
+}
 
-#regForm input[type=submit]:hover, #regForm input[type=button]:hover {background: #E25656; transition: .2s;}
-#mail {background-image:url(../img/icon/mail.png); background-repeat:no-repeat; background-position: 8px 10px;}
-#password {background-image:url(../img/icon/lock.png); background-repeat:no-repeat; background-position: 8px 8px;}
+#regForm a, .remCheck {
+    color: #7a7a7a; 
+    font-size: 13px; 
+    margin-bottom: 6px; 
+    transition: .3s;
+}
+#regForm a:hover {
+    color: #fc6060; 
+    transition: .2s;
+}
+#regForm a {
+    float: right;
+}
 
-.remCheck {float: left;}
-.hrText {margin: 10px; color: #7a7a7a; font-style:italic; font-size: 14px; position: relative;}
-.hrText span {background: #fff;	position: relative;	z-index: 5;	padding: 0 10px;}
+input {
+    border: 1px solid #cecece;
+    transition: .2s;
+}
+input:focus {
+    border: 1px solid #fc6060;
+    outline: none;
+    transition: .5s;
+}
 
+.remCheck {
+    float: left;
+}
+.hrText {
+    margin: 10px; 
+    color: #7a7a7a; 
+    font-style:italic; 
+    font-size: 14px; 
+    position: relative;
+    text-align: center;
+}
+.hrText span {
+    background: #fff;
+    position: relative;
+    z-index: 5;
+    padding: 0 10px;
+}
 .hrText:after {
 	content: '';
 	display: block;
@@ -115,9 +198,60 @@ a#reg {
 	z-index: 1;
 }
 
-#regForm a, .remCheck {color: #7a7a7a; font-size: 13px; margin-bottom: 22px; transition: .3s;}
-#regForm a:hover {color: #fc6060; transition: .2s;}
-#regForm a {float: right;}
-.remCheck {vertical-align: middle;}
-.remCheck input[type="checkbox"] {margin: 2px 4px 0px 0px;}
-.textCheck {float: left;}
+.remCheck {
+    vertical-align: middle;
+}
+.remCheck input[type="checkbox"] {
+    margin: 2px 4px 0px 0px;
+}
+.textCheck {
+    float: left;
+}
+
+
+/*Я добавил*/
+.text-danger {
+    font-size: 10px;
+    color: #B94A48;
+    position: relative;
+    top: -7px;
+}
+.validation-summary-errors {
+    background: rgba(255,50,50,.65); 
+    width: 352px; 
+    position: absolute; 
+    left: 0; 
+    top: 0px;
+    border-radius: 4px 4px 0px 0px;
+    color: #fff;
+    margin-top: 0;
+    text-align: center;
+}
+.validation-summary-errors ul {
+    display: inline;
+}
+.validation-summary-errors ul > li {
+    display: block; 
+    -webkit-margin-before: -0.5em; 
+    -webkit-margin-after: -0.5em;
+}
+
+.block-input {
+    width: 280px;
+    height: 38px;
+    margin-bottom: 16px;
+}
+.block-icon {
+    float: left;
+    clear: left;
+    height: 36px;
+    width: 36px;
+    border: 1px solid #cecece;
+    background: #f3f3f3;
+    border-right: none;
+    text-align: center;
+}
+.block-icon i {
+    padding-top: 12px;
+    color: #bebebe;
+}

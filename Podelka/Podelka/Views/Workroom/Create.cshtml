@@ -35,6 +35,7 @@
                                 <option value="@item.SectionId">@item.Name</option>
                             }
                         </datalist>*@
+                        @*Выше АЛЬТЕРНАТИВЫ @Html.DropDownListFor*@
                         @Html.DropDownListFor(m => m.SelectedSection, new SelectList(Model.Sections, "SectionId", "Name"))
                         @Html.ValidationMessageFor(m => m.SelectedSection, "", new { @class = "text-danger" })<br />
                         <div class="formReg">
