@@ -61,18 +61,16 @@ namespace Podelka.Models
         {
         }
 
-        public ProductPreviewModel(long productId, string name, string description, double? price, double? priceDiscount)
+        public ProductPreviewModel(long productId, string name, double? price, double? priceDiscount)
         {
             ProductId = productId;
             Name = name;
-            Description = description;
             Price = price;
             PriceDiscount = priceDiscount;
         }
 
         public long ProductId { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
         public double? Price { get; set; }
         public double? PriceDiscount { get; set; }
     }

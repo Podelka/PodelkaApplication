@@ -22,6 +22,19 @@
                         @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })<br />
                     </div>
                     <div class="s123">
+                        @*<select data-val="true" data-val-number="The field Раздел must be a number." data-val-required="Выберите раздел" id="SelectedSection" name="SelectedSection">
+                            @foreach (var item in Model.Sections) 
+                            { 
+                                <option value="@item.SectionId">@item.Name</option>
+                            }
+                        </select>*@
+                        @*<input type="text" name="team" id="favorite_team" list="SelectedSection">
+                        <datalist id="SelectedSection">
+                            @foreach (var item in Model.Sections)
+                            {
+                                <option value="@item.SectionId">@item.Name</option>
+                            }
+                        </datalist>*@
                         @Html.DropDownListFor(m => m.SelectedSection, new SelectList(Model.Sections, "SectionId", "Name"))
                         @Html.ValidationMessageFor(m => m.SelectedSection, "", new { @class = "text-danger" })<br />
                         <div class="formReg">
