@@ -182,7 +182,7 @@ namespace Podelka.Controllers
                     {
                         foreach (var item in workroom.Products)
                         {
-                            var product = new ProductPreviewModel(item.ProductId, item.Name, item.Description, item.Price);
+                            var product = new ProductPreviewModel(item.ProductId, item.Name, item.Price);
                             productsCollection.Add(product);
                         }
                     }

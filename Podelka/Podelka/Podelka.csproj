@@ -222,6 +222,8 @@
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\register.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\img\280x280.gif" />
     <Content Include="Content\img\3th_workshop.jpg" />
     <Content Include="Content\img\500x350.gif" />
@@ -255,6 +257,10 @@
     <Content Include="Content\img\shop.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -315,12 +321,13 @@
     <Content Include="Views\User\PersonalProfile.cshtml" />
     <Content Include="Views\Product\PersonalProfile.cshtml" />
     <Content Include="Views\Shared\_WorkroomPreview.cshtml" />
-    <Content Include="Views\Shared\_ProductPreview.cshtml" />
     <Content Include="Views\Shared\_InfoWorkroomPersonal.cshtml" />
     <Content Include="Views\Shared\_InfoWorkroomGuest.cshtml" />
     <Content Include="Views\Shared\_ContactsUserGuest.cshtml" />
     <Content Include="Views\Shared\_ContactsUserPersonal.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_ProductPreviewFour.cshtml" />
+    <Content Include="Views\Shared\_ProductPreview.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
