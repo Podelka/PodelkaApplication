@@ -12,6 +12,8 @@ namespace Podelka.Core
     //добавим обязательным классам int первичный ключ
     public class UserRoleIntPk : IdentityUserRole<long>
     {
+        [Key]
+        public virtual long Id { get; set; }
     }
 
     public class UserClaimIntPk : IdentityUserClaim<long>
@@ -20,6 +22,8 @@ namespace Podelka.Core
 
     public class UserLoginIntPk : IdentityUserLogin<long>
     {
+        [Key]
+        public virtual long Id { get; set; }
     }
 
     public class RoleIntPk : IdentityRole<long, UserRoleIntPk>

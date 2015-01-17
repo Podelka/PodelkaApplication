@@ -38,17 +38,17 @@ namespace Podelka.Core.DataBase
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Workroom>()
-            .HasRequired(f => f.Section)
-            .WithRequiredDependent()
-            .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Workroom>()
+            //.HasRequired(f => f.Section)
+            //.WithRequiredDependent()
+            //.WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Workroom>()
-            .HasRequired(f => f.User)
-            .WithRequiredDependent()
-            .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<ApplicationUser>()
+            //.HasRequired(f => f.Workrooms)
+            //.WithRequiredDependent()
+            //.WillCascadeOnDelete(false);
 
-            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
 
     }
