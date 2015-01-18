@@ -89,6 +89,10 @@ button:hover, input[type="submit"]:hover, input[type="button"]:hover {
     background: #E25656; 
     transition: .2s;
 }
+textarea {
+    font-size: 14px; 
+    font-family: PT Sans, Calibri;
+}
 /*--- Главное меню ---*/
 .menuMain {
     background: #fff; 
@@ -402,7 +406,6 @@ a.mailMakers {
 	font-size: 12px;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	border-radius: 0px 3px 3px 0px;
 	padding: 10px 35px;
 	height: 16px; width: 124px;
 }
@@ -411,7 +414,6 @@ a.mailMakers {
     height: 40px; 
     float: left; 
     background-color: #fc6060; 
-    border-radius: 3px 0px 0px 3px;
 }
 .mailSquare .imageSquare {
 	background: url(../img/icon/mailProfile.png) no-repeat;  
@@ -425,7 +427,6 @@ a.mailMakers {
     transition: .2s;
 }
 .creatWorkroom {
-    border-radius: 3px!important; 
     width: 164px!important;
 }
 .mailSquare .imageExit {
@@ -561,10 +562,8 @@ p.uLabel {
     border-radius: 0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
-    border-radius: 0px 3px 3px 0px;
 }
 .workElement .smallButton {
-    border-radius: 3px 0px 0px 3px;
     margin-right: 3px;
 }
 .workElement .smallButton i {
@@ -582,7 +581,7 @@ p.uLabel {
 }
 .workInfo.fourElement {
     width: 185px;
-    padding: 10px 10px 12px;
+    padding: 5px 10px 12px;
 }
 .workInfo.fourElement h3, .workInfo.fourElement p {
     font-size: 14px;
@@ -593,20 +592,18 @@ p.uLabel {
     margin-bottom: 10px;
 }
 .workElement.fourElement input[type="button"] {
-    width: 152px;
-    height: 30px;
-    font-size: 10px;
+    width: 147px;
+    height: 35px;
 }
 .workElement.fourElement .smallButton {
-    border-radius: 3px 0px 0px 3px;
     margin-right: 3px;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
 }
 .workElement.fourElement .smallButton i {
     color:#f5f5f5;
-    margin: 7px;
-    font-size: 1.1em;
+    margin: 8px;
+    font-size: 1.23em;
 }
 .workElement.fourElement:nth-child(3n) {
     margin-right: 20px;
@@ -669,12 +666,11 @@ p.uLabel {
     color: #3a3a3a;
     font-size: 14px;
 }
-textarea {
+.createBody textarea {
     width: 380px;
     height: 209px; 
     resize: none; 
-    padding: 10px; 
-    font-size: 12px; 
+    padding: 10px;  
     margin-bottom: 20px;
 }
 .createBody input[type=text], .createBody input[type=password], .createBody input[type=email] {
@@ -892,18 +888,110 @@ footer a:hover {
     background-color: #E25656; 
     transition: .2s;
 }
-input.bigButton {float: right; width: 135px; height: 40px; background: #fc6060; margin: 0px; border-radius: 0px;}
+input.bigButton { width: 135px; height: 40px; background: #fc6060; margin: 0px; border-radius: 0px;}
 
 /*--- НОВОЕ ---*/
-.rightContentBlockSmall {width: 280px; float: left; margin-right: 20px;}
-.rightContentBlockBig {width: 500px; float: left;}
-img.leftImg {width: 200px; height: 200px;}
-.rightContentBlockSmall input[type="text"] {width: 269px; margin-bottom: 10px;}
-.rightContentBlockSmall img {margin-bottom: 10px;}
-.rightContentBlockBig textarea {width: 479px!important; height: 80px; margin-bottom: 10px;}
+.leftSidebar p.content{
+    padding: 0px 10px;
+    font-size: 14px;
+    color: #5a5a5a;
+}
 
-input[type="text"].sizeProduct {width: 40px; float: left; margin-right: 10px;}
-.sizeLabel {float: left; margin-right: 10px;}
+.rightContentBlockSmall {
+    width: 280px; 
+    float: left; 
+    margin-right: 20px;
+}
+.rightContentBlockBig {
+    width: 500px; 
+    float: left;
+    font-size: 14px;
+}
+img.leftImg {
+    width: 200px; 
+    height: 200px;
+}
+.rightContentBlockSmall input[type="text"] {
+    width: 269px; 
+    margin-bottom: 10px;
+}
+.rightContentBlockSmall img {
+    margin-bottom: 10px;
+}
+.rightContentBlockBig textarea {
+    width: 479px!important;
+    height: 55px;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+.rightContentBlockBig textarea.second {margin-bottom: 0px;}
+.rightContentBlockBig textarea::-webkit-input-placeholder {font-style: italic;}
+.rightContentBlockBig textarea::-moz-placeholder          {font-style: italic;}
+.rightContentBlockBig textarea:-moz-placeholder           {font-style: italic;}
+.rightContentBlockBig textarea:-ms-input-placeholder      {font-style: italic;}
 
-.rightContentBlockBig select {width: 365px; border: none; }
-.rightContentBlockBig select:focus {outline: 0px; border: 2px solid: #fc6060; }
+input[type="text"].sizeProduct {
+    width: 50px; 
+    float: left; 
+    margin-right: 10px;
+}
+input[type="text"].sizeProduct.last, input[type="text"].weightProduct.last {margin-right: 5px;}
+input[type="text"].weightProduct {
+    width: 55px; 
+    float: left;
+}
+.sizeLabel {
+    float: left; 
+    margin-right: 10px; 
+    margin-top: 8px;
+}
+.weightLabel {
+    float: left; 
+    margin: 0px 10px 0 40px; 
+    margin-top: 8px;
+}
+.metricLabel {
+    float: left;
+    margin-top: 8px;
+}
+.fontLavel {
+    margin-bottom: 5px;
+}
+.sizeLabel, .weightLabel, .fontLavel, .metricLabel {
+    color: #3a3a3a;
+}
+
+.rightContentBlockBig select, .rightContentBlockSmall select {
+    width: 100%;
+    padding: 10px 7px;
+    border-color: #cecece;
+    margin-bottom: 10px;
+}
+.rightContentBlockBig select:focus, .rightContentBlockSmall select:focus {
+    border-color: #fc6060; 
+    outline: none; 
+    transition: .5s;
+}
+.rightContentBlockBig select[multiple] {
+    padding: 0px;
+}
+.rightContentBlockBig select[multiple] option{ 
+    display: block;
+    padding: 5px 0px;
+    padding-left: 10px;
+    border-bottom: #efefef 1px solid;
+}
+.rightContentBlockBig select option:checked {
+    color: #fff;
+    background-color: #fc6060!important;
+}
+
+.agreeRulesLabel {
+    float: left;
+    font-size: 14px;
+    color: #9a9a9a;
+}
+.agreeRulesLabel a {
+    color: #5a5a5a;
+    text-decoration: underline;
+}
