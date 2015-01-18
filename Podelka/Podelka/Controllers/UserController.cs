@@ -183,14 +183,16 @@ namespace Podelka.Controllers
 
                 if (user.Bookmarks != null)
                 {
-                    foreach (var item in user.Bookmarks)
+                    var products = user.Bookmarks.OrderByDescending(p => p.DateAdd).ToList();
+                    foreach (var item in products)
                     {
                         var product = new ProductPreviewModel(item.Product.ProductId, item.Product.Name, item.Product.Price, item.Product.PriceDiscount);
                         productsCollection.Add(product);
                     }
                 }
 
-                return PartialView("_ProductPreview", productsCollection);
+                //return PartialView("_ProductPreviewFour", productsCollection);
+                return PartialView("_ProductPreviewFourRemove", productsCollection);
             }
             else
             {

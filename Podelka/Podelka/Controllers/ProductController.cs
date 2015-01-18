@@ -296,6 +296,40 @@ namespace Podelka.Controllers
         }
 
         [HttpGet]
+        [Authorize]
+        public ActionResult FavoriteRemove(long? id, string returnUrl)
+        {
+            if (id != null)
+            {
+                using (var db = new Context())
+                {
+                    var product = db.Products.Find(id);
+                    if (product != null)
+                    {
+                        var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+                        var favorite = db.Bookmarks.Where(p => p.ProductId == id && p.UserId == userId).FirstOrDefault();
+                        if (favorite != null)
+                        {
+                            db.Bookmarks.Remove(favorite);
+                            db.SaveChanges();
+                        }
+
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        //удалили изделие
+                        return Redirect(returnUrl);
+                    }
+                }
+            }
+            else
+            {
+                return Redirect(returnUrl); //В ссылке отсутвует идентификатор изделия (id)
+            }
+        }
+
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult Section(int? id)
         {

@@ -324,11 +324,12 @@
     <Content Include="Views\Shared\_InfoWorkroomGuest.cshtml" />
     <Content Include="Views\Shared\_ContactsUserGuest.cshtml" />
     <Content Include="Views\Shared\_ContactsUserPersonal.cshtml" />
-    <Content Include="Views\Shared\_ProductPreviewFour.cshtml" />
+    <Content Include="Views\Shared\_ProductPreviewThree.cshtml" />
     <Content Include="Views\Workroom\Methods.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
-    <Content Include="Views\Shared\_ProductPreview.cshtml" />
+    <Content Include="Views\Shared\_ProductPreviewFour.cshtml" />
     <Content Include="Views\Workroom\Review.cshtml" />
+    <Content Include="Views\Shared\_ProductPreviewFourRemove.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

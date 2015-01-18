@@ -54,7 +54,7 @@
                         @Html.DropDownListFor(m => m.SelectedGenderType, new SelectList(Model.GenderTypes, "GenderTypeId", "Name"))
                         @Html.ValidationMessageFor(m => m.SelectedGenderType, "", new { @class = "text-danger" })
                     }
-                    @Html.ListBoxFor(m => m.SelectedMaterials, new SelectList(Model.Materials, "MaterialId", "Name"))
+                    @Html.ListBoxFor(m => m.SelectedMaterials, new MultiSelectList(Model.Materials, "MaterialId", "Name"))
                     @Html.ValidationMessageFor(m => m.SelectedMaterials, "", new { @class = "text-danger" })                
                     @Html.TextAreaFor(m => m.KeyWords, new { placeholder = "Ключевые слова" })
                     @Html.ValidationMessageFor(m => m.KeyWords, "", new { @class = "text-danger" })

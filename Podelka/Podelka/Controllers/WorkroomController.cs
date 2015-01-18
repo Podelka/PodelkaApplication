@@ -324,7 +324,7 @@ namespace Podelka.Controllers
                         }
                     }
 
-                    return PartialView("_ProductPreview", productsCollection);
+                    return PartialView("_ProductPreviewFour", productsCollection);
                 }
                 else
                 {
