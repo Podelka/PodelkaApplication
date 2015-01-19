@@ -328,8 +328,9 @@
     <Content Include="Views\Workroom\Methods.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Shared\_ProductPreviewFour.cshtml" />
-    <Content Include="Views\Workroom\Review.cshtml" />
     <Content Include="Views\Shared\_ProductPreviewFourRemove.cshtml" />
+    <Content Include="Views\User\_UserAdverts.cshtml" />
+    <Content Include="Views\Workroom\_WorkroomReviews.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

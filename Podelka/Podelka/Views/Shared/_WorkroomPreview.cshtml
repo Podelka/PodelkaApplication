@@ -15,22 +15,22 @@
                 @if (item.ViewType == 1)
                 { 
                     <a class="smallButton mail" href="mailto:@item.Email"></a>
-                    @Html.ActionLink(" ", "Review", "Workroom", new { id = item.WorkroomId }, new { @class = "smallButton review" })
+                    @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
                     @Html.ActionLink(" ", "Profile", "User", new { id = item.UserId }, new { @class = "smallButton profile" })
                 }
                 @if (item.ViewType == 2)
                 {
-                    @Html.ActionLink(" ", "Review", "Workroom", new { id = item.WorkroomId }, new { @class = "smallButton review" })
+                    @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
                     @Html.ActionLink(" ", "Profile", "User", new { id = item.UserId }, new { @class = "smallButton profile" })
                 }
                 @if (item.ViewType == 3)
                 {
                     <a class="smallButton mail" href="mailto:@item.Email"></a>
-                    @Html.ActionLink(" ", "Review", "Workroom", new { id = item.WorkroomId }, new { @class = "smallButton review" })
+                    @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
                 }
                 @if (item.ViewType == 4)
                 {
-                    @Html.ActionLink(" ", "Review", "Workroom", new { id = item.WorkroomId }, new { @class = "smallButton review" })
+                    @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
                 }
                 <input type="button" class="bigButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
                 <p>@item.Description</p>

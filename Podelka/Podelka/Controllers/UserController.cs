@@ -31,10 +31,11 @@ namespace Podelka.Controllers
         
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Profile(long? id)
+        public ActionResult Profile(long? id, string menu)
         {
             if (id != null)
             {
+                ViewBag.Menu = RouteData.Values["menu"];
                 var user = UserManager.FindById((long)id);
 
                 if (user != null)
@@ -200,6 +201,33 @@ namespace Podelka.Controllers
             }
         }
 
+        [ChildActionOnly]
+        [AllowAnonymous]
+        public ActionResult Adverts()
+        {
+            //var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+            //var user = UserManager.FindById(userId);
+
+            //if (user != null)
+            //{
+            //    var advertsCollection = new Collection<AdvertPreviewModel>();
+
+            //    if (user.Adverts != null)
+            //    {
+            //        var adverts = user.Adverts.OrderByDescending(p => p.DateAdd).ToList();
+            //        foreach (var item in adverts)
+            //        {
+            //            var advert = new AdvertPreviewModel();
+            //            advertsCollection.Add(advert);
+            //        }
+            //    }
+            return PartialView("_UserAdverts");
+            //}
+            //else
+            //{
+            //    return View("_Error"); //Не найдена пользователь с данным идентификатором (id)
+            //}
+        }
 
 
 

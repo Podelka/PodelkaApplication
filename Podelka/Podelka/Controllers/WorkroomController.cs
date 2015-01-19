@@ -77,6 +77,7 @@ namespace Podelka.Controllers
         {
             if (id != null)
             {
+                ViewBag.Menu = RouteData.Values["menu"];
                 var workroom = new Workroom();
 
                 using (var db = new Context())
@@ -337,13 +338,13 @@ namespace Podelka.Controllers
             }
         }
 
+        [ChildActionOnly]
         [AllowAnonymous]
-        [HttpGet]
-        public ActionResult Review(long? id)
+        public ActionResult Reviews(long? id)
         {
             if (id != null)
             {
-                return View();
+                return PartialView("_WorkroomReviews");
             }
             else
             {

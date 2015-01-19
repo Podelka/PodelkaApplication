@@ -21,13 +21,47 @@
         <div class="rightContent">
             <div class="rightMenu">
                 <ul>
-                    <li class="active"><a href="#">Мастерские</a></li>
-                    <li><a href="#">Заказы</a></li>
+                    @* УЧАСТОК КОДА, ЧТОБЫ ПРИСВАИВАТЬ li class="active", если на этот пункт горизонтального меню нажали *@
+                    @if (ViewBag.Menu == null || ViewBag.Menu == "Workrooms")
+                    {
+                        <li class="active">@Html.ActionLink("Мастерские", "Profile", "User", new { id = Model.UserId, menu = "Workrooms" }, null)</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Мастерские", "Profile", "User", new { id = Model.UserId, menu = "Workrooms" }, null)</li>
+                    }
+                    @if (ViewBag.Menu == "Adverts")
+                    {
+                        <li class="active">@Html.ActionLink("Заказы", "Profile", "User", new { id = Model.UserId, menu = "Adverts" }, null)</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Заказы", "Profile", "User", new { id = Model.UserId, menu = "Adverts" }, null)</li>
+                    }
+                    @if (ViewBag.Menu == "Bookmarks")
+                    {
+                        <li class="active">@Html.ActionLink("Избранное", "Profile", "User", new { id = Model.UserId, menu = "Bookmarks" }, null)</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Избранное", "Profile", "User", new { id = Model.UserId, menu = "Bookmarks" }, null)</li>
+                    }
+                    @* END *@
                 </ul>
             </div>
             <div class="rightBody">
-                @Html.Action("Workrooms", "User", new { id = Model.UserId })
-                @Html.Action("Bookmarks", "User")
+                @if (ViewBag.Menu == null || ViewBag.Menu == "Workrooms")
+                { 
+                    @Html.Action("Workrooms", "User", new { id = Model.UserId })
+                }
+                @if (ViewBag.Menu == "Adverts")
+                {
+                    @Html.Action("Adverts", "User")
+                }
+                @if (ViewBag.Menu == "Bookmarks")
+                {
+                    @Html.Action("Bookmarks", "User")
+                }
             </div>
         </div>
     </div>
