@@ -13,58 +13,44 @@
                 @using (Html.BeginForm("Create", "Workroom", FormMethod.Post, new { @class = "createForm" }))
                 {
                     @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <img src="~/Content/img/280x280.gif">              
+                    @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
+                    <img src="~/Content/img/280x280.gif">
                     <div class="formName">
                         @Html.TextBoxFor(m => m.Name, new { placeholder = "Введите название мастерской" })
-                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })<br />
+                        @Html.ValidationMessageFor(m => m.Name, String.Empty, new { @class = "text-danger" })<br />
                         @Html.TextAreaFor(m => m.Description, new { placeholder = "Напишите пару слов о вашей деятельности.." })
-                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })<br />
+                        @Html.ValidationMessageFor(m => m.Description, String.Empty, new { @class = "text-danger" })<br />
                     </div>
                     <div class="s123">
-                        @*<select data-val="true" data-val-number="The field Раздел must be a number." data-val-required="Выберите раздел" id="SelectedSection" name="SelectedSection">
-                            @foreach (var item in Model.Sections) 
-                            { 
-                                <option value="@item.SectionId">@item.Name</option>
-                            }
-                        </select>*@
-                        @*<input type="text" name="team" id="favorite_team" list="SelectedSection">
-                        <datalist id="SelectedSection">
-                            @foreach (var item in Model.Sections)
-                            {
-                                <option value="@item.SectionId">@item.Name</option>
-                            }
-                        </datalist>*@
-                        @*Выше АЛЬТЕРНАТИВЫ @Html.DropDownListFor*@
                         @Html.DropDownListFor(m => m.SelectedSection, new SelectList(Model.Sections, "SectionId", "Name"))
-                        @Html.ValidationMessageFor(m => m.SelectedSection, "", new { @class = "text-danger" })<br />
+                        @Html.ValidationMessageFor(m => m.SelectedSection, String.Empty, new { @class = "text-danger" })<br />
                         <div class="formReg">
                             <label for="regType">Тип регистрации:</label><br />
                             @foreach (var item in Model.RegisterTypes)
-                            {                                                       
+                            {
                                 @Html.RadioButtonFor(m => m.SelectedRegisterType, item.RegisterTypeId) 
                                 @item.Name <br />
                             }
-                            @Html.ValidationMessageFor(m => m.SelectedRegisterType, "", new { @class = "text-danger" })<br />
+                            @Html.ValidationMessageFor(m => m.SelectedRegisterType, String.Empty, new { @class = "text-danger" })<br />
                         </div>
                         <br />
                         <div class="formPay">
                             <label for="deliver">Способы оплаты:</label><br />
                             @Html.CheckBoxListFor(m => m.SelectedPayGroups, m => m.PayMethods, pay => pay.PayMethodId, pay => pay.Name, pay => pay.IsSelected, MvcCheckBoxList.Model.Position.Vertical)
-                            @Html.ValidationMessageFor(m => m.SelectedPayGroups, "", new { @class = "text-danger" })<br />
+                            @Html.ValidationMessageFor(m => m.SelectedPayGroups, String.Empty, new { @class = "text-danger" })<br />
                         </div>
                         <br />
                         <div class="formDeliver">
                             <label for="deliver">Способы доставки:</label><br />
                             @Html.CheckBoxListFor(m => m.SelectedDeliveryGroups, m => m.DeliveryMethods, delivery => delivery.DeliveryMethodId, delivery => delivery.Name, delivery => delivery.IsSelected, MvcCheckBoxList.Model.Position.Vertical)
-                            @Html.ValidationMessageFor(m => m.SelectedDeliveryGroups, "", new { @class = "text-danger" })<br />
+                            @Html.ValidationMessageFor(m => m.SelectedDeliveryGroups, String.Empty, new { @class = "text-danger" })<br />
                         </div>
                         <br />
                     </div>
                     @Html.ActionLink("Прочитайте правила открытия мастерской", "Rules", "Home")<br />
                     @Html.CheckBoxFor(m => m.AgreeRules)
                     @Html.LabelFor(m => m.AgreeRules)
-                    @Html.ValidationMessageFor(m => m.AgreeRules, "", new { @class = "text-danger" })<br />
+                    @Html.ValidationMessageFor(m => m.AgreeRules, String.Empty, new { @class = "text-danger" })<br />
                     <input type="submit" name="buttonCreate" id="buttonCreate" value="Создать" class="buttonCreate" style="display:none;">
                 }
             </div>

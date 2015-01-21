@@ -66,7 +66,7 @@ namespace Podelka.Models
         public string SecondName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Вы ввели недопустимый Email адрес")]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Email")]
         public string Email { get; set; }
 

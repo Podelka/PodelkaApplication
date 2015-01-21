@@ -3,20 +3,20 @@
 {
     foreach (var item in Model)
     {
-        <div class="workElement clearfix">
-            <img src="~/Content/img/280x280.gif">
-            <div class="workInfo">
-                <h3>@item.Name</h3>
-                @if (item.Price != null)
-                {
-                    double Price = (double)item.Price;
-                    <p class="workPrice">@Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) бел.руб</p>
-                }
-                <a class="smallButton" href="#">
-                    <i class="fa fa-star-o"></i>
-                </a>
-                <input type="button" value="Подробнее" onclick="location.href='@Url.Action("Profile", "Product", new { id = item.ProductId })'" />
-            </div>
-        </div>
+                    <div class="workElement clearfix">
+                        <img src="~/Content/img/280x280.gif">
+                        <div class="workInfo">
+                            <h3>@item.Name</h3>
+                            @if (item.Price != null)
+                            {
+                                double Price = (double)item.Price;
+                                <p class="workPrice">@Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) бел.руб</p>
+                            }
+                            <a class="smallButton" href="@Url.Action("Favorite", "Product", new { id = item.ProductId, returnUrl = Request.RawUrl })">
+                                <i class="fa fa-star-o"></i>
+                            </a>
+                            <input type="button" value="Подробнее" onclick="location.href='@Url.Action("Profile", "Product", new { id = item.ProductId })'" />
+                        </div>
+                    </div>
     }
 }

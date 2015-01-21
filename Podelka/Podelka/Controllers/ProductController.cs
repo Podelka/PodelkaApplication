@@ -96,8 +96,8 @@ namespace Podelka.Controllers
                 var statusReadyDb = new List<StatusReadyProduct>();
                 var genderTypeDb = new List<GenderTypeProduct>();
                 var materialsDb = new List<Material>();
-                var RegisterTypeWorkroom = "";
-                var Section = "";
+                var RegisterTypeWorkroom = String.Empty;
+                var Section = String.Empty;
                 var SectionGender = false;
 
                 using (var db = new Context())

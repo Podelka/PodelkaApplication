@@ -3,14 +3,16 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 @model Podelka.Models.WorkroomMethodsModel
-<h2>Способы доставки и оплаты мастерской. Демонстарция вывода из базы</h2>
-@foreach(var item in Model.PayMethods)
-{
-    @item.Name <br />
-}
-<br />
-<br />
-@foreach (var item in Model.DeliveryMethods)
-{
-    @item.Name <br />
-}
+    <div class="center">
+        <h2>Способы доставки и оплаты мастерской. Демонстарция вывода из базы</h2>
+        @foreach (var item in Model.PayMethods)
+        {
+            @item.Name <br />
+        }
+        <br />
+        <br />
+        @foreach (var item in Model.DeliveryMethods)
+        {
+            @item.Name <br />
+        }
+    </div>

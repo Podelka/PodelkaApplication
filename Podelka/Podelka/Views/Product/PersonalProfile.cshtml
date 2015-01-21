@@ -12,7 +12,7 @@
                 <img class="sbAvater" src='~/Content/img/first_workshop.jpg'>
                 <span class="sbMakerAfter">Мастерская</span>
                 <h3 class="sbName">@Html.ActionLink("" + Model.Workroom.Name + "", "Profile", "Workroom", new { id = Model.WorkroomId }, null)</h3>
-                @Html.Partial("_InfoWorkroomPersonal", Model.Workroom)
+@Html.Partial("_InfoWorkroomPersonal", Model.Workroom)
             </div>
             <div class="rightContent productBody clearfix">
                 <div class="productContent">
@@ -37,7 +37,7 @@
                             }
                             <hr class="dashedHr" />
                             <div class="productDescript">
-                                @Model.Description                         
+                                @Model.Description
                             </div>
                             <hr class="dashedHr" />
                             <strong>Материалы:</strong> @Model.Materials<br />

@@ -3,50 +3,48 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 @model Podelka.Models.WorkroomProfileModel
-<div class="profileView clearfix">
-    <div class="center">
-        <div class="leftSidebar">
-            <img class="sbAvater" src='~/Content/img/first_workshop.jpg'>
-            <span class="sbMakerAfter">Мастерская</span>
-            <h3 class="sbName">@Model.Name</h3>
-            @Html.Partial("_InfoWorkroomPersonal", Model)
-            <div class="profileButton clearfix">
-                @Html.ActionLink("Добавить изделие", "Create", "Product", new { id = Model.WorkroomId }, new { @class = "mailMakers creatWorkroom" })
+    <div class="profileView clearfix">
+        <div class="center">
+            <div class="leftSidebar">
+                <img class="sbAvater" src='~/Content/img/first_workshop.jpg'>
+                <span class="sbMakerAfter">Мастерская</span>
+                <h3 class="sbName">@Model.Name</h3>
+@Html.Partial("_InfoWorkroomPersonal", Model)
+                <div class="profileButton clearfix">
+                    @Html.ActionLink("Добавить изделие", "Create", "Product", new { id = Model.WorkroomId }, new { @class = "mailMakers creatWorkroom" })
+                </div>
             </div>
-        </div>
-        <div class="rightContent">
-            <div class="rightMenu">
-                <ul>
-                    @* УЧАСТОК КОДА, ЧТОБЫ ПРИСВАИВАТЬ li class="active", если на этот пункт горизонтального меню нажали *@
-                    @if (ViewBag.Menu == null || ViewBag.Menu == "Products")
-                    {
+            <div class="rightContent">
+                <div class="rightMenu">
+                    <ul>
+@if (ViewBag.Menu == null || ViewBag.Menu == "Products")
+{
                         <li class="active">@Html.ActionLink("Изделия", "Profile", "Workroom", new { id = Model.WorkroomId, menu = "Products" }, null)</li>
-                    }
-                    else
-                    {
+}
+else
+{
                         <li>@Html.ActionLink("Изделия", "Profile", "Workroom", new { id = Model.WorkroomId, menu = "Products" }, null)</li>
-                    }
-                    @if (ViewBag.Menu == "Reviews")
-                    {
+}
+@if (ViewBag.Menu == "Reviews")
+{
                         <li class="active">@Html.ActionLink("Отзывы", "Profile", "Workroom", new { id = Model.WorkroomId, menu = "Reviews" }, null)</li>
-                    }
-                    else
-                    {
+}
+else
+{
                         <li>@Html.ActionLink("Отзывы", "Profile", "Workroom", new { id = Model.WorkroomId, menu = "Reviews" }, null)</li>
-                    }
-                    @* END *@
-                </ul>
-            </div>
-            <div class="rightBody">
-                @if (ViewBag.Menu == null || ViewBag.Menu == "Products")
-                {
+}
+                    </ul>
+                </div>
+                <div class="rightBody">
+@if (ViewBag.Menu == null || ViewBag.Menu == "Products")
+{
                     @Html.Action("Products", "Workroom", new { id = Model.WorkroomId })
-                }
-                @if (ViewBag.Menu == "Reviews")
-                {
+}
+@if (ViewBag.Menu == "Reviews")
+{
                     @Html.Action("Reviews", "Workroom", new { id = Model.WorkroomId })
-                }
+}
+                </div>
             </div>
         </div>
     </div>
-</div>

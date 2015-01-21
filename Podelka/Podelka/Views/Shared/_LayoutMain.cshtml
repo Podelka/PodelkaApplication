@@ -7,7 +7,7 @@
     <title>Поделка.by | Уникальный каталог изделий ручной работы</title>
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     @Styles.Render("~/Content/css/css_style_font-awesome")
-    @Scripts.Render("~/bundles/jqueryMin_main")     @*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>*@  @*<script src="~/Scripts/main.js" type="text/javascript"></script>*@
+    @Scripts.Render("~/bundles/jqueryMin_main")@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>*@@*<script src="~/Scripts/main.js" type="text/javascript"></script>*@
 </head>
 <body>
     <div class="menuMain">
@@ -49,13 +49,13 @@
                     <div class="wrap_element">
                         @if (Request.IsAuthenticated)
                         {
-                            <span>Личный профиль</span>
-                            @Html.ActionLink(" ", "Profile", "User", new { id = Convert.ToInt64((Html.Action("GetUserId", "Account")).ToString()) }, new { @class = "logIn" })
+                        <span>Личный профиль</span>
+                        @Html.ActionLink(" ", "Profile", "User", new { id = Convert.ToInt64((Html.Action("GetUserId", "Account")).ToString()) }, new { @class = "logIn" })
                         }
                         else
                         {
-                            <span>Войти на сайт</span>
-                            @Html.ActionLink(" ", "Login", "Account", new { returnUrl = Request.RawUrl }, new { @class = "logIn" })
+                        <span>Войти на сайт</span>
+                        @Html.ActionLink(" ", "Login", "Account", new { returnUrl = Request.RawUrl }, new { @class = "logIn" })
                         }
                     </div>
                     <div class="findLine">

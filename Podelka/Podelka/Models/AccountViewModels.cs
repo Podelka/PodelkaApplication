@@ -8,14 +8,14 @@ namespace Podelka.Models
     public class LoginModel
     {
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
+        [EmailAddress(ErrorMessage = "Вы ввели недопустимый Email адрес")]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Email")]
-        [EmailAddress(ErrorMessage = "Вы ввели некорректный e-mail адрес")]
         public string Email { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
         [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "{0} должен содержать не менее {2} символов", MinimumLength = 6)]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Password")]
-        [StringLength(100, ErrorMessage = " {0} должен быть по крайне мере {2} символов в длину", MinimumLength = 6)]
         public string Password { get; set; }
 
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "RememberMe")]
@@ -33,20 +33,20 @@ namespace Podelka.Models
         public string SecondName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Вы ввели недопустимый Email адрес")]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
         [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "{0} должен содержать не менее {2} символов", MinimumLength = 6)]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Password")]
-        [StringLength(100, ErrorMessage = " {0} должен быть по крайне мере {2} символов в длину", MinimumLength = 6)]
         public string Password { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
         [DataType(DataType.Password)]
-        [Display(ResourceType = typeof(DisplayNamesValidation), Name = "ConfirmPassword")]
         [Compare("Password", ErrorMessage = "Пароль и подтверждение пароля не совпадают")]
+        [Display(ResourceType = typeof(DisplayNamesValidation), Name = "ConfirmPassword")]
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
@@ -56,12 +56,15 @@ namespace Podelka.Models
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Skype")]
         public string Skype { get; set; }
 
+        [Url(ErrorMessage = "Пожалуйста, введите адрес по образцу: https://vk.com/id1")] //главное http(s)://site.domen, а остальное добавить разрешается все что угодно
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "SocialNetwork")]
         public string SocialNetwork { get; set; }
 
+        [Url(ErrorMessage = "Пожалуйста, введите адрес по образцу: http://podelka.by")]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "PersonalWebsite")]
         public string PersonalWebsite { get; set; }
 
+        [RegularExpression(@"^(\+375\s\(((\d{2}\)\s\d{3}\-\d{2}\-\d{2})|(\d{3}\)\s\d{2}\-\d{2}\-\d{2})|(\d{4}\)\s\d{1}\-\d{2}\-\d{2})))$", ErrorMessage = "Пожалуйста, введите номер по подходящему образцу: +375 (**) ***-**-**, +375 (***) **-**-**, +375 (****) *-**-**")]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Phone")]
         public string Phone { get; set; }
 
@@ -73,7 +76,7 @@ namespace Podelka.Models
     public class ForgotPasswordModel
     {
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Вы ввели недопустимый Email адрес")]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Email")]
         public string Email { get; set; }
     }
@@ -81,20 +84,20 @@ namespace Podelka.Models
     public class ResetPasswordModel
     {
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Вы ввели недопустимый Email адрес")]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
-        [StringLength(100, ErrorMessage = " {0} должен быть по крайне мере {2} символов в длину", MinimumLength = 6)]
         [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "{0} должен содержать не менее {2} символов", MinimumLength = 6)]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Password")]
         public string Password { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
         [DataType(DataType.Password)]
-        [Display(ResourceType = typeof(DisplayNamesValidation), Name = "ConfirmPassword")]
         [Compare("Password", ErrorMessage = "Пароль и подтверждение пароля не совпадают")]
+        [Display(ResourceType = typeof(DisplayNamesValidation), Name = "ConfirmPassword")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

@@ -38,7 +38,7 @@ namespace Podelka
 
             //Создаем письмо: message.Destination - адрес получателя
             var from = new MailAddress(smtpUserEmail, smtpUserlName);
-            var to = new MailAddress(message.Destination, "");
+            var to = new MailAddress(message.Destination, String.Empty);
             var mail = new MailMessage(from, to);
 
             mail.Subject = message.Subject;

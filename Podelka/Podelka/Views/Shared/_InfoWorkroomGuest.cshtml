@@ -7,4 +7,4 @@
                 <p class="sbAnotation">@Model.Description</p>
                 <span class="sbMakerAfter">Владелец мастерской</span>
                 <h4 class="sbMaker"> @Html.ActionLink(Model.User.FirstName + " " + Model.User.SecondName, "Profile", "User", new { id = Model.UserId }, null) </h4>
-                @Html.Partial("_ContactsUserGuest", Model.User) 
+@Html.Partial("_ContactsUserGuest", Model.User) 

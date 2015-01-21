@@ -295,7 +295,7 @@ namespace Podelka.Controllers
         //            return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
         //        }
         //        // If we got this far, something failed, redisplay form
-        //        ModelState.AddModelError("", "Failed to verify phone");
+        //        ModelState.AddModelError(String.Empty, "Failed to verify phone");
         //        return View(model);
         //    }
         //    else
@@ -380,7 +380,7 @@ namespace Podelka.Controllers
         //    ViewBag.StatusMessage =
         //        message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
         //        : message == ManageMessageId.Error ? "An error has occurred."
-        //        : "";
+        //        : String.Empty;
         //    var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
         //    var user = await UserManager.FindByIdAsync(userId);
         //    if (user == null)
@@ -419,7 +419,7 @@ namespace Podelka.Controllers
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                ModelState.AddModelError(String.Empty, error);
             }
         }
 

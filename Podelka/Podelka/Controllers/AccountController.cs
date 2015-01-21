@@ -89,7 +89,7 @@ namespace Podelka.Controllers
                 {
                     if (user.EmailConfirmed != true)
                     {
-                        ModelState.AddModelError("", "Ваш Email не подтвержден ");
+                        ModelState.AddModelError(String.Empty, "Ваш Email не подтвержден ");
                         return View(model);
                     }
                     else
@@ -105,14 +105,14 @@ namespace Podelka.Controllers
                                 return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                             case SignInStatus.Failure:
                             default:
-                                ModelState.AddModelError("", "Неверный Email или Пароль");
+                                ModelState.AddModelError(String.Empty, "Неверный Email или Пароль");
                                 return View(model);
                         }
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неверный Email или Пароль");
+                    ModelState.AddModelError(String.Empty, "Неверный Email или Пароль");
                     return View(model);
                 }
             }
@@ -302,7 +302,7 @@ namespace Podelka.Controllers
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                ModelState.AddModelError(String.Empty, error);
             }
         }
 
