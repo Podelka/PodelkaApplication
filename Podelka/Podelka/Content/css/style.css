@@ -602,8 +602,8 @@ p.uLabel {
 }
 .workElement.fourElement .smallButton i {
     color:#f5f5f5;
-    margin: 8px;
-    font-size: 1.23em;
+    margin: 9px;
+    font-size: 1.2em;
 }
 .workElement.fourElement:nth-child(3n) {
     margin-right: 20px;
