@@ -4,9 +4,23 @@
 }
 @model ICollection<Podelka.Models.ProductPreviewModel>
     <div class="profileView clearfix">
-        <div class="center">
+        <div id ="rightBody" class="center">
             <div class="rightContent">
-@Html.Partial("_ProductPreviewFour", Model)
+@Html.Partial("_ProductPreview", Model)
             </div>
         </div>
     </div>
+@section Scripts
+{
+    <script>
+    function Preview3()
+    {
+        $('#rightBody #div-one').removeClass('fourElement');
+        $('#rightBody #div-two').removeClass('fourElement');
+    };
+    function Preview4() {
+        $('#rightBody #div-one').addClass('fourElement');
+        $('#rightBody #div-two').addClass('fourElement');
+    };
+    </script>
+}

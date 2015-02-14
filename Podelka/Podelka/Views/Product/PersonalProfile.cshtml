@@ -9,7 +9,18 @@
     <div class="profileView clearfix">
         <div class="center">
             <div class="leftSidebar">
-                <img class="sbAvater" src='~/Content/img/first_workshop.jpg'>
+@{
+    string mapPath = HttpContext.Current.Server.MapPath("/Files");
+    bool isWorkroomImage = File.Exists(@"" + mapPath + "\\Workrooms\\" + @Model.WorkroomId + "-workroom.jpg");
+}
+                @if (isWorkroomImage)
+                {
+                <img class="sbAvater" src='~/Files/Workrooms/@Model.WorkroomId-workroom.jpg'>
+                }
+                else
+                {
+                <img class="sbAvater" src='~/Content/img/image-workroom.jpg'>
+                }
                 <span class="sbMakerAfter">Мастерская</span>
                 <h3 class="sbName">@Html.ActionLink("" + Model.Workroom.Name + "", "Profile", "Workroom", new { id = Model.WorkroomId }, null)</h3>
 @Html.Partial("_InfoWorkroomPersonal", Model.Workroom)
@@ -28,7 +39,7 @@
                                     Price.Replace(str, "$1 ");
                                 }*@
                                 double Price = (double)Model.Price;
-                                <strong>Цена:</strong> @Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) @:бел.руб<br />
+                                <strong>Цена:</strong> @Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) @:руб<br />
                             }
                             <strong>Состояние:</strong> @Model.StatusReady<br />
                             @if(Model.Gender != null)

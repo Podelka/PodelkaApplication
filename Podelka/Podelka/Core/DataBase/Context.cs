@@ -50,6 +50,5 @@ namespace Podelka.Core.DataBase
 
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
-
     }
 }

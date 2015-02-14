@@ -72,7 +72,7 @@ namespace Podelka.Controllers
                     else
                     {
                         return View("Profile", model);
-                    }  
+                    }
                 }
                 else
                 {
@@ -151,8 +151,6 @@ namespace Podelka.Controllers
                     }
 
                     var materialsDbModel = new Collection<MaterialsDbModel>();
-                    var materialDefault = new MaterialsDbModel(0, "Материалы");
-                    materialsDbModel.Add(materialDefault);
                     foreach (var item in materialsDb)
                     {
                         var material = new MaterialsDbModel(item.MaterialId, item.Name);
@@ -164,7 +162,7 @@ namespace Podelka.Controllers
                 }
                 else
                 {
-                    return View("_Error"); //вам не пренадлежит эта мастерская проверьте id
+                    return View("_Error");//вам не пренадлежит эта мастерская проверьте id
                 }
             }
             else
@@ -251,8 +249,9 @@ namespace Podelka.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult Favorite(long? id, string returnUrl)
+        public ActionResult Favorite(long? id)
         {
+            string errorMessage;
             if (id != null)
             {
                 using (var db = new Context())
@@ -279,19 +278,19 @@ namespace Podelka.Controllers
                             db.Bookmarks.Add(fovoriteNew);
                             db.SaveChanges();
                         }
-
-                        return Redirect(returnUrl);
+                        return Json(new { success = true});
                     }
                     else
                     {
-                        //удалили изделие
-                        return Redirect(returnUrl);
+                        errorMessage = "Удалили изделие";
+                        return Json(new { success = false, errorMessage = errorMessage });
                     }
                 }
             }
             else
             {
-                return Redirect(returnUrl); //В ссылке отсутвует идентификатор изделия (id)
+                errorMessage = "В ссылке отсутвует идентификатор изделия (id)";
+                return Json(new { success = false, errorMessage = errorMessage });
             }
         }
 
@@ -325,7 +324,7 @@ namespace Podelka.Controllers
             }
             else
             {
-                return Redirect(returnUrl); //В ссылке отсутвует идентификатор изделия (id)
+                return Redirect(returnUrl);//В ссылке отсутвует идентификатор изделия (id)
             }
         }
 
@@ -356,12 +355,12 @@ namespace Podelka.Controllers
                 }
                 else
                 {
-                    return View("_Error"); //Не найдена мастерская с данным идентификатором (id)
+                    return View("_Error");//Не найдена мастерская с данным идентификатором (id)
                 }
             }
             else
             {
-                return View("_Error"); //В ссылке отсутвует идентификатор мастерской (id)
+                return View("_Error");//В ссылке отсутвует идентификатор мастерской (id)
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Podelka.Core.DataBase
 {
-    public class RegisterTypeWorkroom       
+    public class RegisterTypeWorkroom
     {
         [Key]
         public byte WorkroomRegisterTypeId { get; set; }

@@ -27,7 +27,7 @@ namespace Podelka
             var smtpUserPass = "podelka2015";
 
             var smtpHost = "smtp.gmail.com";
-            var smtpPort = 587;   //25 порт для яндекса
+            var smtpPort = 587;//25 порт для яндекса
 
             //Создание подключения и авторизация
             SmtpClient client = new SmtpClient(smtpHost, smtpPort);
@@ -47,15 +47,14 @@ namespace Podelka
 
             return client.SendMailAsync(mail);
 
-            //return Task.FromResult(0); //вариант такого ретурна
+            //return Task.FromResult(0);//вариант такого ретурна
         }
     }
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser, long>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser, long> store)
-            : base(store)
+        public ApplicationUserManager(IUserStore<ApplicationUser, long> store) : base(store)
         {
         }
 
@@ -74,10 +73,10 @@ namespace Podelka
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = false, //Требовать специальные символы(. , и т.д.)
-                RequireDigit = true,             //Требовать цифры
-                RequireLowercase = true,         //Требовать нижний регистр
-                RequireUppercase = false,        //Требовать верхний регистр
+                RequireNonLetterOrDigit = false,//Требовать специальные символы(. , и т.д.)
+                RequireDigit = false,//Требовать цифры
+                RequireLowercase = false,//Требовать нижний регистр
+                RequireUppercase = false,//Требовать верхний регистр
             };
 
             // Configure user lockout defaults
@@ -111,8 +110,7 @@ namespace Podelka
     // Configure the application sign-in manager which is used in this application.
     public class ApplicationSignInManager : SignInManager<ApplicationUser, long>
     {
-        public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
-            : base(userManager, authenticationManager)
+        public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) : base(userManager, authenticationManager)
         {
         }
 

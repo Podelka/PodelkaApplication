@@ -1,0 +1,53 @@
+﻿/* ------------------------------------- 
+    JCrop customization
+---------------------------------------- */
+
+#preview-pane {
+    position: absolute;
+    left: 850px;
+    z-index: 1;
+    display: block;
+    border: 1px #000 solid;
+}
+
+#preview-pane .preview-container {
+    overflow: hidden;
+    width: 300px;  /* ToDo - size of the crop window*/
+    height: 300px; /* ToDo - size of the crop window*/
+}
+
+.upload-progress {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    width: 50%;
+}
+
+.upload-percent-value {
+    padding-left: 10px;
+    position: absolute;
+    float: left !important;
+}
+
+.upload-percent-bar {
+    background-color: #bbb;
+    height: 20px;
+    float: left !important;
+}
+
+/* -------------------------------------*/ 
+.pull-left {
+  float: left !important;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.bg-danger {
+  background-color: #f2dede;
+}
+
+a.bg-danger:hover {
+  background-color: #e4b9b9;
+}

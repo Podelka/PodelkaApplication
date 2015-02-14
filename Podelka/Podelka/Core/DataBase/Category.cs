@@ -13,6 +13,6 @@ namespace Podelka.Core.DataBase
         public bool Gender { get; set; }
 
         public virtual Section Section { get; set; }
-        public virtual ICollection<Product> Products { get; set; } //
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

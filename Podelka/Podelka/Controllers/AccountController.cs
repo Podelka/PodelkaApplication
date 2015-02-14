@@ -12,6 +12,11 @@ using Podelka.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Podelka.Core;
 using Podelka.Core.DataBase;
+using System.IO;
+using System.Drawing;
+using System.Collections.Generic;
+using System.Web.Helpers;
+using Podelka.Core.Service;
 
 namespace Podelka.Controllers
 {
@@ -23,7 +28,7 @@ namespace Podelka.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -89,7 +94,7 @@ namespace Podelka.Controllers
                 {
                     if (user.EmailConfirmed != true)
                     {
-                        ModelState.AddModelError(String.Empty, "Ваш Email не подтвержден ");
+                        ModelState.AddModelError(String.Empty, "Ваш Email не подтвержден");
                         return View(model);
                     }
                     else
@@ -98,11 +103,7 @@ namespace Podelka.Controllers
                         switch (result)
                         {
                             case SignInStatus.Success:
-                                return RedirectToLocal(returnUrl);    
-                            case SignInStatus.LockedOut:
-                                return View("Lockout");
-                            case SignInStatus.RequiresVerification:
-                                return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                                return RedirectToLocal(returnUrl);
                             case SignInStatus.Failure:
                             default:
                                 ModelState.AddModelError(String.Empty, "Неверный Email или Пароль");
@@ -164,10 +165,10 @@ namespace Podelka.Controllers
                     await AddUserToRoleAsync(user, "User");
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
-                               protocol: Request.Url.Scheme);
+                        protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Подтверждение электронной почты",
-                               "<h2 style=font-family:Georgia,serif;font-size:40px;font-weight:bold;font-style:italic>Всё готово</h2>"+
-                    "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\">завершить регистрацию</a>");
+                        "<h2 style=font-family:Georgia,serif;font-size:40px;font-weight:bold;font-style:italic>Всё готово</h2>"+
+                        "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\">завершить регистрацию</a>");
                     return View("DisplayEmail");
                 }
                 else
@@ -188,7 +189,7 @@ namespace Podelka.Controllers
         {
             if (userId == null || code == null)
             {
-                return View("_Error");  //В адресной строке отсутвуют необходимые параметры (идентификатор пользователя(id) и/или секретный код)
+                return View("_Error");//В адресной строке отсутвуют необходимые параметры (идентификатор пользователя(id) и/или секретный код)
             }
             
             var result = await UserManager.ConfirmEmailAsync((long)userId, code);
@@ -227,11 +228,11 @@ namespace Podelka.Controllers
                     string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Сброс пароля",
-                               "Для сброса пароля, нажмите по ссылке <a href=\"" + callbackUrl + "\">здесь</a>");
+                        "Для сброса пароля, нажмите по ссылке <a href=\"" + callbackUrl + "\">здесь</a>");
                     return RedirectToAction("ForgotPasswordConfirmation", "Account");
                 }
             }
-            else 
+            else
             { 
                 return View(model);
             }
@@ -285,10 +286,126 @@ namespace Podelka.Controllers
             return View();
         }
 
+///<summary>
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///</summary>
+///<returns></returns>
+        [HttpGet]
+        [Authorize]
+        public ActionResult Photo()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //[Authorize]
+        //public ActionResult Photo(UploadImageModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var userId = Convert.ToUInt64(HttpContext.User.Identity.GetUserId());
+        //        var name = userId.ToString() + "avatar";
+
+        //        Bitmap original = Bitmap.FromStream(model.File.InputStream) as Bitmap;
+
+        //        if (original != null)
+        //        {
+        //            var imgService = new ImageApplication();
+        //            var img = imgService.CreateImage(original, model.X, model.Y, model.Width, model.Height);
+        //            var fn = Server.MapPath("~/Content/img/" + name + ".jpg");
+
+        //            img.Save(fn, System.Drawing.Imaging.ImageFormat.Jpeg);
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError(String.Empty, "Your upload did not seem valid. Please try again using only correct images!");
+        //            return View(model);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return View(model);
+        //    }
+        //}
+
+        private int _avatarWidth = 300;// ToDo - Change the size of the stored avatar image
+        private int _avatarHeight = 300;// ToDo - Change the size of the stored avatar image
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult _Upload(IEnumerable<HttpPostedFileBase> File)
+        {
+            ImageService imageService = new ImageService();
+            string errorMessage = String.Empty;
+
+            if (File != null && File.Count() > 0)
+            {
+                // Get one only
+                var file = File.FirstOrDefault();
+                // Check if the file is an image
+                if (file != null && imageService.IsImage(file))
+                {
+                    // Verify that the user selected a file
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var webPath = imageService.SaveTemporaryFile(file, System.Web.HttpContext.Current); //. .Server.MapPath("/Temp"));//Передать правильно объект HttpContext
+                        return Json(new { success = true, fileName = webPath.Replace("\\", "/") });//success
+                    }
+                    errorMessage = "File cannot be zero length.";//failure
+                }
+                errorMessage = "File is of wrong format.";//failure
+            }
+            errorMessage = "No file uploaded.";//failure
+
+            return Json(new { success = false, errorMessage = errorMessage });
+        }
+
+        [HttpPost]
+        public ActionResult Save(string t, string l, string h, string w, string fileName)
+        {
+            try
+            {
+                // Get file from temporary folder
+                var fn = Path.Combine(Server.MapPath("~/Temp"), Path.GetFileName(fileName));
+
+                // Calculate dimesnions
+                int top = Convert.ToInt32(t.Replace("-", "").Replace("px", ""));
+                int left = Convert.ToInt32(l.Replace("-", "").Replace("px", ""));
+                int height = Convert.ToInt32(h.Replace("-", "").Replace("px", ""));
+                int width = Convert.ToInt32(w.Replace("-", "").Replace("px", ""));
+
+                // Get image and resize it, ...
+                var img = new WebImage(fn);
+                img.Resize(width, height);
+                // ... crop the part the user selected, ...
+                img.Crop(top, left, img.Height - top - _avatarHeight, img.Width - left - _avatarWidth);
+                // ... delete the temporary file,...
+                System.IO.File.Delete(fn);
+                // ... and save the new one.
+                var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+                string newFileName = "/Files/Users/" + userId.ToString() + "-avatar.jpg";
+                string newFileLocation = HttpContext.Server.MapPath(newFileName);
+                if (Directory.Exists(Path.GetDirectoryName(newFileLocation)) == false)
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(newFileLocation));
+                }
+
+                img.Save(newFileLocation);
+
+                return Json(new { success = true, avatarFileLocation = newFileName });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMessage = "Unable to upload file.\nERRORINFO: " + ex.Message });
+            }
+        }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 
         #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
 
         private IAuthenticationManager AuthenticationManager
         {
@@ -319,34 +436,6 @@ namespace Podelka.Controllers
             
         }
 
-        internal class ChallengeResult : HttpUnauthorizedResult
-        {
-            public ChallengeResult(string provider, string redirectUri)
-                : this(provider, redirectUri, 0)
-            {
-            }
-
-            public ChallengeResult(string provider, string redirectUri, int userId)
-            {
-                LoginProvider = provider;
-                RedirectUri = redirectUri;
-                UserId = userId;
-            }
-
-            public string LoginProvider { get; set; }
-            public string RedirectUri { get; set; }
-            public int UserId { get; set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
-                if (UserId != 0)
-                {
-                    properties.Dictionary[XsrfKey] = UserId.ToString();
-                }
-                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
-            }
-        }
         #endregion
     }
 }

@@ -4,7 +4,18 @@
     foreach (var item in Model)
     {
                     <div class="workroomPreview">
-                        <img src="~/Content/img/first_workshop.jpg">
+@{
+    string mapPath = HttpContext.Current.Server.MapPath("/Files");
+    bool isWorkroomImage = File.Exists(@"" + mapPath + "\\Workrooms\\" + @item.WorkroomId + "-workroom.small.jpg");
+}
+                        @if (isWorkroomImage)
+                        {
+                        <img class="sbAvater" src='~/Files/Workrooms/@item.WorkroomId-workroom.small.jpg'>
+                        }
+                        else
+                        {
+                        <img class="sbAvater" src='~/Content/img/image-workroom.small.jpg'>
+                        }
                         <div class="workroomInfo">
                             <h3>@item.Name</h3>
                             <div class="rating">
@@ -40,7 +51,20 @@
                             <div class="lastProduct">
                                 @foreach (var product in item.LastProducts)
                                 {
-                                <a href="@Url.Action("Profile", "Product", new { id = product.ProductId})"><img src="@Url.Content("~/Content/img/90x90.gif")" title="@product.Name" /></a>
+                                <a href="@Url.Action("Profile", "Product", new { id = product.ProductId})">
+@{
+    string mapPath2 = HttpContext.Current.Server.MapPath("/Files");
+    bool isProductImage = File.Exists(@"" + mapPath2 + "\\Products\\" + product.ProductId + "-product.profile.small.jpg");
+}
+                                    @if (isProductImage)
+                                    {
+                                    <img src='~/Files/Products/@product.ProductId-product.profile.small.jpg' title="@product.Name" />
+                                    }
+                                    else
+                                    {
+                                    <img src="@Url.Content("~/Content/img/90x90.gif")" title="@product.Name" />
+                                    }
+                                </a>
                                 }
                             </div>
                             }

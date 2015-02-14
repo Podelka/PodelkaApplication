@@ -12,11 +12,43 @@
     }
     if (Model.PersonalWebsite != null)
     {
-                <div class="sbSite"><i class="fa fa-globe fa-pr fa-fw"></i><a href="http://@Model.PersonalWebsite">@Model.PersonalWebsite</a></div>
+        string personalWebsite = String.Empty;
+        if (Model.PersonalWebsite.Contains("http://"))
+        {
+            personalWebsite = Model.PersonalWebsite.Replace("http://", String.Empty);
+        }
+        else
+        {
+            if (Model.PersonalWebsite.Contains("https://"))
+            {
+                personalWebsite = Model.PersonalWebsite.Replace("https://", String.Empty);
+            }
+            else
+            {
+                personalWebsite = Model.PersonalWebsite;
+            }
+        }
+                <div class="sbSite"><i class="fa fa-globe fa-pr fa-fw"></i><a href="@Model.PersonalWebsite">@personalWebsite</a></div>
     }
     if (Model.SocialNetwork != null)
     {
-                <div class="sbSocial"><i class="fa fa-users fa-pr fa-fw"></i><a href="http://@Model.SocialNetwork">@Model.SocialNetwork</a></div>
+        string socialNetwork = String.Empty;
+        if (Model.SocialNetwork.Contains("http://"))
+        {
+            socialNetwork = Model.SocialNetwork.Replace("http://", String.Empty);
+        }
+        else
+        {
+            if (Model.SocialNetwork.Contains("https://"))
+            {
+                socialNetwork = Model.SocialNetwork.Replace("https://", String.Empty);
+            }
+            else 
+            { 
+                socialNetwork = Model.SocialNetwork; 
+            }
+        }
+                <div class="sbSocial"><i class="fa fa-users fa-pr fa-fw"></i><a href="@Model.SocialNetwork">@socialNetwork</a></div>
     }
     if (Model.Skype != null)
     {

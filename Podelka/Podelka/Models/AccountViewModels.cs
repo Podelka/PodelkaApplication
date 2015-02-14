@@ -2,9 +2,29 @@
 using Podelka.Resources;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace Podelka.Models
 {
+    public class UploadImageModel
+    {
+
+        [Display(Name = "Local file")]
+        public HttpPostedFileBase File { get; set; }
+
+        [Range(0, int.MaxValue)]
+        public int X { get; set; }
+
+        [Range(0, int.MaxValue)]
+        public int Y { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int Width { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int Height { get; set; }
+    }
+
     public class LoginModel
     {
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
@@ -14,7 +34,9 @@ namespace Podelka.Models
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
         [DataType(DataType.Password)]
-        [StringLength(100, ErrorMessage = "{0} должен содержать не менее {2} символов", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-zA-Zа-яА-Я]).*$", ErrorMessage = "{0} должен содержать хотя бы одну букву и цифру")]
+        [MinLength(6, ErrorMessage = "{0} должен содержать не менее {1} символов")]
+        [MaxLength(100, ErrorMessage = "Максимальная длина пароля {1} символов")]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Password")]
         public string Password { get; set; }
 
@@ -39,13 +61,15 @@ namespace Podelka.Models
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
         [DataType(DataType.Password)]
-        [StringLength(100, ErrorMessage = "{0} должен содержать не менее {2} символов", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*\d)(?=.*[a-zA-Zа-яА-Я]).*$", ErrorMessage = "{0} должен содержать хотя бы одну букву и цифру")]
+        [MinLength(6, ErrorMessage = "{0} должен содержать не менее {1} символов")]
+        [MaxLength(100, ErrorMessage = "Максимальная длина пароля {1} символов")]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Password")]
         public string Password { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ErrorMessagesValidation), ErrorMessageResourceName = "RequiredTemplate")]
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Пароль и подтверждение пароля не совпадают")]
+        [Compare("Password", ErrorMessage = "{1} и {0} не совпадают")]
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "ConfirmPassword")]
         public string ConfirmPassword { get; set; }
 
@@ -56,7 +80,7 @@ namespace Podelka.Models
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "Skype")]
         public string Skype { get; set; }
 
-        [Url(ErrorMessage = "Пожалуйста, введите адрес по образцу: https://vk.com/id1")] //главное http(s)://site.domen, а остальное добавить разрешается все что угодно
+        [Url(ErrorMessage = "Пожалуйста, введите адрес по образцу: https://vk.com/podelkaby")] //главное http(s)://site.domen, а остальное добавить разрешается все что угодно
         [Display(ResourceType = typeof(DisplayNamesValidation), Name = "SocialNetwork")]
         public string SocialNetwork { get; set; }
 

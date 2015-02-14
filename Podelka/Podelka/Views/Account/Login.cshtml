@@ -24,6 +24,15 @@
         <div id="regForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
             {
+                <label for="state">State:</label>
+                <input type="text" name="state" id="state" list="state_list">
+                <datalist id="state_list">
+                    <option>Алабама</option>
+                    <option>Аляска</option>
+                    <option>Аризона</option>
+                    <option>Арканзас</option>
+                    <!-- и т.д. -->
+                </datalist>
                 @Html.AntiForgeryToken()
                 <p class="input-data">Введите данные для авторизации:</p>
                 @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
@@ -31,7 +40,7 @@
                     <div class="block-icon">
                         <i class="fa fa-ml fa-envelope"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.Email, new { id = "mail", placeholder = Html.DisplayNameFor(m => m.Email) })
+                    @Html.TextBoxFor(m => m.Email, new { type="email", id = "mail", placeholder = Html.DisplayNameFor(m => m.Email) })
                     @Html.ValidationMessageFor(m => m.Email, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input">

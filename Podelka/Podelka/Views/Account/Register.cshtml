@@ -31,42 +31,42 @@
                     <div class="block-icon">
                         <i class="fa fa-lg fa-user"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.FirstName, new { @id = "name", placeholder = Html.DisplayNameFor(m => m.FirstName) })
+                    @Html.TextBoxFor(m => m.FirstName, new { id = "name", placeholder = Html.DisplayNameFor(m => m.FirstName) })
                     @Html.ValidationMessageFor(m => m.FirstName, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input position-right">
                     <div class="block-icon">
                         <i class="fa fa-lg fa-user"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.SecondName, new { @id = "lastname", placeholder = Html.DisplayNameFor(m => m.SecondName) })
+                    @Html.TextBoxFor(m => m.SecondName, new { id = "lastname", placeholder = Html.DisplayNameFor(m => m.SecondName) })
                     @Html.ValidationMessageFor(m => m.SecondName, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input position-left">
                     <div class="block-icon">
                         <i class="fa fa-ml fa-envelope"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.Email, new { @id = "mail", placeholder = Html.DisplayNameFor(m => m.Email) })
+                    @Html.TextBoxFor(m => m.Email, new { type = "email", id = "mail", placeholder = Html.DisplayNameFor(m => m.Email) })
                     @Html.ValidationMessageFor(m => m.Email, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input position-right">
                     <div class="block-icon">
                         <i class="fa fa-lg fa-home"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.City, new { @id = "city", placeholder = Html.DisplayNameFor(m => m.City) })
+                    @Html.TextBoxFor(m => m.City, new { id = "city", placeholder = Html.DisplayNameFor(m => m.City) })
                     @Html.ValidationMessageFor(m => m.City, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input position-left">
                     <div class="block-icon">
                         <i class="fa fa-lg fa-unlock-alt"></i>
                     </div>
-                    @Html.PasswordFor(m => m.Password, new { @id = "password", placeholder = Html.DisplayNameFor(m => m.Password) })
+                    @Html.PasswordFor(m => m.Password, new { id = "password", placeholder = Html.DisplayNameFor(m => m.Password) })
                     @Html.ValidationMessageFor(m => m.Password, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input position-right">
                     <div class="block-icon">
                         <i class="fa fa-lg fa-lock"></i>
                     </div>
-                    @Html.PasswordFor(m => m.ConfirmPassword, new { @id = "podpass", placeholder = Html.DisplayNameFor(m => m.ConfirmPassword) })
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { id = "podpass", placeholder = Html.DisplayNameFor(m => m.ConfirmPassword) })
                     @Html.ValidationMessageFor(m => m.ConfirmPassword, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="clearfix"></div>
@@ -75,34 +75,34 @@
                     <div class="block-icon">
                         <i class="fa fa-lg fa-globe"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.PersonalWebsite, new { @class = "position-left", type = "url", id = "site", placeholder = Html.DisplayNameFor(m => m.PersonalWebsite) })
+                    @Html.TextBoxFor(m => m.PersonalWebsite, new { type = "url", @class = "position-left", id = "site", placeholder = Html.DisplayNameFor(m => m.PersonalWebsite) })
                     @Html.ValidationMessageFor(m => m.PersonalWebsite, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input position-right">
                     <div class="block-icon">
                         <i class="fa fa-ml fa-users"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.SocialNetwork, new { @class = "position-right", type = "url", id = "social", placeholder = Html.DisplayNameFor(m => m.SocialNetwork) })
+                    @Html.TextBoxFor(m => m.SocialNetwork, new { type = "url", id = "social", placeholder = Html.DisplayNameFor(m => m.SocialNetwork) })
                     @Html.ValidationMessageFor(m => m.SocialNetwork, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input position-left">
                     <div class="block-icon">
                         <i class="fa fa-lg fa-skype"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.Skype, new { @class = "position-left", id = "skype", placeholder = Html.DisplayNameFor(m => m.Skype) })
+                    @Html.TextBoxFor(m => m.Skype, new { id = "skype", placeholder = Html.DisplayNameFor(m => m.Skype) })
                 </div>
                 <div class="block-input position-right">
                     <div class="block-icon">
                         <i class="fa fa-lg fa-phone"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.Phone, new { @class = "position-right", id = "phone", placeholder = Html.DisplayNameFor(m => m.Phone) })
+                    @Html.TextBoxFor(m => m.Phone, new { id = "phone", placeholder = Html.DisplayNameFor(m => m.Phone) })
                     @Html.ValidationMessageFor(m => m.Phone, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="clearfix"></div>
                 <div class="block-input position-left">
-                    @Html.LabelFor(m => m.AgreeRules, new { @class = "position-right" })
+                    @Html.LabelFor(m => m.AgreeRules)
                     @*<input class="position-right" data-val="true" data-val-mustbetrue="Требуется поле Я согласен с этими правилами." id="AgreeRules" name="AgreeRules" type="checkbox" value="true" />*@
-                    @Html.CheckBoxFor(m => m.AgreeRules, new { @class = "position-right" })
+                    @Html.CheckBoxFor(m => m.AgreeRules)
                     @Html.ValidationMessageFor(m => m.AgreeRules, String.Empty, new { @class = "text-danger" })<br />
                 </div>
                 <div class="block-input position-right">
