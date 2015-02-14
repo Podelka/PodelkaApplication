@@ -25,10 +25,10 @@ $(window).on('load , resize', function createSize(){
 
 $(function() {
     $('#AgreeRules').click(function () {
-    if ($(this).is(':checked')) {
+        if ($(this).is(':checked')) {
         $('#buttonCreate').show()
-    } else {
-        $('#buttonCreate').hide()
-    }
-});
+        } else {
+            $('#buttonCreate').hide()
+        }
+    });
 });

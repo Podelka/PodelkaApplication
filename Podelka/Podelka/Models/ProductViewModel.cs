@@ -108,28 +108,64 @@ namespace Podelka.Models
             Materials = materials;
         }
 
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string KeyWords { get; set; }
-        public double? Price { get; set; }
-        public string Size1 { get; set; }
-        public string Size2 { get; set; }
-        public string Size3 { get; set; }
-        public string Weight { get; set; }
         public string RegisterTypeWorkroom { get; set; }
         public string SectionName { get; set; }
         public bool SectionGender { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, введите {0}")]
+        [Display(Name = "Название")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, введите {0}")]
+        [Display(Name = "Описание")]
+        public string Description { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, введите {0}")]
+        [Display(Name = "Ключевые слова")]
+        public string KeyWords { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, введите Цену")]
+        [Display(Name = "Цена")]
+        public double? Price { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, введите Высоту")]
+        [Display(Name = "Высота")]
+        public string Size1 { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, введите Ширину")]
+        [Display(Name = "Ширина")]
+        public string Size2 { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, введите Глубину")]
+        [Display(Name = "Глубина")]
+        public string Size3 { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, введите Массу")]
+        [Display(Name = "Масса")]
+        public string Weight { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, выберите Категорию")]
+        [Display(Name = "Категория")]
         public short SelectedCategory { get; set; }
         public ICollection<CategoriesDbModel> Categories { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, выберите {0}")]
+        [Display(Name = "Состояние готовности")]
         public byte SelectedStatusReady { get; set; }
         public ICollection<StatusReadyProductDbModel> StatusReady { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, выберите {0}")]
+        [Display(Name = "Половой признак")]
         public byte? SelectedGenderType { get; set; }
         public ICollection<GenderTypeDbModel> GenderTypes { get; set; }
+
+        [Required(ErrorMessage = "Пожалуйста, выберите {0}")]
+        [Display(Name = "Материалы")]
         public int[] SelectedMaterials { get; set; }
         public ICollection<MaterialsDbModel> Materials { get; set; }
 
-        [MustBeTrue(ErrorMessage = "Вы обязаны согласиться с правилами, чтобы добавить товар")]
-        [Display(Name = "Я согласен с этими правилами")]
+        [MustBeTrue(ErrorMessage = "Вы обязаны согласиться с правилами, чтобы добавить изделие")]
+        [Display(Name = "Я согласен с правилами сайта")]
         public bool AgreeRules { get; set; }
     }
 

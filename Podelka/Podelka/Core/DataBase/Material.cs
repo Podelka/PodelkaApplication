@@ -7,7 +7,6 @@ namespace Podelka.Core.DataBase
 {
     public class Material
     {
-
         public short MaterialId { get; set; }
         public string Name { get; set; }
 

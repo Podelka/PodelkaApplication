@@ -1,0 +1,39 @@
+﻿@model ICollection<Podelka.Models.ProductPreviewModel>
+@if (Model != null)
+{
+                    <div class="rightMenu">
+                        <button onclick="Preview3()">Выводить по 3</button>
+                        <button onclick="Preview4()">Выводить по 4</button>
+                    </div>
+    foreach (var item in Model)
+    {
+                    <a href="@Url.Action("Profile", "Product", new { id = item.ProductId })">
+                    <div id="workElement" class="workElement fourElement clearfix">
+@{
+        string mapPath = HttpContext.Current.Server.MapPath("/Files");
+        bool isProductImage = File.Exists(@"" + mapPath + "\\Products\\" + item.ProductId + "-product.profile.jpg");
+}
+                        @if (isProductImage)
+                        {
+                        <img src='~/Files/Products/@item.ProductId-product.profile.jpg'>
+                        }
+                        else
+                        {
+                        <img src="~/Content/img/280x280.gif" />
+                        }
+                        <div id="workInfo" class="workInfo fourElement">
+                            <h3>@item.Name</h3>
+                            @if (item.Price != null)
+                            {
+                            double Price = (double)item.Price;
+                            <p class="workPrice">@Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) руб</p>
+                            }
+                            <a class="smallButton" href="@Url.Action("FavoriteRemove", "Product", new { id = item.ProductId, returnUrl = Request.RawUrl })">
+                                <i class="fa fa-star-o"></i>
+                            </a>
+                        </div>
+                    </div>
+                    </a>
+    }
+}
+

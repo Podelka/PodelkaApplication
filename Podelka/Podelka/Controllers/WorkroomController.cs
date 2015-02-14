@@ -94,7 +94,7 @@ namespace Podelka.Controllers
                     var user = new UserProfileModel(workroom.UserId, workroom.User.FirstName, workroom.User.SecondName, workroom.User.Email, workroom.User.City, workroom.User.Skype, workroom.User.SocialNetwork, workroom.User.PersonalWebsite, workroom.User.Phone, workroom.User.DateRegistration);
 
                     var model = new WorkroomProfileModel(workroom.WorkroomId, workroom.UserId, workroom.Name, workroom.Description, workroom.CountGood, workroom.CountMedium, workroom.CountBad, workroom.DateCreate, user);
-                        
+
                     var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                     if (userId != 0 && workroom.User.Id == userId)
                     {
@@ -225,7 +225,7 @@ namespace Podelka.Controllers
         }
 
         [HttpGet]
-        public ActionResult Methods(long? id)      
+        public ActionResult Methods(long? id)
         {
             if (id != null)
             {
@@ -244,7 +244,7 @@ namespace Podelka.Controllers
                                 db.Entry(item).Reference(w=>w.PayMethod).Load();
                             }
                         }
-                        
+
                         db.Entry(workroom).Collection(w => w.WorkroomDeliveryMethods).Load();
                         if (workroom.WorkroomDeliveryMethods != null)
                         {
@@ -295,7 +295,7 @@ namespace Podelka.Controllers
             }
         }
 
-        [ChildActionOnly]
+        //[ChildActionOnly]
         [AllowAnonymous]
         public ActionResult Products(long? id)
         {
@@ -325,7 +325,7 @@ namespace Podelka.Controllers
                         }
                     }
 
-                    return PartialView("_ProductPreviewFour", productsCollection);
+                    return PartialView("_ProductPreview", productsCollection);
                 }
                 else
                 {
@@ -338,7 +338,7 @@ namespace Podelka.Controllers
             }
         }
 
-        [ChildActionOnly]
+        //[ChildActionOnly]
         [AllowAnonymous]
         public ActionResult Reviews(long? id)
         {
@@ -352,4 +352,4 @@ namespace Podelka.Controllers
             }
         }
     }
-} 
+}

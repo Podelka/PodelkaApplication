@@ -26,7 +26,7 @@ namespace Podelka.Core.DataBase
         public DateTime DateCreate { get; set; }
 
         public virtual Workroom Workroom { get; set; }
-        public virtual Category Category { get; set; } //
+        public virtual Category Category { get; set; }
         public virtual GenderTypeProduct GenderTypeProduct { get; set; }
         public virtual StatusReadyProduct ProductStatusReady { get; set; }
         public virtual ICollection<ProductMaterial> ProductMaterials { get; set; }

@@ -3,47 +3,86 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 @model Podelka.Models.WorkroomProfileModel
-<div class="profileView clearfix">
-    <div class="center">
-        <div class="leftSidebar">
-            <img class="sbAvater" src='~/Content/img/first_workshop.jpg'>
-            <span class="sbMakerAfter">Мастерская</span>
-            <h3 class="sbName">@Model.Name</h3>
-            @Html.Partial("_InfoWorkroomGuest", Model)
-        </div>
-        <div class="rightContent">
-            <div class="rightMenu">
-                <ul>
-                    @* УЧАСТОК КОДА, ЧТОБЫ ПРИСВАИВАТЬ li class="active", если на этот пункт горизонтального меню нажали *@
+    <div class="profileView clearfix">
+        <div class="center">
+            <div class="leftSidebar">
+@{
+    string mapPath = HttpContext.Current.Server.MapPath("/Files");
+    bool isWorkroomImage = File.Exists(@"" + mapPath + "\\Workrooms\\" + @Model.WorkroomId + "-workroom.jpg");
+}
+                @if (isWorkroomImage)
+                {
+                <img class="sbAvater" src='~/Files/Workrooms/@Model.WorkroomId-workroom.jpg'>
+                }
+                else
+                {
+                <img class="sbAvater" src='~/Content/img/image-workroom.jpg'>
+                }
+                <span class="sbMakerAfter">Мастерская</span>
+                <h3 class="sbName">@Model.Name</h3>
+@Html.Partial("_InfoWorkroomGuest", Model)
+            </div>
+            <div class="rightContent">
+                <div id ="rightMenu" class="rightMenu">
+                    <ul>
                     @if (ViewBag.Menu == null || ViewBag.Menu == "Products")
                     {
-                        <li class="active">@Html.ActionLink("Изделия", "Profile", "Workroom", new { id = Model.WorkroomId, menu = "Products" }, null)</li>
+                        <li id="products" class="active">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_products({0});", Model.WorkroomId) })</li>
+                        <li id="reviews">@Ajax.ActionLink("Отзывы", "Reviews", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_reviews({0});", Model.WorkroomId) })</li>
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Изделия", "Profile", "Workroom", new { id = Model.WorkroomId, menu = "Products" }, null)</li>
+                        <li id="products">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_products({0});", Model.WorkroomId) })</li>
+                        <li id="reviews" class="active">@Ajax.ActionLink("Отзывы", "Reviews", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_reviews({0});", Model.WorkroomId) })</li>
                     }
-                    @if (ViewBag.Menu == "Reviews")
-                    {
-                        <li class="active">@Html.ActionLink("Отзывы", "Profile", "Workroom", new { id = Model.WorkroomId, menu = "Reviews" }, null)</li>
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("Отзывы", "Profile", "Workroom", new { id = Model.WorkroomId, menu = "Reviews" }, null)</li>
-                    }
-                    @* END *@
-                </ul>
-            </div>
-            <div class="rightBody">
+                    </ul>
+                </div>
+                <div id="rightBody" class="rightBody">
                 @if (ViewBag.Menu == null || ViewBag.Menu == "Products")
                 {
                     @Html.Action("Products", "Workroom", new { id = Model.WorkroomId })
                 }
-                @if (ViewBag.Menu == "Reviews")
+                else
                 {
                     @Html.Action("Reviews", "Workroom", new { id = Model.WorkroomId })
                 }
+                </div>
             </div>
         </div>
     </div>
-</div>
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"> </script>
+    <script>
+        function active_menu_products(WorkroomId)
+        {
+            $('#rightMenu li').removeClass('active');
+            $('#products').addClass('active');
+            window.history.pushState(
+            null, // any object, that can be retrieved
+            'Продукты мастерской', // new page title
+            '/Workroom/Profile/' + WorkroomId + '/Products' // new url
+            );
+        };
+        function active_menu_reviews(WorkroomId)
+        {
+            $('#rightMenu li').removeClass('active');
+            $('#reviews').addClass('active');
+            window.history.pushState(
+            null, // any object, that can be retrieved
+            'Продукты мастерской', // new page title
+            '/Workroom/Profile/' + WorkroomId + '/Reviews' // new url
+            );
+        };
+        function Preview3()
+        {
+            $('#rightBody #workElement').removeClass('fourElement');
+            $('#rightBody #workInfo').removeClass('fourElement');
+        };
+        function Preview4()
+        {
+            $('#rightBody #workElement').addClass('fourElement');
+            $('#rightBody #workInfo').addClass('fourElement');
+        };
+    </script>
+}

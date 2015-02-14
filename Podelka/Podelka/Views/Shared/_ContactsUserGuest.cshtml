@@ -1,28 +1,60 @@
 ﻿@model Podelka.Models.UserProfileModel
-        @if (Model.City != null)
-        {
-            <p class="sbCity"><img src="~/Content/img/icon/map.png">@Model.City</p>
-        }
-        @if (Model.Phone != null || Model.PersonalWebsite != null || Model.SocialNetwork != null || Model.Skype != null)
-        {
-            <p class="hrText"><span>Контакты</span></p>
-            if (Model.Phone != null)
-            {
+@if (Model.City != null)
+{
+                <p class="sbCity"><img src="~/Content/img/icon/map.png">@Model.City</p>
+}
+@if (Model.Phone != null || Model.PersonalWebsite != null || Model.SocialNetwork != null || Model.Skype != null)
+{
+                <p class="hrText"><span>Контакты</span></p>
+    if (Model.Phone != null)
+    {
                 <div class="sbPhone">@Model.Phone</div> @*<p class="sbPhone">+375 29 666-55-44<br />+375 44 222-22-21<br />+375 33 654-98-98</p>*@
-            }
-            if (Model.PersonalWebsite != null)
+    }
+    if (Model.PersonalWebsite != null)
+    {
+        string personalWebsite = String.Empty;
+        if (Model.PersonalWebsite.Contains("http://"))
+        {
+            personalWebsite = Model.PersonalWebsite.Replace("http://", String.Empty);
+        }
+        else
+        {
+            if (Model.PersonalWebsite.Contains("https://"))
             {
-                <div class="sbSite"><i class="fa fa-globe fa-pr fa-fw"></i><a href="http://@Model.PersonalWebsite">@Model.PersonalWebsite</a></div>
+                personalWebsite = Model.PersonalWebsite.Replace("https://", String.Empty);
             }
-            if (Model.SocialNetwork != null)
+            else
             {
-                <div class="sbSocial"><i class="fa fa-users fa-pr fa-fw"></i><a href="http://@Model.SocialNetwork">@Model.SocialNetwork</a></div>
-            }
-            if (Model.Skype != null)
-            {
-                <div class="sbSkype"><i class="fa fa-skype fa-pr fa-fw"></i><a href="skype:@Model.Skype?call">@Model.Skype</a></div>
+                personalWebsite = Model.PersonalWebsite;
             }
         }
+                <div class="sbSite"><i class="fa fa-globe fa-pr fa-fw"></i><a href="@Model.PersonalWebsite">@personalWebsite</a></div>
+    }
+    if (Model.SocialNetwork != null)
+    {
+        string socialNetwork = String.Empty;
+        if (Model.SocialNetwork.Contains("http://"))
+        {
+            socialNetwork = Model.SocialNetwork.Replace("http://", String.Empty);
+        }
+        else
+        {
+            if (Model.SocialNetwork.Contains("https://"))
+            {
+                socialNetwork = Model.SocialNetwork.Replace("https://", String.Empty);
+            }
+            else 
+            { 
+                socialNetwork = Model.SocialNetwork; 
+            }
+        }
+                <div class="sbSocial"><i class="fa fa-users fa-pr fa-fw"></i><a href="@Model.SocialNetwork">@socialNetwork</a></div>
+    }
+    if (Model.Skype != null)
+    {
+                <div class="sbSkype"><i class="fa fa-skype fa-pr fa-fw"></i><a href="skype:@Model.Skype?call">@Model.Skype</a></div>
+    }
+}
                 <hr class="dashedHr" />
                 <div class="profileButton clearfix">
                     <div class="mailSquare"><div class="imageSquare"></div></div>

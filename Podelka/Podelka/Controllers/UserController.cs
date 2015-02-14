@@ -41,7 +41,7 @@ namespace Podelka.Controllers
                 if (user != null)
                 {
                     var model = new UserProfileModel(user.Id, user.FirstName, user.SecondName, user.Email, user.City, user.Skype, user.SocialNetwork, user.PersonalWebsite, user.Phone, user.DateRegistration);
-                        
+
                     var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                     if (userId != 0 && id == userId)
                     {
@@ -54,12 +54,12 @@ namespace Podelka.Controllers
                 }
                 else
                 {
-                    return View("_Error"); //Не найден пользователь с данным идентификатором (id)
+                    return View("_Error");//Не найден пользователь с данным идентификатором (id)
                 }
             }
             else
             {
-                return View("_Error"); //В ссылке отсутвует идентификатор пользователя (id)
+                return View("_Error");//В ссылке отсутвует идентификатор пользователя (id)
             }
         }
 
@@ -84,7 +84,7 @@ namespace Podelka.Controllers
                 var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                 var userInfo = UserManager.FindById(userId);
                 var user = UserManager.Find(userInfo.Email, model.ConfirmOldPassword);
-                
+
                 if (user != null)
                 {
                     user.UserName = model.Email;
@@ -96,7 +96,7 @@ namespace Podelka.Controllers
                     user.SocialNetwork = model.SocialNetwork;
                     user.PersonalWebsite = model.PersonalWebsite;
                     user.City = model.City;
-                   
+
                     using (var db = new Context())
                     {
                         db.Entry(user).State = EntityState.Modified;
@@ -117,7 +117,7 @@ namespace Podelka.Controllers
             }
         }
 
-        [ChildActionOnly]
+        //[ChildActionOnly]
         [AllowAnonymous]
         public ActionResult Workrooms(long? id)
         {
@@ -171,7 +171,7 @@ namespace Podelka.Controllers
             }
         }
 
-        [ChildActionOnly]
+        //[ChildActionOnly]
         [Authorize]
         public ActionResult Bookmarks()
         {
@@ -192,8 +192,8 @@ namespace Podelka.Controllers
                     }
                 }
 
-                //return PartialView("_ProductPreviewFour", productsCollection);
-                return PartialView("_ProductPreviewFourRemove", productsCollection);
+                //return PartialView("_ProductPreview", productsCollection);
+                return PartialView("_ProductPreviewRemove", productsCollection);
             }
             else
             {
@@ -201,7 +201,7 @@ namespace Podelka.Controllers
             }
         }
 
-        [ChildActionOnly]
+        //[ChildActionOnly]
         [AllowAnonymous]
         public ActionResult Adverts()
         {
@@ -295,7 +295,7 @@ namespace Podelka.Controllers
         //            return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
         //        }
         //        // If we got this far, something failed, redisplay form
-        //        ModelState.AddModelError("", "Failed to verify phone");
+        //        ModelState.AddModelError(String.Empty, "Failed to verify phone");
         //        return View(model);
         //    }
         //    else
@@ -380,7 +380,7 @@ namespace Podelka.Controllers
         //    ViewBag.StatusMessage =
         //        message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
         //        : message == ManageMessageId.Error ? "An error has occurred."
-        //        : "";
+        //        : String.Empty;
         //    var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
         //    var user = await UserManager.FindByIdAsync(userId);
         //    if (user == null)
@@ -399,7 +399,6 @@ namespace Podelka.Controllers
 
 #region Helpers
         // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
 
         private IAuthenticationManager AuthenticationManager
         {
@@ -419,30 +418,8 @@ namespace Podelka.Controllers
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                ModelState.AddModelError(String.Empty, error);
             }
-        }
-
-        private bool HasPassword()
-        {
-            var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
-            var user = UserManager.FindById(userId);
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
-        }
-
-        private bool HasPhoneNumber()
-        {
-            var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
-            var user = UserManager.FindById(userId);
-            if (user != null)
-            {
-                return user.PhoneNumber != null;
-            }
-            return false;
         }
 
         public enum ManageMessageId
