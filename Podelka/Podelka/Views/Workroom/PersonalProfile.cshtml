@@ -40,7 +40,7 @@
                         }
                     </ul>
                 </div>
-                <div id="rightBody" class="rightBody">
+                <div id="rightBody" class="rightBody clearfix">
                     @if (ViewBag.Menu == null || ViewBag.Menu == "Products")
                     {
                         @Html.Action("Products", "Workroom", new { id = Model.WorkroomId })

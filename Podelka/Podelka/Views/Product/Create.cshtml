@@ -35,7 +35,7 @@
                     @Html.ValidationMessageFor(m => m.AgreeRules, String.Empty, new { @class = "text-danger" })<br />
                 </div>
                 <div class="rightContentBlockBig createBody">
-                    @Html.TextAreaFor(m => m.Description, new { placeholder = "Введите краткое, но развёрнутое описание изделия...", maxlength = "200" })
+                    @Html.TextAreaFor(m => m.Description, new { placeholder = "Введите краткое, но детальное описание изделия...", maxlength = "200" })
                     @Html.ValidationMessageFor(m => m.Description, String.Empty, new { @class = "text-danger" })
                     <div class="sizeLabel">Размеры:</div>
                     @Html.TextBoxFor(m => m.Size1, new { @class = "sizeProduct", maxlength = "4", placeholder = "В" })

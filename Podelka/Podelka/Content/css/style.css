@@ -486,6 +486,7 @@ p.uLabel {
     padding: 0; 
     list-style-image: none; 
     box-shadow: 0 1px 2px rgba(0,0,0,.05);
+    float: left;
 }
 .rightMenu ul > li { 
 	margin: 0; 
@@ -514,6 +515,19 @@ p.uLabel {
     padding: 16px 20px; 
     text-align:center;
 }
+.productViewButton {
+    padding: 10px;
+    float: right;
+}
+.productViewButton img{
+    height: 30px;
+    cursor: pointer;
+    opacity: .4;
+    transition: .2s;
+}
+.productViewButton img:hover {
+    opacity: .8;
+}
 
 .workElement {
     width: 280px; 
@@ -522,13 +536,9 @@ p.uLabel {
     margin-bottom: 20px; 
     margin-right:20px; 
     background: #fff;
+    position: relative;
 }
-.workElement:nth-child(3n) {
-    margin-right: 0;
-}
-.workElement:nth-last-child(1) {
-    border-bottom: none;
-}
+
 .workInfo {
     padding: 10px 20px 20px;
     width: 240px;
@@ -552,9 +562,6 @@ p.uLabel {
     text-align: center;
     color: #0a0a0a;
     font-weight: bold;
-    border-bottom: 1px #ececec solid;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
 }
 .workElement input[type="button"] {
     width: 197px;
@@ -588,8 +595,7 @@ p.uLabel {
     margin-bottom: 8px;
 }
 .workInfo.fourElement p {
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
 }
 .workElement.fourElement input[type="button"] {
     width: 147px;
@@ -605,11 +611,11 @@ p.uLabel {
     margin: 8px;
     font-size: 1.23em;
 }
-.workElement.fourElement:nth-child(3n) {
+.workElement:nth-of-type(3n), .workElement.fourElement:nth-of-type(4n) {
+    margin-right: 0px;
+} 
+.workElement:nth-of-type(4n), .workElement.fourElement:nth-of-type(3n) {
     margin-right: 20px;
-}
-.workElement.fourElement:nth-child(4n) {
-    margin-right: 0;
 }
 
 .rating {
@@ -824,6 +830,15 @@ footer a:hover {
     margin-right: 20px;
     margin-bottom: 20px;
 }
+.workroomPreview h4.noneElement {
+    width: 390px;
+    background: #f1f1f1;
+    color: #7a7a7a;
+    font-weight: 100;
+    text-align: center;
+    padding: 35px 0px;
+    margin: 0px;
+}
 .workroomPreview h3 {
     margin: 0;
     margin-bottom: 5px;
@@ -837,28 +852,27 @@ footer a:hover {
     font-size: 14px;
     color: #5a5a5a;
     clear: both;
-    border-top: 1px #dedede dashed;
-    border-bottom: 1px #dedede dashed;
-    padding: 10px 0px;
+    padding-left: 10px;
     font-style: italic;
     text-align: justify;
     margin: 0;
     height: 55px;
     overflow: hidden;
+    border-left: 5px solid #fc6060;
 }
 .workroomPreview .rating {
     text-align: left;
     margin: 0;
     margin-bottom: 10px;
 }
-.lastProduct img{
+.lastProduct a > img{
     width: 90px;
     height: 90px;
     float: left;
     margin-right: 10px;
     margin-bottom: 0px;
 }
-.lastProduct img:nth-child(4) {
+.lastProduct a:nth-child(4n) > img {
     margin-right: 0px;
 }
 .smallButton {
@@ -887,6 +901,22 @@ footer a:hover {
 .smallButton:hover {
     background-color: #E25656; 
     transition: .2s;
+}
+.likeButton {
+    position: absolute;
+    transition: .3s;
+    top: 0px;
+    right: 0px;
+    display: none;
+}
+.workElement:hover .likeButton {
+    display: block;
+}
+.likeButton i {
+    color:#fff;
+    padding: 5px;
+    font-size: 1.5em;
+    text-shadow: 0px 1px 2px rgba(0,0,0,.2);
 }
 input.bigButton { width: 135px; height: 40px; background: #fc6060; margin: 0px; border-radius: 0px;}
 

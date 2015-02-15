@@ -1,10 +1,6 @@
 ﻿@model ICollection<Podelka.Models.ProductPreviewModel>
 @if (Model != null)
 {
-    <div class="rightMenu">
-        <button onclick="Preview3()">Выводить по 3</button>
-        <button onclick="Preview4()">Выводить по 4</button>
-    </div>
     foreach (var item in Model)
     {
         <a href="@Url.Action("Profile", "Product", new { id = item.ProductId })">
@@ -32,7 +28,7 @@
                                 <i class="fa fa-star-o"></i>
                             </a>*@
                             @*<i class="fa fa-star-o">@Ajax.ActionLink(" ", "Favorite", "Product", new { id = item.ProductId }, new AjaxOptions { }, new { @class = "smallButton" })</i>*@
-                            <a class="smallButton" data-ajax="true" href="@Url.Action("Favorite", "Product", new { id = item.ProductId })" >
+                            <a class="likeButton" data-ajax="true" href="@Url.Action("Favorite", "Product", new { id = item.ProductId })" >
                                 <i class="fa fa-star-o"></i>
                             </a>
                         </div>
