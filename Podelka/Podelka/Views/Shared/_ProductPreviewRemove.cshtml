@@ -24,6 +24,10 @@
                         double Price = (double)item.Price;
                         <p class="workPrice">@Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) руб</p>
                     }
+                    else
+                    {
+                        <p class="workPrice">цена договорная</p>
+                    }
                     <a class="likeButton" href="@Url.Action("FavoriteRemove", "Product", new { id = item.ProductId, returnUrl = Request.RawUrl })">
                         <i class="fa fa-star-o"></i>
                     </a>

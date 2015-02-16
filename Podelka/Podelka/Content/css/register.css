@@ -1,5 +1,5 @@
 ::-moz-selection {
-    background: #fc6060; 
+    background: #fc6060;
     color: #fff;
 }
 ::-webkit-selection {
@@ -7,43 +7,43 @@
     color: #fff;
 }
 ::selection {
-    background: #fc6060; 
+    background: #fc6060;
     color: #fff;
 }
 
 body {
-    font-family: PT Sans, Calibri, Segue Ui; 
+    font-family: PT Sans, Calibri, Segue Ui;
     margin: 0;
 }
 #bg {
-    position:fixed; 
-    top:-50%; 
-    left:-50%; 
-    width:200%; 
+    position:fixed;
+    top:-50%;
+    left:-50%;
+    width:200%;
     height:200%;
 }
 #bg img {
-    position:absolute; 
-    top:0; 
-    left:0; 
-    right:0; 
-    bottom:0; 
-    margin:auto; 
-    min-width:50%; 
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    min-width:50%;
     min-height:50%;
 }
 
 .clearfix:after{
-    content:''; 
-    display:table; 
+    content:'';
+    display:table;
     clear:both;
 }
 
 /*--- Форма входа ---*/
 
 .container {
-    position: absolute; 
-    opacity: 0; 
+    position: absolute;
+    opacity: 0;
     transition: 1s;
 }
 .container h3 {
@@ -54,13 +54,13 @@ body {
 	font-weight: 700;
 	text-shadow: 1px 1px 0px rgba(36,36,36,.4);
 	letter-spacing: -0.2px;
-	text-align: center; 
+	text-align: center;
 }
 .container p.sub {
-    color: #f5f5ff; 
-    font-size: 11px; 
-    font-style: italic; 
-    text-align: center; 
+    color: #f5f5ff;
+    font-size: 11px;
+    font-style: italic;
+    text-align: center;
 }
 
 #regForm {
@@ -70,32 +70,32 @@ body {
 	padding: 36px;
 	background: #fff;
 	border-radius: 4px;
-	z-index:1; 
+	z-index:1;
 	box-shadow: 0 0 5px rgba(34, 34, 34, 0.3);
 	cursor: default;
 	transition: .7s;
 	padding-bottom: 46px;
 }
 #regForm label {
-    float: left; 
-    margin-bottom: 10px; 
-    font-size: 14px; 
+    float: left;
+    margin-bottom: 10px;
+    font-size: 14px;
     color: #3a3a3a;
 }
 #regForm button {
-	background: none; 
-	border: 0; 
-	outline: 0; 
-	color: #7a7a7a; 
-	font-size: 20px; 
-	position: absolute; 
-	margin: 0; 
-	top: 0px; 
+	background: none;
+	border: 0;
+	outline: 0;
+	color: #7a7a7a;
+	font-size: 20px;
+	position: absolute;
+	margin: 0;
+	top: 0px;
 	right: 5px;
 	transition: .3s;
 }
 #regForm button:hover {
-    color: #555; 
+    color: #555;
     transition: .2s;
 }
 input {
@@ -103,8 +103,8 @@ input {
     transition: .2s;
 }
 input:focus {
-    border: 1px solid #fc6060; 
-    outline: none; 
+    border: 1px solid #fc6060;
+    outline: none;
     transition: .5s;
 }
 #regForm input[type=text], #regForm input[type=password], #regForm input[type=email], #regForm input[type=url]{
@@ -118,17 +118,17 @@ input:focus {
     margin: 0;
 }
 #regForm input[type=submit], #regForm input[type=button] {
-	width: 280px; 
-	height: 40px; 
-	border: 0; 
-	outline: 0; 
-	background: #fc6060; 
-	border-radius: 3px; 
-	-moz-border-radius: 3px; 
+	width: 280px;
+	height: 40px;
+	border: 0;
+	outline: 0;
+	background: #fc6060;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
-	color: #fff; 
-	font-weight:700; 
-	font-size: 12px; 
+	color: #fff;
+	font-weight:700;
+	font-size: 12px;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	transition: .3s;
@@ -145,23 +145,23 @@ input:focus {
     float: left;
 }
 #regForm input[type=submit]:hover, #regForm input[type=button]:hover {
-    background: #E25656; 
+    background: #E25656;
     transition: .2s;
 }
 #regForm p.regText {
-    text-align: left; 
-    font-size: 14px; 
-    color: #3a3a3a; 
-    margin: 0; 
+    text-align: left;
+    font-size: 14px;
+    color: #3a3a3a;
+    margin: 0;
     margin-bottom: 10px;
 }
 #regForm p.regAddText {
-    float: left; 
-    margin-bottom: 10px; 
-    font-size: 11px; 
-    font-style: italic; 
-    color: #7a7a7a; 
-    margin: 0; 
+    float: left;
+    margin-bottom: 10px;
+    font-size: 11px;
+    font-style: italic;
+    color: #7a7a7a;
+    margin: 0;
     margin-top: 10px;
 }
 
@@ -201,7 +201,7 @@ input:focus {
     transition: .3s;
 }
 #regForm a:hover {
-    color: #fc6060; 
+    color: #fc6060;
     transition: .2s;
 }
 #regForm a {

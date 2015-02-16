@@ -13,7 +13,9 @@
                         <img src="~/Content/img/icon/four-view.png" title="Четыре товара в ряд" onclick="Preview4()">
                     </div>
                 </div>
-                @Html.Partial("_ProductPreview", Model)
+                <div id="rightBody" class="rightBody clearfix">
+                    @Html.Partial("_ProductPreview", Model)
+                </div>
             </div>
         </div>
     </div>

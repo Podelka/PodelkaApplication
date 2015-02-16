@@ -124,7 +124,7 @@ namespace Podelka.Models
         [Display(Name = "Ключевые слова")]
         public string KeyWords { get; set; }
 
-        [Required(ErrorMessage = "Пожалуйста, введите Цену")]
+        //[Required(ErrorMessage = "Пожалуйста, введите Цену")]//Т.к. цена добавляется не к каждому товару, то Required нельзя применять к Price
         [Display(Name = "Цена")]
         public double? Price { get; set; }
 
@@ -154,8 +154,8 @@ namespace Podelka.Models
         public byte SelectedStatusReady { get; set; }
         public ICollection<StatusReadyProductDbModel> StatusReady { get; set; }
 
-        //[Required(ErrorMessage = "Пожалуйста, выберите {0}")]  Т.к. половой признак добавляется не к каждому товару, то Required нельзя применять к SelectedGenderType
-        //[Display(Name = "Половой признак")]
+        //[Required(ErrorMessage = "Пожалуйста, выберите {0}")]  //Т.к. половой признак добавляется не к каждому товару, то Required нельзя применять к SelectedGenderType
+        [Display(Name = "Половой признак")]
         public byte? SelectedGenderType { get; set; }
         public ICollection<GenderTypeDbModel> GenderTypes { get; set; }
 

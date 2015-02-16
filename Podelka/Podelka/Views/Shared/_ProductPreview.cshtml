@@ -24,9 +24,10 @@
                         double Price = (double)item.Price;
                         <p class="workPrice">@Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) руб</p>
                     }
-                    @*<a class="smallButton" href="@Url.Action("Favorite", "Product", new { id = item.ProductId })">
-                        <i class="fa fa-star-o"></i>
-                    </a>*@
+                    else
+                    {
+                        <p class="workPrice">цена договорная</p>
+                    }
                     @*<i class="fa fa-star-o">@Ajax.ActionLink(" ", "Favorite", "Product", new { id = item.ProductId }, new AjaxOptions { }, new { @class = "smallButton" })</i>*@
                     <a class="likeButton" data-ajax="true" href="@Url.Action("Favorite", "Product", new { id = item.ProductId })">
                         <i class="fa fa-star-o"></i>

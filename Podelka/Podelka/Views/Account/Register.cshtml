@@ -100,16 +100,14 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="block-input position-left">
-                    @Html.LabelFor(m => m.AgreeRules)
-                    @*<input class="position-right" data-val="true" data-val-mustbetrue="Требуется поле Я согласен с этими правилами." id="AgreeRules" name="AgreeRules" type="checkbox" value="true" />*@
-                    @Html.CheckBoxFor(m => m.AgreeRules, new { id = "agreeRules" })
-                    @Html.ValidationMessageFor(m => m.AgreeRules, String.Empty, new { @class = "text-danger" })<br />
+                    @Html.CheckBoxFor(m => m.AgreeRules, new { @class = "agreeRulesLabel", id = "agreeRules" })
+                    <div class="agreeRulesLabel">Я согласен с @Html.ActionLink("правилами сайта", "Rules", "Home")</div>
+                    @Html.ValidationMessageFor(m => m.AgreeRules, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input position-right">
-                    @Html.ActionLink("Прочитайте правила регистрации", "Rules", "Home")
+                    <input type="submit" name="buttonCreate" id="buttonCreate" value="Продолжить" />
                 </div>
                 <p class="regAddText"><font color="#fc6060">*</font> дополнительная информация не обязательна.</p>
-                <input type="submit" name="buttonCreate" id="buttonCreate" value="Продолжить" /><br />
             }
         </div>
         <p class="sub">* передаваемая вами информация служит только для регистрации,<br />либо для обратной связи с вами.

@@ -35,8 +35,12 @@
                         <li id="adverts" class="active">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_adverts({0});", Model.UserId) })</li>
                     }
                 </ul>
+                <div class="productViewButton">
+                    <img src="~/Content/img/icon/three-view.png" title="Три товара в ряд" onclick="Preview3()">
+                    <img src="~/Content/img/icon/four-view.png" title="Четыре товара в ряд" onclick="Preview4()">
+                </div>
             </div>
-            <div id="rightBody" class="rightBody">
+            <div id="rightBody" class="rightBody clearfix">
                 @if (ViewBag.Menu == null || ViewBag.Menu == "Workrooms")
                 {
                     @Html.Action("Workrooms", "User", new { id = Model.UserId })

@@ -11,7 +11,8 @@
                 <h2>Открытие мастерской</h2>
                 <img src="~/Content/img/shop.png">
                 <hr class="dashedHr" />
-                @Html.CheckBoxFor(m => m.AgreeRules, new { @class = "agreeRulesLabel", id = "agreeRules" })<div class="agreeRulesLabel">Я согласен с @Html.ActionLink("правилами сайта", "Rules", "Home")</div>
+                @Html.CheckBoxFor(m => m.AgreeRules, new { @class = "agreeRulesLabel", id = "agreeRules" })
+                <div class="agreeRulesLabel">Я согласен с @Html.ActionLink("правилами сайта", "Rules", "Home")</div>
                 @Html.ValidationMessageFor(m => m.AgreeRules, String.Empty, new { @class = "text-danger" })<br />
                 <input type="submit" name="buttonCreate" id="buttonCreate" value="Создать" />
             </div>
@@ -20,7 +21,7 @@
                 @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
                 <img src="~/Content/img/280x280.gif">
                 <div class="formName">
-                    @Html.TextBoxFor(m => m.Name, new { placeholder = "Введите название мастерской" })
+                    @Html.TextBoxFor(m => m.Name, new { placeholder = "Название" })
                     @Html.ValidationMessageFor(m => m.Name, String.Empty, new { @class = "text-danger" })<br />
                     @Html.TextAreaFor(m => m.Description, new { placeholder = "Напишите пару слов о вашей деятельности.." })
                     @Html.ValidationMessageFor(m => m.Description, String.Empty, new { @class = "text-danger" })<br />
