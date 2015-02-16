@@ -121,7 +121,7 @@ namespace Podelka.Controllers
                 if (workroom != null && workroom.UserId == Convert.ToInt64(HttpContext.User.Identity.GetUserId()))
                 {
                     var categoriesDbModel = new Collection<CategoriesDbModel>();
-                    var categoryDefault = new CategoriesDbModel(0, "Категория", false);
+                    var categoryDefault = new CategoriesDbModel(0, "--Выбрать--", false);
                     categoriesDbModel.Add(categoryDefault);
                     foreach (var item in categoriesDb)
                     {
@@ -130,8 +130,6 @@ namespace Podelka.Controllers
                     }
 
                     var statusReadyDbModel = new Collection<StatusReadyProductDbModel>();
-                    var statusDefault = new StatusReadyProductDbModel(0, "Наличие");
-                    statusReadyDbModel.Add(statusDefault);
                     foreach (var item in statusReadyDb)
                     {
                         var status = new StatusReadyProductDbModel(item.ProductStatusReadyId, item.Name);
@@ -139,8 +137,6 @@ namespace Podelka.Controllers
                     }
 
                     var genderTypeDbModel = new Collection<GenderTypeDbModel>();
-                    var genderTypeDefault = new GenderTypeDbModel(0, "Половой признак");
-                    genderTypeDbModel.Add(genderTypeDefault);
                     if (genderTypeDb != null && genderTypeDb.Any())
                     {
                         foreach (var item in genderTypeDb)

@@ -3,72 +3,73 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 @model Podelka.Models.ProductCreateModel
-    <div class="profileView clearfix">
-        <div class="center">
-            @using (Html.BeginForm("Create", "Product", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
-                <div class="leftSidebar createSidebar">
-                    <h2>Добавление изделия</h2>
-                    <img class="leftImg" src="~/Content/img/shop.png">
-                    <hr class="dashedHr" />
-                    <p class="content">Здесь будет краткий мануал и ссылки на туториалы по добавлению изделия.</p>
-                    <input type="submit" name="buttonCreate" id="buttonCreate" value="Добавить товар" style="display:none;" />
-                </div>
-                <div class="rightContentBlockSmall createBody">
-                    <img src="~/Content/img/280x280.gif">
-                    @Html.TextBoxFor(m => m.Name, new { placeholder = "Введите название изделия" })
-                    @Html.ValidationMessageFor(m => m.Name, String.Empty, new { @class = "text-danger" })
-                    @if (Model.RegisterTypeWorkroom == "Отсутсвует")
-                    {
+<div class="profileView clearfix">
+    <div class="center">
+        @using (Html.BeginForm("Create", "Product", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
+            <div class="leftSidebar createSidebar">
+                <h2>Добавление изделия</h2>
+                <img class="leftImg" src="~/Content/img/shop.png">
+                <hr class="dashedHr" />
+                <p class="content">Здесь будет краткий мануал и ссылки на туториалы по добавлению изделия.</p>
+                @Html.CheckBoxFor(m => m.AgreeRules, new { @class = "agreeRulesLabel", id = "agreeRules" })<div class="agreeRulesLabel">Я согласен с @Html.ActionLink("правилами сайта", "Rules", "Home")</div>
+                @Html.ValidationMessageFor(m => m.AgreeRules, String.Empty, new { @class = "text-danger" })<br />
+                <input type="submit" name="buttonCreate" id="buttonCreate" value="Добавить товар" />
+            </div>
+            <div class="rightContentBlockSmall createBody">
+                <img src="~/Content/img/280x280.gif">
+                @Html.TextBoxFor(m => m.Name, new { placeholder = "Введите название изделия" })
+                @Html.ValidationMessageFor(m => m.Name, String.Empty, new { @class = "text-danger" })
+                @if (Model.RegisterTypeWorkroom == "Отсутсвует")
+                {
                     @:Вы не имеете права продавать изделия по белорусскому законодательсву! Вы размещаете их для демонстрации своих талантов.<br />
-                    }
-                    else
-                    {
+                }
+                else
+                {
                     @Html.TextBoxFor(m => m.Price, new { placeholder = "Цена" })
                     @Html.ValidationMessageFor(m => m.Price, String.Empty, new { @class = "text-danger" })
-                    }
-                    @Html.DropDownListFor(m => m.SelectedStatusReady, new SelectList(Model.StatusReady, "StatusReadyId", "Name"))
-                    @Html.ValidationMessageFor(m => m.SelectedStatusReady, String.Empty, new { @class = "text-danger" })<br />
-                    @Html.CheckBoxFor(m => m.AgreeRules, new { @class = "agreeRulesLabel" })<div class="agreeRulesLabel">Я согласен с @Html.ActionLink("правилами сайта", "Rules", "Home")</div>
-                    @Html.ValidationMessageFor(m => m.AgreeRules, String.Empty, new { @class = "text-danger" })<br />
-                </div>
-                <div class="rightContentBlockBig createBody">
-                    @Html.TextAreaFor(m => m.Description, new { placeholder = "Введите краткое, но развёрнутое описание изделия...", maxlength = "200" })
-                    @Html.ValidationMessageFor(m => m.Description, String.Empty, new { @class = "text-danger" })
-                    <div class="sizeLabel">Размеры:</div>
-                    @Html.TextBoxFor(m => m.Size1, new { @class = "sizeProduct", maxlength = "4", placeholder = "В" })
-                    @Html.ValidationMessageFor(m => m.Size1, String.Empty, new { @class = "text-danger" })
-                    <div class="sizeLabel">x</div>
-                    @Html.TextBoxFor(m => m.Size2, new { @class = "sizeProduct", maxlength = "4", placeholder = "Ш" })
-                    @Html.ValidationMessageFor(m => m.Size2, String.Empty, new { @class = "text-danger" })
-                    <div class="sizeLabel">x</div>
-                    @Html.TextBoxFor(m => m.Size3, new { @class = "sizeProduct last", maxlength = "4", placeholder = "Г" })
-                    @Html.ValidationMessageFor(m => m.Size3, String.Empty, new { @class = "text-danger" })
-                    <div class="metricLabel">см</div>
-                    <div class="weightLabel">Масса:</div>
-                    @Html.TextBoxFor(m => m.Weight, new { @class = "weightProduct last", maxlength = "5" })<div class="metricLabel">г</div>
-                    @Html.ValidationMessageFor(m => m.Weight, String.Empty, new { @class = "text-danger" })
-                    <div class="fontLavel">Раздел мастерской: <strong>@Model.SectionName</strong></div>
-                    <div class="fontLavel">Выберите категорию:</div>
-                    @Html.DropDownListFor(m => m.SelectedCategory, new SelectList(Model.Categories, "CategoryId", "Name"))
-                    @Html.ValidationMessageFor(m => m.SelectedCategory, String.Empty, new { @class = "text-danger" })
-                    @if (Model.SectionGender == true)
-                    {
+                }
+                @Html.DropDownListFor(m => m.SelectedStatusReady, new SelectList(Model.StatusReady, "StatusReadyId", "Name"))
+                @Html.ValidationMessageFor(m => m.SelectedStatusReady, String.Empty, new { @class = "text-danger" })<br />
+            </div>
+            <div class="rightContentBlockBig createBody">
+                @Html.TextAreaFor(m => m.Description, new { placeholder = "Введите краткое, но детальное описание изделия...", maxlength = "200" })
+                @Html.ValidationMessageFor(m => m.Description, String.Empty, new { @class = "text-danger" })
+                <div class="sizeLabel">Размеры:</div>
+                @Html.TextBoxFor(m => m.Size1, new { @class = "sizeProduct", maxlength = "4", placeholder = "В" })
+                @Html.ValidationMessageFor(m => m.Size1, String.Empty, new { @class = "text-danger" })
+                <div class="sizeLabel">x</div>
+                @Html.TextBoxFor(m => m.Size2, new { @class = "sizeProduct", maxlength = "4", placeholder = "Ш" })
+                @Html.ValidationMessageFor(m => m.Size2, String.Empty, new { @class = "text-danger" })
+                <div class="sizeLabel">x</div>
+                @Html.TextBoxFor(m => m.Size3, new { @class = "sizeProduct last", maxlength = "4", placeholder = "Г" })
+                @Html.ValidationMessageFor(m => m.Size3, String.Empty, new { @class = "text-danger" })
+                <div class="metricLabel">см</div>
+                <div class="weightLabel">Масса:</div>
+                @Html.TextBoxFor(m => m.Weight, new { @class = "weightProduct last", maxlength = "5" })<div class="metricLabel">г</div>
+                @Html.ValidationMessageFor(m => m.Weight, String.Empty, new { @class = "text-danger" })
+                <div class="fontLavel">Раздел мастерской: <strong>@Model.SectionName</strong></div>
+                <div class="fontLavel">Выберите категорию:</div>
+                @Html.DropDownListFor(m => m.SelectedCategory, new SelectList(Model.Categories, "CategoryId", "Name"))
+                @Html.ValidationMessageFor(m => m.SelectedCategory, String.Empty, new { @class = "text-danger" })
+                @if (Model.SectionGender == true)
+                {
                     <div class="fontLavel">Выберите пол:</div>
                     @Html.DropDownListFor(m => m.SelectedGenderType, new SelectList(Model.GenderTypes, "GenderTypeId", "Name"))
                     @Html.ValidationMessageFor(m => m.SelectedGenderType, String.Empty, new { @class = "text-danger" })
-                    }
-                    <div class="fontLavel">Материал <i style="color:#9a9a9a;">(для выбора нескольких удерживайте Ctrl)</i>:</div>
-                    @Html.ListBoxFor(m => m.SelectedMaterials, new MultiSelectList(Model.Materials, "MaterialId", "Name"))
-                    @Html.ValidationMessageFor(m => m.SelectedMaterials, String.Empty, new { @class = "text-danger" })
-                    @Html.TextAreaFor(m => m.KeyWords, new { @class ="second", placeholder = "Введите ключевые слова, описывающие ваше изделие (через запятую)...", maxlength = "160" })
-                    @Html.ValidationMessageFor(m => m.KeyWords, String.Empty, new { @class = "text-danger" })
-                </div>
-            }
-        </div>
+                }
+                <div class="fontLavel">Материал <i style="color:#9a9a9a;">(для выбора нескольких удерживайте Ctrl)</i>:</div>
+                @Html.ListBoxFor(m => m.SelectedMaterials, new MultiSelectList(Model.Materials, "MaterialId", "Name"))
+                @Html.ValidationMessageFor(m => m.SelectedMaterials, String.Empty, new { @class = "text-danger" })
+                @Html.TextAreaFor(m => m.KeyWords, new { @class ="second", placeholder = "Введите ключевые слова, описывающие ваше изделие (через запятую)...", maxlength = "160" })
+                @Html.ValidationMessageFor(m => m.KeyWords, String.Empty, new { @class = "text-danger" })
+            </div>
+        }
     </div>
-@section Scripts {
+</div>
+@section Scripts
+{
     @Scripts.Render("~/bundles/jqueryValidate")
 }

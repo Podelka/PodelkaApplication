@@ -2,8 +2,8 @@
     ViewBag.Title = "Добавление фотографии в профиль";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
-@using Podelka.Core.Source
 @model Podelka.Models.UploadImageModel
+@using Podelka.Core.Source
 @*@Html.HiddenFor(model => model.X)
 @Html.HiddenFor(model => model.Y)
 @Html.HiddenFor(model => model.Width)
@@ -12,14 +12,11 @@
     @using (Ajax.BeginForm("_Upload", "Account", new AjaxOptions() { HttpMethod = "POST" }, new { enctype = "multipart/form-data", id = "avatar-upload-form" }))
     {
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-        
+        @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
         @Html.LabelFor(model => model.File)
         @Html.FileFor(model => model.File)
         @Html.ValidationMessageFor(model => model.File)
-
         @*<input type="file" name="files" /><br>*@
-        
         <div class="upload-file-notice">Максимальный размер: <span id="avatar-max-size"></span> MB</div>
     }
     <div class="upload-progress hidden">
@@ -46,42 +43,32 @@
     </div>
 </div>
 <div id="avatar-result" class="hidden">
-    <img src="" alt="Final Image" />  @*//Влиять на кеш и заставить загружать фотографию не из кеша браузера, а брать с сервера*@
+    <img src="" alt="Final Image" />
 </div>
 @section Scripts
 {
-    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"> </script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.form.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery.Jcrop.min.js")"></script>
-    
     <script>
-
-        var jcrop_api,
-            boundx,
-            boundy,
-            xsize,
-            ysize;
-
+        var jcrop_api, boundx, boundy, xsize, ysize;
         $(function ()
         {
             if (typeof $('#avatar-upload-form') !== undefined)
             {
-                var maxSizeAllowed = 10; // ToDo - Change upload limit in MB
-
+                var maxSizeAllowed = 10;// ToDo - Change upload limit in MB
                 initAvatarUpload();
-
                 $('#avatar-max-size').html(maxSizeAllowed);
-
                 $("#avatar-upload-form input:file").on("change", function (e)
                 {
                     var files = e.currentTarget.files;
-
                     for (var x in files)
                     {
                         if (files[x].name != "item" && typeof files[x].name != "undefined")
                         {
                             if (files[x].size <= maxSizeAllowed * 1024 * 1024)
-                            { // ToDo - change the size limit of the file. You may need to change web.config if larger files are necessary.
+                            {
+                                // ToDo - change the size limit of the file. You may need to change web.config if larger files are necessary.
                                 // Submit the selected file
                                 $('#avatar-upload-form .upload-file-notice').removeClass('bg-danger');
                                 $('#avatar-upload-form').submit();
@@ -103,8 +90,8 @@
             {
                 beforeSend: function ()
                 {
-                updateProgress(0);
-                $('#avatar-upload-form').addClass('hidden');
+                    updateProgress(0);
+                    $('#avatar-upload-form').addClass('hidden');
                 },
                 uploadProgress: function (event, position, total, percentComplete)
                 {
@@ -120,13 +107,10 @@
                     else
                     {
                         $('#preview-pane .preview-container img').attr('src', data.fileName);
-
                         var img = $('#crop-avatar-target');
                         img.attr('src', data.fileName);
-
-                        $('#avatar-upload-box').addClass('hidden'); // ToDo - Remove if you want to keep the upload box
+                        $('#avatar-upload-box').addClass('hidden');// ToDo - Remove if you want to keep the upload box
                         $('#avatar-crop-box').removeClass('hidden');
-
                         initAvatarCrop(img);
                     }
                 },
@@ -140,7 +124,7 @@
         {
             $('.upload-percent-bar').width(percentComplete + '%');
             $('.upload-percent-value').html(percentComplete + '%');
-            if (percentComplete === 0) 
+            if (percentComplete === 0)
             {
                 $('#upload-status').empty();
                 $('.upload-progress').removeClass('hidden');
@@ -159,30 +143,28 @@
                 var bounds = this.getBounds();
                 boundx = bounds[0];
                 boundy = bounds[1];
-
                 jcrop_api = this;
                 jcrop_api.animateTo([0, 0, 500, 500]);
                 jcrop_api.setOptions({ allowSelect: true });
                 jcrop_api.setOptions({ allowMove: true });
                 jcrop_api.setOptions({ allowResize: true });
                 jcrop_api.setOptions({ aspectRatio: 1 });
-
                 var pcnt = $('#preview-pane .preview-container');
                 xsize = pcnt.width();
                 ysize = pcnt.height();
-
                 $('#preview-pane').appendTo(jcrop_api.ui.holder);
-
                 jcrop_api.focus();
             });
         }
 
-        function updatePreviewPane(c) {
-            if (parseInt(c.w) > 0) {
+        function updatePreviewPane(c)
+        {
+            if (parseInt(c.w) > 0)
+            {
                 var rx = xsize / c.w;
                 var ry = ysize / c.h;
-
-                $('#preview-pane .preview-container img').css({
+                $('#preview-pane .preview-container img').css(
+                {
                     width: Math.round(rx * boundx) + 'px',
                     height: Math.round(ry * boundy) + 'px',
                     marginLeft: '-' + Math.round(rx * c.x) + 'px',
@@ -195,7 +177,6 @@
         {
             var img = $('#preview-pane .preview-container img');
             $('#avatar-crop-box button').addClass('disabled');
-
             $.ajax(
             {
                 type: "POST",
@@ -214,9 +195,8 @@
                 if (data.success === true)
                 {
                     $('#avatar-result img').attr('src', data.avatarFileLocation);
-
                     $('#avatar-result').removeClass('hidden');
-                    $('#avatar-crop-box').addClass('hidden'); // ToDo - Remove if you want to keep the upload box
+                    $('#avatar-crop-box').addClass('hidden');// ToDo - Remove if you want to keep the upload box
                     //Перенаправить на страницу пользователя 
                 }
                 else

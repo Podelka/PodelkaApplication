@@ -141,7 +141,7 @@ namespace Podelka.Controllers
             }
 
             var sectionDbModel = new List<SectionDbModel>();
-            var defaultSection = new SectionDbModel(0, "Выберите раздел мастерской");
+            var defaultSection = new SectionDbModel(0, "--Выберите--");
             sectionDbModel.Add(defaultSection);
             foreach (var item in sectionsDb)
             {

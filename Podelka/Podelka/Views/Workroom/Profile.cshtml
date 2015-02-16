@@ -3,28 +3,28 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 @model Podelka.Models.WorkroomProfileModel
-    <div class="profileView clearfix">
-        <div class="center">
-            <div class="leftSidebar">
-@{
-    string mapPath = HttpContext.Current.Server.MapPath("/Files");
-    bool isWorkroomImage = File.Exists(@"" + mapPath + "\\Workrooms\\" + @Model.WorkroomId + "-workroom.jpg");
-}
-                @if (isWorkroomImage)
-                {
+<div class="profileView clearfix">
+    <div class="center">
+        <div class="leftSidebar">
+            @{
+                string mapPath = HttpContext.Current.Server.MapPath("/Files");
+                bool isWorkroomImage = File.Exists(@"" + mapPath + "\\Workrooms\\" + @Model.WorkroomId + "-workroom.jpg");
+            }
+            @if (isWorkroomImage)
+            {
                 <img class="sbAvater" src='~/Files/Workrooms/@Model.WorkroomId-workroom.jpg'>
-                }
-                else
-                {
+            }
+            else
+            {
                 <img class="sbAvater" src='~/Content/img/image-workroom.jpg'>
-                }
-                <span class="sbMakerAfter">Мастерская</span>
-                <h3 class="sbName">@Model.Name</h3>
-@Html.Partial("_InfoWorkroomGuest", Model)
-            </div>
-            <div class="rightContent">
-                <div id ="rightMenu" class="rightMenu">
-                    <ul>
+            }
+            <span class="sbMakerAfter">Мастерская</span>
+            <h3 class="sbName">@Model.Name</h3>
+            @Html.Partial("_InfoWorkroomGuest", Model)
+        </div>
+        <div class="rightContent">
+            <div id ="rightMenu" class="rightMenu">
+                <ul>
                     @if (ViewBag.Menu == null || ViewBag.Menu == "Products")
                     {
                         <li id="products" class="active">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_products({0});", Model.WorkroomId) })</li>
@@ -35,9 +35,13 @@
                         <li id="products">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_products({0});", Model.WorkroomId) })</li>
                         <li id="reviews" class="active">@Ajax.ActionLink("Отзывы", "Reviews", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_reviews({0});", Model.WorkroomId) })</li>
                     }
-                    </ul>
+                </ul>
+                <div class="productViewButton">
+                    <img src="~/Content/img/icon/three-view.png" title="Три товара в ряд" onclick="Preview3()">
+                    <img src="~/Content/img/icon/four-view.png" title="Четыре товара в ряд" onclick="Preview4()">
                 </div>
-                <div id="rightBody" class="rightBody">
+            </div>
+            <div id="rightBody" class="rightBody clearfix">
                 @if (ViewBag.Menu == null || ViewBag.Menu == "Products")
                 {
                     @Html.Action("Products", "Workroom", new { id = Model.WorkroomId })
@@ -46,13 +50,13 @@
                 {
                     @Html.Action("Reviews", "Workroom", new { id = Model.WorkroomId })
                 }
-                </div>
             </div>
         </div>
     </div>
+</div>
 @section Scripts
 {
-    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"> </script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
     <script>
         function active_menu_products(WorkroomId)
         {

@@ -3,77 +3,77 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 @model Podelka.Models.UserProfileModel
-    <div class="profileView clearfix">
-        <div class="center">
-            <div class="leftSidebar">
-@{
-    string mapPath = HttpContext.Current.Server.MapPath("/Files");
-    bool isUserImage = File.Exists(@"" + mapPath + "\\Users\\" + @Model.UserId + "-avatar.jpg");
-}
-                @if (isUserImage)
-                {
+<div class="profileView clearfix">
+    <div class="center">
+        <div class="leftSidebar">
+            @{
+                string mapPath = HttpContext.Current.Server.MapPath("/Files");
+                bool isUserImage = File.Exists(@"" + mapPath + "\\Users\\" + @Model.UserId + "-avatar.jpg");
+            }
+            @if (isUserImage)
+            {
                 <img class="sbAvater" src='~/Files/Users/@Model.UserId-avatar.jpg'>
-                }
-                else
-                {
+            }
+            else
+            {
                 <img class="sbAvater" src='~/Content/img/user-avatar.jpg'>
-                }
-                <h3 class="sbName">@Model.FirstName @Model.SecondName</h3>
-                <p class="uLabel">(это Вы)</p>
-@Html.Partial("_ContactsUserPersonal", Model)
-                <div class="profileButton clearfix">
-                    @Html.ActionLink("Открыть мастерскую", "Create", "Workroom", null, new { @class = "mailMakers creatWorkroom" })
-                </div>
-                <div class="profileButton exitButton clearfix">
-                    <div class="mailSquare"><div class="imageExit imageSquare"></div></div>
-                    @Html.ActionLink("Выйти", "LogOff", "Account", null, new { @class = "mailMakers" })
-                </div>
+            }
+            <h3 class="sbName">@Model.FirstName @Model.SecondName</h3>
+            <p class="uLabel">(это Вы)</p>
+            @Html.Partial("_ContactsUserPersonal", Model)
+            <div class="profileButton clearfix">
+                @Html.ActionLink("Открыть мастерскую", "Create", "Workroom", null, new { @class = "mailMakers creatWorkroom" })
             </div>
-            <div class="rightContent">
-                <div id="rightMenu"class="rightMenu">
-                    <ul>
-                        @if (ViewBag.Menu == null || ViewBag.Menu == "Workrooms")
-                        {
+            <div class="profileButton exitButton clearfix">
+                <div class="mailSquare"><div class="imageExit imageSquare"></div></div>
+                @Html.ActionLink("Выйти", "LogOff", "Account", null, new { @class = "mailMakers" })
+            </div>
+        </div>
+        <div class="rightContent">
+            <div id="rightMenu"class="rightMenu">
+                <ul>
+                    @if (ViewBag.Menu == null || ViewBag.Menu == "Workrooms")
+                    {
                         <li id="workrooms" class="active">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_workrooms({0});", Model.UserId) })</li>
                         <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_adverts({0});", Model.UserId) })</li>
                         <li id="bookmarks">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_bookmarks({0});", Model.UserId) })</li>
+                    }
+                    else
+                    {
+                        <li id="workrooms">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_workrooms({0});", Model.UserId) })</li>
+                        if (ViewBag.Menu == "Adverts")
+                        {
+                            <li id="adverts" class="active">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_adverts({0});", Model.UserId) })</li>
+                            <li id="bookmarks">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_bookmarks({0});", Model.UserId) })</li>
                         }
                         else
                         {
-                        <li id="workrooms">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_workrooms({0});", Model.UserId) })</li>
-                            if (ViewBag.Menu == "Adverts")
-                            {
-                        <li id="adverts" class="active">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_adverts({0});", Model.UserId) })</li>
-                        <li id="bookmarks">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_bookmarks({0});", Model.UserId) })</li>
-                            }
-                            else
-                            {
-                        <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_adverts({0});", Model.UserId) })</li>
-                        <li id="bookmarks" class="active">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_bookmarks({0});", Model.UserId) })</li>
-                            }
+                            <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_adverts({0});", Model.UserId) })</li>
+                            <li id="bookmarks" class="active">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_bookmarks({0});", Model.UserId) })</li>
                         }
-                    </ul>
-                </div>
-                <div id="rightBody" class="rightBody">
-                    @if (ViewBag.Menu == null || ViewBag.Menu == "Workrooms")
-                    {
-                        @Html.Action("Workrooms", "User", new { id = Model.UserId })
                     }
-                    @if (ViewBag.Menu == "Adverts")
-                    {
-                        @Html.Action("Adverts", "User")
-                    }
-                    @if (ViewBag.Menu == "Bookmarks")
-                    {
-                        @Html.Action("Bookmarks", "User")
-                    }
-                </div>
+                </ul>
+            </div>
+            <div id="rightBody" class="rightBody">
+                @if (ViewBag.Menu == null || ViewBag.Menu == "Workrooms")
+                {
+                    @Html.Action("Workrooms", "User", new { id = Model.UserId })
+                }
+                @if (ViewBag.Menu == "Adverts")
+                {
+                    @Html.Action("Adverts", "User")
+                }
+                @if (ViewBag.Menu == "Bookmarks")
+                {
+                    @Html.Action("Bookmarks", "User")
+                }
             </div>
         </div>
     </div>
+</div>
 @section Scripts
 {
-    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"> </script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
     <script>
         function active_menu_workrooms(UserId)
         {

@@ -154,8 +154,8 @@ namespace Podelka.Models
         public byte SelectedStatusReady { get; set; }
         public ICollection<StatusReadyProductDbModel> StatusReady { get; set; }
 
-        [Required(ErrorMessage = "Пожалуйста, выберите {0}")]
-        [Display(Name = "Половой признак")]
+        //[Required(ErrorMessage = "Пожалуйста, выберите {0}")]  Т.к. половой признак добавляется не к каждому товару, то Required нельзя применять к SelectedGenderType
+        //[Display(Name = "Половой признак")]
         public byte? SelectedGenderType { get; set; }
         public ICollection<GenderTypeDbModel> GenderTypes { get; set; }
 
