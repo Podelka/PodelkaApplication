@@ -3,8 +3,8 @@
 {
     foreach (var item in Model)
     {
-        <a href="@Url.Action("Profile", "Product", new { id = item.ProductId })">
-            <div id="workElement" class="workElement fourElement clearfix">
+        <div id="workElement" class="workElement fourElement clearfix">
+            <a href="@Url.Action("Profile", "Product", new { id = item.ProductId })">
                 @{
                     string mapPath = HttpContext.Current.Server.MapPath("/Files");
                     bool isProductImage = File.Exists(@"" + mapPath + "\\Products\\" + item.ProductId + "-product.profile.jpg");
@@ -17,7 +17,7 @@
                 {
                     <img src="~/Content/img/product.image.jpg" />
                 }
-                <div id="workInfo" class="workInfo fourElement">
+                <span id="workInfo" class="workInfo fourElement">
                     <h3>@item.Name</h3>
                     @if (item.Price != null)
                     {
@@ -29,12 +29,16 @@
                         <p class="workPrice">цена договорная</p>
                     }
                     @*<i class="fa fa-star-o">@Ajax.ActionLink(" ", "Favorite", "Product", new { id = item.ProductId }, new AjaxOptions { }, new { @class = "smallButton" })</i>*@
-                    <a class="likeButton" data-ajax="true" href="@Url.Action("Favorite", "Product", new { id = item.ProductId })">
-                        <i class="fa fa-star-o"></i>
-                    </a>
-                </div>
-            </div>
-        </a>
+                    
+                </span>
+                <span class="viewBanner">
+                    <i class="fa fa-eye"></i>
+                </span>
+            </a>
+            <a class="likeButton" data-ajax="true" href="@Url.Action("Favorite", "Product", new { id = item.ProductId })">
+                <i class="fa fa-star-o"></i>
+            </a>
+        </div>  
     }
 }
 
