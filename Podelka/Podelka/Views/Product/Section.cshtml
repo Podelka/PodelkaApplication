@@ -4,23 +4,34 @@
 }
 @model ICollection<Podelka.Models.ProductPreviewModel>
     <div class="profileView clearfix">
-        <div id ="rightBody" class="center">
+        <div id="rightBody" class="center">
             <div class="rightContent">
-@Html.Partial("_ProductPreview", Model)
+                <div id="rightMenu" class="rightMenu">
+                    <ul></ul>
+                    <div class="productViewButton">
+                        <img src="~/Content/img/icon/three-view.png" title="Три товара в ряд" onclick="Preview3()">
+                        <img src="~/Content/img/icon/four-view.png" title="Четыре товара в ряд" onclick="Preview4()">
+                    </div>
+                </div>
+                <div id="rightBody" class="rightBody clearfix">
+                    @Html.Partial("_ProductPreview", Model)
+                </div>
             </div>
         </div>
     </div>
 @section Scripts
 {
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
     <script>
-    function Preview3()
-    {
-        $('#rightBody #div-one').removeClass('fourElement');
-        $('#rightBody #div-two').removeClass('fourElement');
-    };
-    function Preview4() {
-        $('#rightBody #div-one').addClass('fourElement');
-        $('#rightBody #div-two').addClass('fourElement');
-    };
+        function Preview3()
+        {
+            $('#rightBody #workElement').removeClass('fourElement');
+            $('#rightBody #workInfo').removeClass('fourElement');
+        };
+        function Preview4()
+        {
+            $('#rightBody #workElement').addClass('fourElement');
+            $('#rightBody #workInfo').addClass('fourElement');
+        };
     </script>
 }

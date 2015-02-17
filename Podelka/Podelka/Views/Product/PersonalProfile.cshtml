@@ -3,60 +3,61 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 @model Podelka.Models.ProductProfileModel
-@section MetaKeywords {
+@section MetaKeywords
+{
     <meta name="keywords" content="@Model.KeyWords">
 }
-    <div class="profileView clearfix">
-        <div class="center">
-            <div class="leftSidebar">
-@{
-    string mapPath = HttpContext.Current.Server.MapPath("/Files");
-    bool isWorkroomImage = File.Exists(@"" + mapPath + "\\Workrooms\\" + @Model.WorkroomId + "-workroom.jpg");
-}
-                @if (isWorkroomImage)
-                {
+<div class="profileView clearfix">
+    <div class="center">
+        <div class="leftSidebar">
+            @{
+                string mapPath = HttpContext.Current.Server.MapPath("/Files");
+                bool isWorkroomImage = File.Exists(@"" + mapPath + "\\Workrooms\\" + @Model.WorkroomId + "-workroom.jpg");
+            }
+            @if (isWorkroomImage)
+            {
                 <img class="sbAvater" src='~/Files/Workrooms/@Model.WorkroomId-workroom.jpg'>
-                }
-                else
-                {
+            }
+            else
+            {
                 <img class="sbAvater" src='~/Content/img/image-workroom.jpg'>
-                }
-                <span class="sbMakerAfter">Мастерская</span>
-                <h3 class="sbName">@Html.ActionLink("" + Model.Workroom.Name + "", "Profile", "Workroom", new { id = Model.WorkroomId }, null)</h3>
-@Html.Partial("_InfoWorkroomPersonal", Model.Workroom)
-            </div>
-            <div class="rightContent productBody clearfix">
-                <div class="productContent">
-                    <span class="breadcrumbs">@Html.ActionLink(Model.SectionName, "Section", "Product", new { id = Model.SectionId }, null) / @Model.CategoryName / @Model.Name</span>
-                    <h1>@Model.Name</h1>
-                    <div class="productInfo">
-                        <img src="~/Content/img/500x350.gif">
-                        <div class="productText">
-                            @if (Model.Price != null) 
-                            {
-                                @*@{
-                                    string str = @"(/(\d)(?=(\d\d\d)+([^\d]|$))/g)";
-                                    Price.Replace(str, "$1 ");
-                                }*@
-                                double Price = (double)Model.Price;
-                                <strong>Цена:</strong> @Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) @:руб<br />
-                            }
-                            <strong>Состояние:</strong> @Model.StatusReady<br />
-                            @if(Model.Gender != null)
-                            { 
-                                <strong>Пол:</strong> @Model.Gender
-                            }
-                            <hr class="dashedHr" />
-                            <div class="productDescript">
-                                @Model.Description
-                            </div>
-                            <hr class="dashedHr" />
-                            <strong>Материалы:</strong> @Model.Materials<br />
-                            <strong>Габариты:</strong> @Model.Size см<br />
-                            <strong>Масса:</strong> @Model.Weight г<br />
+            }
+            <span class="sbMakerAfter">Мастерская</span>
+            <h3 class="sbName">@Html.ActionLink("" + Model.Workroom.Name + "", "Profile", "Workroom", new { id = Model.WorkroomId }, null)</h3>
+            @Html.Partial("_InfoWorkroomPersonal", Model.Workroom)
+        </div>
+        <div class="rightContent productBody clearfix">
+            <div class="productContent">
+                <span class="breadcrumbs">@Html.ActionLink(Model.SectionName, "Section", "Product", new { id = Model.SectionId }, null) / @Model.CategoryName / @Model.Name</span>
+                <h1>@Model.Name</h1>
+                <div class="productInfo">
+                    <img src="~/Content/img/500x350.gif">
+                    <div class="productText">
+                        @if (Model.Price != null) 
+                        {
+                            @*@{
+                                string str = @"(/(\d)(?=(\d\d\d)+([^\d]|$))/g)";
+                                Price.Replace(str, "$1 ");
+                            }*@
+                            double Price = (double)Model.Price;
+                            <strong>Цена:</strong> @Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) @:руб<br />
+                        }
+                        <strong>Состояние:</strong> @Model.StatusReady<br />
+                        @if (Model.Gender != null)
+                        {
+                            <strong>Пол:</strong> @Model.Gender
+                        }
+                        <hr class="dashedHr" />
+                        <div class="productDescript">
+                            @Model.Description
                         </div>
+                        <hr class="dashedHr" />
+                        <strong>Материалы:</strong> @Model.Materials<br />
+                        <strong>Габариты:</strong> @Model.Size см<br />
+                        <strong>Масса:</strong> @Model.Weight г<br />
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

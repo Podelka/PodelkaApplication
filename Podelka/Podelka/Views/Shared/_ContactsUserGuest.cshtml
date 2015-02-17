@@ -1,14 +1,14 @@
 ﻿@model Podelka.Models.UserProfileModel
 @if (Model.City != null)
 {
-                <p class="sbCity"><img src="~/Content/img/icon/map.png">@Model.City</p>
+    <p class="sbCity"><img src="~/Content/img/icon/map.png">@Model.City</p>
 }
 @if (Model.Phone != null || Model.PersonalWebsite != null || Model.SocialNetwork != null || Model.Skype != null)
 {
-                <p class="hrText"><span>Контакты</span></p>
+    <p class="hrText"><span>Контакты</span></p>
     if (Model.Phone != null)
     {
-                <div class="sbPhone">@Model.Phone</div> @*<p class="sbPhone">+375 29 666-55-44<br />+375 44 222-22-21<br />+375 33 654-98-98</p>*@
+        <div class="sbPhone">@Model.Phone</div>@*<p class="sbPhone">+375 29 666-55-44<br />+375 44 222-22-21<br />+375 33 654-98-98</p>*@
     }
     if (Model.PersonalWebsite != null)
     {
@@ -28,7 +28,7 @@
                 personalWebsite = Model.PersonalWebsite;
             }
         }
-                <div class="sbSite"><i class="fa fa-globe fa-pr fa-fw"></i><a href="@Model.PersonalWebsite">@personalWebsite</a></div>
+        <div class="sbSite"><i class="fa fa-globe fa-pr fa-fw"></i><a href="@Model.PersonalWebsite">@personalWebsite</a></div>
     }
     if (Model.SocialNetwork != null)
     {
@@ -43,20 +43,20 @@
             {
                 socialNetwork = Model.SocialNetwork.Replace("https://", String.Empty);
             }
-            else 
-            { 
-                socialNetwork = Model.SocialNetwork; 
+            else
+            {
+                socialNetwork = Model.SocialNetwork;
             }
         }
-                <div class="sbSocial"><i class="fa fa-users fa-pr fa-fw"></i><a href="@Model.SocialNetwork">@socialNetwork</a></div>
+        <div class="sbSocial"><i class="fa fa-users fa-pr fa-fw"></i><a href="@Model.SocialNetwork">@socialNetwork</a></div>
     }
     if (Model.Skype != null)
     {
-                <div class="sbSkype"><i class="fa fa-skype fa-pr fa-fw"></i><a href="skype:@Model.Skype?call">@Model.Skype</a></div>
+        <div class="sbSkype"><i class="fa fa-skype fa-pr fa-fw"></i><a href="skype:@Model.Skype?call">@Model.Skype</a></div>
     }
 }
-                <hr class="dashedHr" />
-                <div class="profileButton clearfix">
-                    <div class="mailSquare"><div class="imageSquare"></div></div>
-                    <a class="mailMakers" href="mailto:@Model.Email">Написать письмо</a>
-                </div>
+<hr class="dashedHr" />
+<div class="profileButton clearfix">
+    <div class="mailSquare"><div class="imageSquare"></div></div>
+    <a class="mailMakers" href="mailto:@Model.Email">Написать письмо</a>
+</div>

@@ -1,6 +1,6 @@
-﻿/* ------------------------------------- 
+﻿/*-------------------------------------
     JCrop customization
----------------------------------------- */
+----------------------------------------*/
 
 #preview-pane {
     position: absolute;
@@ -12,8 +12,8 @@
 
 #preview-pane .preview-container {
     overflow: hidden;
-    width: 300px;  /* ToDo - size of the crop window*/
-    height: 300px; /* ToDo - size of the crop window*/
+    width: 300px;/* ToDo - size of the crop window*/
+    height: 300px;/* ToDo - size of the crop window*/
 }
 
 .upload-progress {
@@ -34,7 +34,7 @@
     float: left !important;
 }
 
-/* -------------------------------------*/ 
+/* -------------------------------------*/
 .pull-left {
   float: left !important;
 }

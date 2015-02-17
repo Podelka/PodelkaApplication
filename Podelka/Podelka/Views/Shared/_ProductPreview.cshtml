@@ -4,36 +4,37 @@
     foreach (var item in Model)
     {
         <a href="@Url.Action("Profile", "Product", new { id = item.ProductId })">
-        <div id="workElement" class="workElement fourElement clearfix">
-        @{
-            string mapPath = HttpContext.Current.Server.MapPath("/Files");
-            bool isProductImage = File.Exists(@"" + mapPath + "\\Products\\" + item.ProductId + "-product.profile.jpg");
-        }
-                        @if (isProductImage)
-                        {
-                        <img src='~/Files/Products/@item.ProductId-product.profile.jpg'>
-                        }
-                        else
-                        {
-                        <img src="~/Content/img/280x280.gif" />
-                        }
-                        <div id="workInfo" class="workInfo fourElement">
-                            <h3>@item.Name</h3>
-                            @if (item.Price != null)
-                            {
-                            double Price = (double)item.Price;
-                            <p class="workPrice">@Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) руб</p>
-                            }
-                            @*<a class="smallButton" href="@Url.Action("Favorite", "Product", new { id = item.ProductId })">
-                                <i class="fa fa-star-o"></i>
-                            </a>*@
-                            @*<i class="fa fa-star-o">@Ajax.ActionLink(" ", "Favorite", "Product", new { id = item.ProductId }, new AjaxOptions { }, new { @class = "smallButton" })</i>*@
-                            <a class="likeButton" data-ajax="true" href="@Url.Action("Favorite", "Product", new { id = item.ProductId })" >
-                                <i class="fa fa-star-o"></i>
-                            </a>
-                        </div>
-                    </div>
+            <div id="workElement" class="workElement fourElement clearfix">
+                @{
+                    string mapPath = HttpContext.Current.Server.MapPath("/Files");
+                    bool isProductImage = File.Exists(@"" + mapPath + "\\Products\\" + item.ProductId + "-product.profile.jpg");
+                }
+                @if (isProductImage)
+                {
+                    <img src='~/Files/Products/@item.ProductId-product.profile.jpg'>
+                }
+                else
+                {
+                    <img src="~/Content/img/product.image.jpg" />
+                }
+                <div id="workInfo" class="workInfo fourElement">
+                    <h3>@item.Name</h3>
+                    @if (item.Price != null)
+                    {
+                        double Price = (double)item.Price;
+                        <p class="workPrice">@Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) руб</p>
+                    }
+                    else
+                    {
+                        <p class="workPrice">цена договорная</p>
+                    }
+                    @*<i class="fa fa-star-o">@Ajax.ActionLink(" ", "Favorite", "Product", new { id = item.ProductId }, new AjaxOptions { }, new { @class = "smallButton" })</i>*@
+                    <a class="likeButton" data-ajax="true" href="@Url.Action("Favorite", "Product", new { id = item.ProductId })">
+                        <i class="fa fa-star-o"></i>
                     </a>
+                </div>
+            </div>
+        </a>
     }
 }
 

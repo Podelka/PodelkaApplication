@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="~/Content/css/login.css">
     <link rel="stylesheet" href="~/Content/css/font-awesome.css">
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-    @Scripts.Render("~/bundles/jqueryMin_main")@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>*@@*<script src="~/Scripts/main.js" type="text/javascript"></script>*@
+    @Scripts.Render("~/bundles/jqueryMin_main")
     @Scripts.Render("~/bundles/jqueryValidate")
 </head>
 <body>
@@ -24,15 +24,16 @@
         <div id="regForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
             {
-                <label for="state">State:</label>
+                @*<label for="state">State:</label>
                 <input type="text" name="state" id="state" list="state_list">
                 <datalist id="state_list">
-                    <option>Алабама</option>
-                    <option>Аляска</option>
-                    <option>Аризона</option>
-                    <option>Арканзас</option>
-                    <!-- и т.д. -->
-                </datalist>
+                    <option>Витебск</option>
+                    <option>Могилев</option>
+                    <option>Гомель</option>
+                    <option>Брест</option>
+                    <option>Гродно</option>
+                    <option>Минск</option>
+                </datalist>*@
                 @Html.AntiForgeryToken()
                 <p class="input-data">Введите данные для авторизации:</p>
                 @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })

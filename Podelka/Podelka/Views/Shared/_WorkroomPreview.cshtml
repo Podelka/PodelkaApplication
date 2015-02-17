@@ -3,77 +3,77 @@
 {
     foreach (var item in Model)
     {
-                    <div class="workroomPreview">
-@{
-    string mapPath = HttpContext.Current.Server.MapPath("/Files");
-    bool isWorkroomImage = File.Exists(@"" + mapPath + "\\Workrooms\\" + @item.WorkroomId + "-workroom.small.jpg");
-}
-                        @if (isWorkroomImage)
+        <div class="workroomPreview">
+            @{
+                string mapPath = HttpContext.Current.Server.MapPath("/Files");
+                bool isWorkroomImage = File.Exists(@"" + mapPath + "\\Workrooms\\" + @item.WorkroomId + "-workroom.small.jpg");
+            }
+            @if (isWorkroomImage)
+            {
+                <img class="sbAvater" src='~/Files/Workrooms/@item.WorkroomId-workroom.small.jpg'>
+            }
+            else
+            {
+                <img class="sbAvater" src='~/Content/img/image-workroom.small.jpg'>
+            }
+            <div class="workroomInfo">
+                <h3>@item.Name</h3>
+                <div class="rating">
+                    <div class="ratingUp"></div><span class="up">@item.CountGood</span>
+                    <div class="ratingMiddle"></div><span class="middle">@item.CountMedium</span>
+                    <div class="ratingDown"></div><span class="down">@item.CountBad</span>
+                </div>
+                @if (item.ViewType == 1)
+                {
+                    <a class="smallButton mail" href="mailto:@item.Email"></a>
+                    @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
+                    @Html.ActionLink(" ", "Profile", "User", new { id = item.UserId }, new { @class = "smallButton profile" })
+                }
+                @if (item.ViewType == 2)
+                {
+                    @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
+                    @Html.ActionLink(" ", "Profile", "User", new { id = item.UserId }, new { @class = "smallButton profile" })
+                }
+                @if (item.ViewType == 3)
+                {
+                    <a class="smallButton mail" href="mailto:@item.Email"></a>
+                    @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
+                }
+                @if (item.ViewType == 4)
+                {
+                    @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
+                }
+                <input type="button" class="bigButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
+                <p>@item.Description</p>
+                @if (item.LastProducts != null && item.LastProducts.Any())
+                {
+                    <h4>Последние изделия:</h4>
+                    <div class="lastProduct">
+                        @foreach (var product in item.LastProducts)
                         {
-                        <img class="sbAvater" src='~/Files/Workrooms/@item.WorkroomId-workroom.small.jpg'>
-                        }
-                        else
-                        {
-                        <img class="sbAvater" src='~/Content/img/image-workroom.small.jpg'>
-                        }
-                        <div class="workroomInfo">
-                            <h3>@item.Name</h3>
-                            <div class="rating">
-                                <div class="ratingUp"></div><span class="up">@item.CountGood</span>
-                                <div class="ratingMiddle"></div><span class="middle">@item.CountMedium</span>
-                                <div class="ratingDown"></div><span class="down">@item.CountBad</span>
-                            </div>
-@if (item.ViewType == 1)
-{ 
-                            <a class="smallButton mail" href="mailto:@item.Email"></a>
-                            @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
-                            @Html.ActionLink(" ", "Profile", "User", new { id = item.UserId }, new { @class = "smallButton profile" })
-}
-@if (item.ViewType == 2)
-{
-                            @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
-                            @Html.ActionLink(" ", "Profile", "User", new { id = item.UserId }, new { @class = "smallButton profile" })
-}
-@if (item.ViewType == 3)
-{
-                            <a class="smallButton mail" href="mailto:@item.Email"></a>
-                            @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
-}
-@if (item.ViewType == 4)
-{
-                            @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
-}
-                            <input type="button" class="bigButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
-                            <p>@item.Description</p>
-                            @if (item.LastProducts != null && item.LastProducts.Any())
-                            { 
-                            <h4>Последние изделия:</h4>
-                            <div class="lastProduct">
-                                @foreach (var product in item.LastProducts)
-                                {
-                                <a href="@Url.Action("Profile", "Product", new { id = product.ProductId})">
-@{
-    string mapPath2 = HttpContext.Current.Server.MapPath("/Files");
-    bool isProductImage = File.Exists(@"" + mapPath2 + "\\Products\\" + product.ProductId + "-product.profile.small.jpg");
-}
-                                    @if (isProductImage)
-                                    {
-                                    <img src='~/Files/Products/@product.ProductId-product.profile.small.jpg' title="@product.Name" />
-                                    }
-                                    else
-                                    {
-                                    <img src="@Url.Content("~/Content/img/90x90.gif")" title="@product.Name" />
-                                    }
-                                </a>
+                            <a href="@Url.Action("Profile", "Product", new { id = product.ProductId})">
+                                @{
+                                    string mapPath2 = HttpContext.Current.Server.MapPath("/Files");
+                                    bool isProductImage = File.Exists(@"" + mapPath2 + "\\Products\\" + product.ProductId + "-product.profile.small.jpg");
                                 }
-                            </div>
-                            }
-                            else
-                            {
-                            <h4>Последние изделия:</h4>
-                            <h4 class="noneElement">Изделия отсутсвуют</h4>
-                            }
-                        </div>
+                                @if (isProductImage)
+                                {
+                                    <img src='~/Files/Products/@product.ProductId-product.profile.small.jpg' title="@product.Name" />
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content("~/Content/img/product.image.small.jpg")" title="@product.Name" />
+                                }
+                            </a>
+                        }
                     </div>
+                }
+                else
+                {
+                    <h4>Последние изделия:</h4>
+                    <h4 class="noneElement">Изделия отсутсвуют</h4>
+                }
+            </div>
+        </div>
     }
 }

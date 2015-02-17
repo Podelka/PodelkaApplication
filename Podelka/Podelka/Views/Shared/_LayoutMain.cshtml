@@ -11,7 +11,7 @@
     <link href="@Url.Content("~/Content/css/IMAGE.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/css/jquery.Jcrop.css")" rel="stylesheet" />
 
-    @Scripts.Render("~/bundles/jqueryMin_main")@*<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>*@@*<script src="~/Scripts/main.js" type="text/javascript"></script>*@
+    @Scripts.Render("~/bundles/jqueryMin_main")
 </head>
 <body>
     <div class="menuMain">
@@ -53,13 +53,13 @@
                     <div class="wrap_element">
                         @if (Request.IsAuthenticated)
                         {
-                        <span>Личный профиль</span>
-                        @Html.ActionLink(" ", "Profile", "User", new { id = Convert.ToInt64((Html.Action("GetUserId", "Account")).ToString()) }, new { @class = "logIn" })
+                            <span>Личный профиль</span>
+                            @Html.ActionLink(" ", "Profile", "User", new { id = Convert.ToInt64((Html.Action("GetUserId", "Account")).ToString()) }, new { @class = "logIn" })
                         }
                         else
                         {
-                        <span>Войти на сайт</span>
-                        @Html.ActionLink(" ", "Login", "Account", new { returnUrl = Request.RawUrl }, new { @class = "logIn" })
+                            <span>Войти на сайт</span>
+                            @Html.ActionLink(" ", "Login", "Account", new { returnUrl = Request.RawUrl }, new { @class = "logIn" })
                         }
                     </div>
                     <div class="findLine">
@@ -94,10 +94,10 @@
             </div>
             <div class="footerRight">
                 © 2015 Поделка | podelka.by<br />
-                Обратная связь: <a href="#">info@podelka.by</a>
+                Обратная связь: <a href="mailto:info@podelka.by">info@podelka.by</a>
             </div>
         </div>
     </footer>
-    @RenderSection("scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -371,10 +371,10 @@ namespace Podelka.Controllers
                 var fn = Path.Combine(Server.MapPath("~/Temp"), Path.GetFileName(fileName));
 
                 // Calculate dimesnions
-                int top = Convert.ToInt32(t.Replace("-", "").Replace("px", ""));
-                int left = Convert.ToInt32(l.Replace("-", "").Replace("px", ""));
-                int height = Convert.ToInt32(h.Replace("-", "").Replace("px", ""));
-                int width = Convert.ToInt32(w.Replace("-", "").Replace("px", ""));
+                int top = Convert.ToInt32(t.Replace("-", String.Empty).Replace("px", String.Empty));
+                int left = Convert.ToInt32(l.Replace("-", String.Empty).Replace("px", String.Empty));
+                int height = Convert.ToInt32(h.Replace("-", String.Empty).Replace("px", String.Empty));
+                int width = Convert.ToInt32(w.Replace("-", String.Empty).Replace("px", String.Empty));
 
                 // Get image and resize it, ...
                 var img = new WebImage(fn);
