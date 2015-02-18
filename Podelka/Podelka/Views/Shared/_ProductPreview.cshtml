@@ -28,17 +28,16 @@
                     {
                         <p class="workPrice">цена договорная</p>
                     }
-                    @*<i class="fa fa-star-o">@Ajax.ActionLink(" ", "Favorite", "Product", new { id = item.ProductId }, new AjaxOptions { }, new { @class = "smallButton" })</i>*@
-                    
                 </span>
                 <span class="viewBanner">
                     <i class="fa fa-eye"></i>
                 </span>
             </a>
+            @*<i class="fa fa-star-o">@Ajax.ActionLink(" ", "Favorite", "Product", new { id = item.ProductId }, new AjaxOptions { }, new { @class = "likeButton" })</i>*@
             <a class="likeButton" data-ajax="true" href="@Url.Action("Favorite", "Product", new { id = item.ProductId })">
                 <i class="fa fa-star-o"></i>
             </a>
-        </div>  
+        </div>
     }
 }
 
