@@ -28,11 +28,13 @@
                     <a class="smallButton mail" href="mailto:@item.Email"></a>
                     @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
                     @Html.ActionLink(" ", "Profile", "User", new { id = item.UserId }, new { @class = "smallButton profile" })
+    <input type="button" class="bigButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
                 }
                 @if (item.ViewType == 2)
                 {
                     @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
                     @Html.ActionLink(" ", "Profile", "User", new { id = item.UserId }, new { @class = "smallButton profile" })
+                    <input type="button" class="bigButton twoButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
                 }
                 @if (item.ViewType == 3)
                 {
@@ -42,8 +44,9 @@
                 @if (item.ViewType == 4)
                 {
                     @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
+                    <input type="button" class="bigButton oneButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
                 }
-                <input type="button" class="bigButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
+                
                 <p>@item.Description</p>
                 @if (item.LastProducts != null && item.LastProducts.Any())
                 {
@@ -51,7 +54,7 @@
                     <div class="lastProduct">
                         @foreach (var product in item.LastProducts)
                         {
-                            <a href="@Url.Action("Profile", "Product", new { id = product.ProductId})">
+                            <a class="lastProductElement" href="@Url.Action("Profile", "Product", new { id = product.ProductId})">
                                 @{
                                     string mapPath2 = HttpContext.Current.Server.MapPath("/Files");
                                     bool isProductImage = File.Exists(@"" + mapPath2 + "\\Products\\" + product.ProductId + "-product.profile.small.jpg");
@@ -64,6 +67,9 @@
                                 {
                                     <img src="@Url.Content("~/Content/img/product.image.small.jpg")" title="@product.Name" />
                                 }
+                                <div class="lastProductView">
+                                    <i class="fa fa-eye"></i>
+                                </div>
                             </a>
                         }
                     </div>

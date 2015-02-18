@@ -545,6 +545,7 @@ p.uLabel {
     padding: 10px;
     width: 260px;
     display: block;
+    font-size: .9em;
 }
 .workElement img {
     margin-right: 20px;
@@ -555,13 +556,11 @@ p.uLabel {
 .workElement h3 {
     margin: 0;
     color: #3a3a3a;
-    font-size: 14px;
     text-align: center;
     font-weight: 100;
 }
 .workElement p.workPrice {
 	margin: 0;
-    font-size: 14px;
     text-align: center;
     color: #0a0a0a;
     font-weight: bold;
@@ -587,7 +586,7 @@ p.uLabel {
     display: block;
 }
 .workInfo.fourElement h3, .workInfo.fourElement p {
-    font-size: 12px;
+    font-size: .9em;
     margin: 0px;
 }
 .workInfo.fourElement p {
@@ -887,29 +886,53 @@ footer a:hover {
     font-size: 14px;
     color: #5a5a5a;
     clear: both;
-    padding-left: 10px;
     font-style: italic;
     text-align: justify;
     margin: 0;
     height: 55px;
     overflow: hidden;
-    border-left: 5px solid #fc6060;
+    border-bottom: 1px solid #ececec;
 }
 .workroomPreview .rating {
     text-align: left;
     margin: 0;
     margin-bottom: 10px;
 }
-.lastProduct a > img{
-    width: 90px;
-    height: 90px;
+.lastProductElement {
+    position: relative;
     float: left;
     margin-right: 10px;
     margin-bottom: 0px;
 }
-.lastProduct a:nth-child(4n) > img {
+.lastProductElement img {
+    width: 90px;
+    height: 90px;
+    margin: 0px;
+}
+.lastProductElement:nth-child(4n) {
     margin-right: 0px;
 }
+.lastProductView {
+    background: rgba(30,30,30,.5);
+    color: #4e4e4e;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    transition: .3s;
+    height: 90px;
+    width: 90px;
+}
+.lastProductView i {
+    font-size: 2.6em;
+    margin: 25px;
+    color: #f3f3f3;
+}
+.lastProductElement:hover .lastProductView {
+    opacity: 1;
+   
+}
+
 .smallButton {
     width: 40px;
     height: 40px;
@@ -945,7 +968,12 @@ input.bigButton {
     margin: 0px;
     border-radius: 0px;
 }
-
+input.bigButton.twoButton {
+    width: 180px;
+}
+input.bigButton.oneButton {
+    width: 225px;
+}
 /*--- НОВОЕ ---*/
 .leftSidebar p.content{
     padding: 0px 10px;
