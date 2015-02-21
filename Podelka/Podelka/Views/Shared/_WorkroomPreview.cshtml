@@ -28,7 +28,7 @@
                     <a class="smallButton mail" href="mailto:@item.Email"></a>
                     @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
                     @Html.ActionLink(" ", "Profile", "User", new { id = item.UserId }, new { @class = "smallButton profile" })
-    <input type="button" class="bigButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
+                    <input type="button" class="bigButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
                 }
                 @if (item.ViewType == 2)
                 {
@@ -40,14 +40,23 @@
                 {
                     <a class="smallButton mail" href="mailto:@item.Email"></a>
                     @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
+                    <input type="button" class="bigButton twoButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
                 }
                 @if (item.ViewType == 4)
                 {
                     @Html.ActionLink(" ", "Profile", "Workroom", new { id = item.WorkroomId, menu = "Reviews" }, new { @class = "smallButton review" })
                     <input type="button" class="bigButton oneButton" value=" подробнее" onclick="location.href='@Url.Action("Profile", "Workroom", new { id = item.WorkroomId })'" />
                 }
-                
-                <p>@item.Description</p>
+                @if (item.Description.Length > 150)//159(цифрами) или 183(символами без пробелов) всего влазит
+                {
+                    var reg = @"(.){150}";
+                    string priceMod = System.Text.RegularExpressions.Regex.Match(item.Description, reg).Groups[0].Value + "...";
+                    <p>@priceMod</p>
+                }
+                else
+                {
+                    <p>@item.Description</p>
+                }
                 @if (item.LastProducts != null && item.LastProducts.Any())
                 {
                     <h4>Последние изделия:</h4>

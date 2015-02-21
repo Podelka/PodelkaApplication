@@ -35,12 +35,12 @@
                     <div class="productText">
                         @if (Model.Price != null)
                         {
-                            @*@{
-                                string str = @"(/(\d)(?=(\d\d\d)+([^\d]|$))/g)";
-                                Price.Replace(str, "$1 ");
-                            }*@
-                            double Price = (double)Model.Price;
-                            <strong>Цена:</strong> @Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) @:руб<br />
+                            var reg = new System.Text.RegularExpressions.Regex(@"(\d)(?=(\d\d\d)+(^\d|$))");
+                            string priceReal = Model.Price.ToString();
+                            string priceMod = reg.Replace(priceReal, "$1 ");
+                            <strong>Цена:</strong> @priceMod @:руб<br />
+                            @*double Price = (double)Model.Price;
+                            <strong>Цена:</strong> @Price.ToString("N0", System.Globalization.CultureInfo.CurrentCulture) @:руб<br />*@
                         }
                         <strong>Состояние:</strong> @Model.StatusReady<br />
                         @if (Model.Gender != null)

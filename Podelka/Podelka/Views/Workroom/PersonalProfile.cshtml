@@ -40,8 +40,8 @@
                     }
                 </ul>
                 <div class="productViewButton">
-                    <img src="~/Content/img/icon/three-view.png" title="Три товара в ряд" onclick="Preview3()">
-                    <img src="~/Content/img/icon/four-view.png" title="Четыре товара в ряд" onclick="Preview4()">
+                    <img src="~/Content/img/icon/three-view.png" title="Три товара в ряд" onclick="Preview3()" id="previewProdTheree" />
+                    <img src="~/Content/img/icon/four-view.png" title="Четыре товара в ряд" onclick="Preview4()" id="previewProdFour" />
                 </div>
             </div>
             <div id="rightBody" class="rightBody clearfix">
@@ -80,16 +80,6 @@
             'Продукты мастерской', // new page title
             '/Workroom/Profile/' + WorkroomId + '/Reviews' // new url
             );
-        };
-        function Preview3()
-        {
-            $('#rightBody #workElement').removeClass('fourElement');
-            $('#rightBody #workInfo').removeClass('fourElement');
-        };
-        function Preview4()
-        {
-            $('#rightBody #workElement').addClass('fourElement');
-            $('#rightBody #workInfo').addClass('fourElement');
         };
     </script>
 }

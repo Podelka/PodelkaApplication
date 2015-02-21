@@ -9,8 +9,8 @@
                 <div id="rightMenu" class="rightMenu">
                     <ul></ul>
                     <div class="productViewButton">
-                        <img src="~/Content/img/icon/three-view.png" title="Три товара в ряд" onclick="Preview3()">
-                        <img src="~/Content/img/icon/four-view.png" title="Четыре товара в ряд" onclick="Preview4()">
+                        <img src="~/Content/img/icon/three-view.png" title="Три товара в ряд" onclick="Preview3()" id="previewProdTheree" />
+                        <img src="~/Content/img/icon/four-view.png" title="Четыре товара в ряд" onclick="Preview4()" id="previewProdFour" />
                     </div>
                 </div>
                 <div id="rightBody" class="rightBody clearfix">
@@ -22,16 +22,4 @@
 @section Scripts
 {
     <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-    <script>
-        function Preview3()
-        {
-            $('#rightBody #workElement').removeClass('fourElement');
-            $('#rightBody #workInfo').removeClass('fourElement');
-        };
-        function Preview4()
-        {
-            $('#rightBody #workElement').addClass('fourElement');
-            $('#rightBody #workInfo').addClass('fourElement');
-        };
-    </script>
 }

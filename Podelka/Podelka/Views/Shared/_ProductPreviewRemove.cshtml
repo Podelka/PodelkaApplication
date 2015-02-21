@@ -22,7 +22,7 @@
                     @if (item.Price != null)
                     {
                         double Price = (double)item.Price;
-                        <p class="workPrice">@Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) руб</p>
+                        <p class="workPrice">@Price.ToString("N0", System.Globalization.CultureInfo.CurrentCulture) руб</p>
                     }
                     else
                     {

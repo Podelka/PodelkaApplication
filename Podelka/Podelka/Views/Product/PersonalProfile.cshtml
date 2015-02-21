@@ -33,14 +33,10 @@
                 <div class="productInfo">
                     <img src="~/Content/img/500x350.gif">
                     <div class="productText">
-                        @if (Model.Price != null) 
+                        @if (Model.Price != null)
                         {
-                            @*@{
-                                string str = @"(/(\d)(?=(\d\d\d)+([^\d]|$))/g)";
-                                Price.Replace(str, "$1 ");
-                            }*@
                             double Price = (double)Model.Price;
-                            <strong>Цена:</strong> @Price.ToString("#,#", System.Globalization.CultureInfo.InvariantCulture) @:руб<br />
+                            <strong>Цена:</strong> @Price.ToString("N0", System.Globalization.CultureInfo.CurrentCulture) @:руб<br />
                         }
                         <strong>Состояние:</strong> @Model.StatusReady<br />
                         @if (Model.Gender != null)
