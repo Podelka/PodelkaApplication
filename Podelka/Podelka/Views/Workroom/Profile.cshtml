@@ -12,11 +12,11 @@
             }
             @if (isWorkroomImage)
             {
-                <img class="sbAvater" src='~/Files/Workrooms/@Model.WorkroomId-workroom.jpg'>
+                <img class="sbAvater" src="@Url.Content(String.Format("~/Files/Workrooms/{0}-workroom.jpg", Model.WorkroomId))" alt="" />
             }
             else
             {
-                <img class="sbAvater" src='~/Content/img/image-workroom.jpg'>
+                <img class="sbAvater" src="@Url.Content("~/Content/img/image-workroom.jpg")" alt="" />
             }
             <span class="sbMakerAfter">Мастерская</span>
             <h3 class="sbName">@Model.Name</h3>
@@ -27,18 +27,18 @@
                 <ul>
                     @if (ViewBag.Menu == null || ViewBag.Menu == "Products")
                     {
-                        <li id="products" class="active">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_products({0});", Model.WorkroomId) })</li>
-                        <li id="reviews">@Ajax.ActionLink("Отзывы", "Reviews", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_reviews({0});", Model.WorkroomId) })</li>
+                        <li id="products" class="active">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_products({0});", Model.WorkroomId), OnSuccess = "review()" })</li>
+                        <li id="reviews">@Ajax.ActionLink("Отзывы", "Reviews", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_reviews({0});", Model.WorkroomId) })</li>
                     }
                     else
                     {
-                        <li id="products">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_products({0});", Model.WorkroomId) })</li>
-                        <li id="reviews" class="active">@Ajax.ActionLink("Отзывы", "Reviews", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_reviews({0});", Model.WorkroomId) })</li>
+                        <li id="products">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_products({0});", Model.WorkroomId), OnSuccess = "review()" })</li>
+                        <li id="reviews" class="active">@Ajax.ActionLink("Отзывы", "Reviews", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_reviews({0});", Model.WorkroomId) })</li>
                     }
                 </ul>
                 <div class="productViewButton">
-                    <img src="~/Content/img/icon/three-view.png" title="Три товара в ряд" onclick="Preview3()" id="previewProdTheree" />
-                    <img src="~/Content/img/icon/four-view.png" title="Четыре товара в ряд" onclick="Preview4()" id="previewProdFour" />
+                    <img src="@Url.Content("~/Content/img/icon/three-view.png")" alt="" title="Три товара в ряд" id="previewProdThree" />
+                    <img src="@Url.Content("~/Content/img/icon/four-view.png")" alt="" title="Четыре товара в ряд" id="previewProdFour" />
                 </div>
             </div>
             <div id="rightBody" class="rightBody clearfix">
@@ -56,27 +56,6 @@
 </div>
 @section Scripts
 {
-    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-    <script>
-        function active_menu_products(WorkroomId)
-        {
-            $('#rightMenu li').removeClass('active');
-            $('#products').addClass('active');
-            window.history.pushState(
-            null, // any object, that can be retrieved
-            'Продукты мастерской', // new page title
-            '/Workroom/Profile/' + WorkroomId + '/Products' // new url
-            );
-        };
-        function active_menu_reviews(WorkroomId)
-        {
-            $('#rightMenu li').removeClass('active');
-            $('#reviews').addClass('active');
-            window.history.pushState(
-            null, // any object, that can be retrieved
-            'Продукты мастерской', // new page title
-            '/Workroom/Profile/' + WorkroomId + '/Reviews' // new url
-            );
-        };
-    </script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/generalFunctionsForProfileUW.js")" type="text/javascript"></script>
 }

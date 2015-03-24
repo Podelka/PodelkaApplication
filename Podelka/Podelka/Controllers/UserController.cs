@@ -40,7 +40,20 @@ namespace Podelka.Controllers
 
                 if (user != null)
                 {
-                    var model = new UserProfileModel(user.Id, user.FirstName, user.SecondName, user.Email, user.City, user.Skype, user.SocialNetwork, user.PersonalWebsite, user.Phone, user.DateRegistration);
+                    string mapPath = System.Web.HttpContext.Current.Server.MapPath("/Files");
+                    bool isUserImage = System.IO.File.Exists(@"" + mapPath + "\\Users\\" + user.Id + "-avatar.jpg");
+
+                    string profileImageSrc = String.Empty;
+                    if (isUserImage)
+                    {
+                        profileImageSrc = String.Format("~/Files/Users/{0}-avatar.jpg", user.Id);
+                    }
+                    else
+                    {
+                        profileImageSrc = "~/Content/img/user-avatar.jpg";
+                    }
+
+                    var model = new UserProfileModel(user.Id, user.FirstName, user.SecondName, profileImageSrc, user.Email, user.City, user.Skype, user.SocialNetwork, user.PersonalWebsite, user.Phone, user.DateRegistration);
 
                     var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                     if (userId != 0 && id == userId)

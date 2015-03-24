@@ -117,10 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="RequiredTemplate" xml:space="preserve">
-    <value>Please enter {0}</value>
+  <data name="AgreeRulesMustBeTrue" xml:space="preserve">
+    <value>Вы обязаны согласиться с правилами, чтобы зарегестрироваться</value>
   </data>
-  <data name="RequiredTemplateSpecialForSecondName" xml:space="preserve">
-    <value>Please enter {0}</value>
+  <data name="CityRequired" xml:space="preserve">
+    <value>Пожалуйста, выберите {0}</value>
+  </data>
+  <data name="ConfirmPasswordCompare" xml:space="preserve">
+    <value>Введенные пароли не совпадают</value>
+  </data>
+  <data name="EmailEqual" xml:space="preserve">
+    <value>{0} уже используется</value>
+  </data>
+  <data name="EmailMaxLength" xml:space="preserve">
+    <value>{0} не должен превышать {1} символов</value>
+  </data>
+  <data name="EmailRegular" xml:space="preserve">
+    <value>Вы ввели недопустимый {0}</value>
+  </data>
+  <data name="FirstNameMaxLength" xml:space="preserve">
+    <value>{0} не должно превышать {1} символов</value>
+  </data>
+  <data name="FirstNameMinLength" xml:space="preserve">
+    <value>{0} не должно быть меньше {1} символов</value>
+  </data>
+  <data name="FirstNameRegular" xml:space="preserve">
+    <value>{0} начинается с прописной буквы и может состоять из символов (‘а-я’, пробела и дефиса)</value>
+  </data>
+  <data name="PasswordMaxLength" xml:space="preserve">
+    <value>{0} не должен превышать {1} символов</value>
+  </data>
+  <data name="PasswordMinLength" xml:space="preserve">
+    <value>{0} не должен быть меньше {1} символов</value>
+  </data>
+  <data name="PasswordRegular" xml:space="preserve">
+    <value>{0} должен содержать хотя бы одну букву и цифру</value>
+  </data>
+  <data name="PersonalWebsiteRegular" xml:space="preserve">
+    <value>Пожалуйста, введите адрес по образцу: http://podelka.by</value>
+  </data>
+  <data name="PhoneRegular" xml:space="preserve">
+    <value>Пожалуйста, введите номер по подходящему образцу: +375 (**) ***-**-**, +375 (***) **-**-**, +375 (****) *-**-**</value>
+  </data>
+  <data name="RequiredTemplate" xml:space="preserve">
+    <value>Пожалуйста, введите {0}</value>
+  </data>
+  <data name="SecondNameMaxLength" xml:space="preserve">
+    <value>{0} не должна превышать {1} символов</value>
+  </data>
+  <data name="SecondNameMinLength" xml:space="preserve">
+    <value>{0} не должна быть меньше {1} символов</value>
+  </data>
+  <data name="SecondNameRegular" xml:space="preserve">
+    <value>{0} начинается с прописной буквы и может состоять из символов (‘а-я’, пробела и дефиса)</value>
+  </data>
+  <data name="SecondNameRequired" xml:space="preserve">
+    <value>Пожалуйста, введите Фамилию</value>
+  </data>
+  <data name="SocialNetworkRegular" xml:space="preserve">
+    <value>Пожалуйста, введите адрес по образцу: https://vk.com/podelkaby</value>
   </data>
 </root>

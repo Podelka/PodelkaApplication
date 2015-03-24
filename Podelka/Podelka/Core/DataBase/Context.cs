@@ -36,6 +36,10 @@ namespace Podelka.Core.DataBase
         public DbSet<ProductMaterial> ProductMaterials { get; set; }
         public DbSet<StatusReadyProduct> StatusReadyProducts { get; set; }
 
+        //public DbSet<Region> Regions { get; set; }
+        //public DbSet<District> Districts { get; set; }
+        //public DbSet<City> Cities { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<Workroom>()

@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Проверка попап";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+<div id="modDialog">
+</div>
+@using(Html.BeginForm("Index","Popup",FormMethod.Post))
+{
+    <div>
+        <p>Страница на которой должно появится диалоговое окно</p>
+    </div>
+    <input type="submit" name="buttonCreate" id="but" value="Продолжить" />
+}
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function ()
+        {
+            $.ajaxSetup(
+            {
+                cache: false
+            });
+            $("#but").click(function (e)
+            {
+                e.preventDefault();
+                $.post(this.href, function (data)
+                {
+                    $('body').css('overflow', 'hidden'); // выключаем скролл
+                    $('#modDialog').html(data);
+                    $('#overlay').fadeIn(400, // сначала плавно показываем темную подложку
+                    function ()
+                    { // после выполнения предъидущей анимации
+                        $('#modal_form')
+                            .css('display', 'block') // убираем у модального окна display: none;
+                            .animate({ opacity: 1}, 200); // плавно прибавляем прозрачность одновременно со съезжанием вниз
+                    });
+                    $('#modal_form').css('overflow', 'auto'); // включаем скролл у модального окна
+                });
+            });
+        });
+    </script>
+}

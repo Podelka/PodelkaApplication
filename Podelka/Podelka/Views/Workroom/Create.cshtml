@@ -9,7 +9,7 @@
         {
             <div class="leftSidebar createSidebar createForm">
                 <h2>Открытие мастерской</h2>
-                <img src="~/Content/img/shop.png">
+                <img src="@Url.Content("~/Content/img/shop.png")" alt="" />
                 <hr class="dashedHr" />
                 @Html.CheckBoxFor(m => m.AgreeRules, new { @class = "agreeRulesLabel", id = "agreeRules" })
                 <div class="agreeRulesLabel">Я согласен с @Html.ActionLink("правилами сайта", "Rules", "Home")</div>
@@ -19,7 +19,7 @@
             <div class="rightContent createBody">
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
-                <img src="~/Content/img/280x280.gif">
+                <img src="@Url.Content("~/Content/img/280x280.gif")" alt="" />
                 <div class="formName">
                     @Html.TextBoxFor(m => m.Name, new { placeholder = "Название" })
                     @Html.ValidationMessageFor(m => m.Name, String.Empty, new { @class = "text-danger" })<br />

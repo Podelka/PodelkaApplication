@@ -57,15 +57,6 @@ namespace Podelka.Controllers
             private set { _signInManager = value; }
         }
 
-        private async Task AddUserToRoleAsync(ApplicationUser user, string role)
-        {
-            using (var db = new Context())
-            {
-                var userManager = new UserManager<ApplicationUser, long>(new UserStoreIntPk(db));
-                var result = await userManager.AddToRoleAsync(user.Id, role);
-            }
-        }
-
         [ChildActionOnly]
         [Authorize]
         public ActionResult GetUserId()
@@ -164,12 +155,13 @@ namespace Podelka.Controllers
                 {
                     await AddUserToRoleAsync(user, "User");
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code },
+                    var callbackUrl = Url.Action("EmailConfirmation", "Account", new { userId = user.Id, code = code },
                         protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Подтверждение электронной почты",
                         "<h2 style=font-family:Georgia,serif;font-size:40px;font-weight:bold;font-style:italic>Всё готово</h2>"+
                         "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\">завершить регистрацию</a>");
-                    return View("DisplayEmail");
+                    //return View("RegisterConfirmation");
+                    return PartialView("_RegisterConfirmation");
                 }
                 else
                 {
@@ -185,7 +177,7 @@ namespace Podelka.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(long? userId, string code)
+        public async Task<ActionResult> EmailConfirmation(long? userId, string code)
         {
             if (userId == null || code == null)
             {
@@ -196,7 +188,7 @@ namespace Podelka.Controllers
             
             if (result.Succeeded)
             {
-                return View("ConfirmEmail");
+                return View("EmailConfirmation");
             }
             else
             {
@@ -329,8 +321,8 @@ namespace Podelka.Controllers
         //    }
         //}
 
-        private int _avatarWidth = 300;// ToDo - Change the size of the stored avatar image
-        private int _avatarHeight = 300;// ToDo - Change the size of the stored avatar image
+        private int _avatarWidth = 300;//Изменить размер (ширину) хранимого изображения
+        private int _avatarHeight = 300;//Изменить размер (высоту) хранимого изображения
 
         [HttpPost]
         [Authorize]
@@ -342,22 +334,22 @@ namespace Podelka.Controllers
 
             if (File != null && File.Count() > 0)
             {
-                // Get one only
+                //Получить только один файл
                 var file = File.FirstOrDefault();
-                // Check if the file is an image
+                // Проверка, является ли файл изображением с нужным нам расширением
                 if (file != null && imageService.IsImage(file))
                 {
-                    // Verify that the user selected a file
+                    //Убедитесь, что пользователь выбрал файл
                     if (file != null && file.ContentLength > 0)
                     {
-                        var webPath = imageService.SaveTemporaryFile(file, System.Web.HttpContext.Current); //. .Server.MapPath("/Temp"));//Передать правильно объект HttpContext
-                        return Json(new { success = true, fileName = webPath.Replace("\\", "/") });//success
+                        var webPath = imageService.SaveTemporaryFile(file, System.Web.HttpContext.Current);
+                        return Json(new { success = true, fileName = webPath.Replace("\\", "/") });//успех
                     }
-                    errorMessage = "File cannot be zero length.";//failure
+                    errorMessage = "File cannot be zero length.";//ошибка
                 }
-                errorMessage = "File is of wrong format.";//failure
+                errorMessage = "File is of wrong format.";//ошибка
             }
-            errorMessage = "No file uploaded.";//failure
+            errorMessage = "No file uploaded.";//ошибка
 
             return Json(new { success = false, errorMessage = errorMessage });
         }
@@ -367,23 +359,23 @@ namespace Podelka.Controllers
         {
             try
             {
-                // Get file from temporary folder
+                //Получение файла из временной папки
                 var fn = Path.Combine(Server.MapPath("~/Temp"), Path.GetFileName(fileName));
 
-                // Calculate dimesnions
+                //Рассчет размеров
                 int top = Convert.ToInt32(t.Replace("-", String.Empty).Replace("px", String.Empty));
                 int left = Convert.ToInt32(l.Replace("-", String.Empty).Replace("px", String.Empty));
                 int height = Convert.ToInt32(h.Replace("-", String.Empty).Replace("px", String.Empty));
                 int width = Convert.ToInt32(w.Replace("-", String.Empty).Replace("px", String.Empty));
 
-                // Get image and resize it, ...
+                //Получение изображения и изменение его размеров
                 var img = new WebImage(fn);
                 img.Resize(width, height);
-                // ... crop the part the user selected, ...
+                //Обрезать часть изображения, выбранной пользователем
                 img.Crop(top, left, img.Height - top - _avatarHeight, img.Width - left - _avatarWidth);
-                // ... delete the temporary file,...
+                //Удалить временные файлы
                 System.IO.File.Delete(fn);
-                // ... and save the new one.
+                //Сохранить новое изображение
                 var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                 string newFileName = "/Files/Users/" + userId.ToString() + "-avatar.jpg";
                 string newFileLocation = HttpContext.Server.MapPath(newFileName);
@@ -434,6 +426,26 @@ namespace Podelka.Controllers
                 return RedirectToAction("Index", "Home");
             }
             
+        }
+
+        private async Task AddUserToRoleAsync(ApplicationUser user, string role)
+        {
+            using (var db = new Context())
+            {
+                var userManager = new UserManager<ApplicationUser, long>(new UserStoreIntPk(db));
+                var result = await userManager.AddToRoleAsync(user.Id, role);
+            }
+        }
+
+        public JsonResult CheckUserEmail(string email)
+        {
+            var user = UserManager.FindByEmail(email);
+            bool result = true;
+            if (user != null)
+            {
+                result = false;       
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

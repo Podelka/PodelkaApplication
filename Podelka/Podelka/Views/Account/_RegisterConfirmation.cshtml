@@ -1,0 +1,42 @@
+﻿@*<div class="modal-content">
+    <div class="modal-header">
+        <button class="close" data-dismiss="modal" area-hidden="true">X</button>
+        <h4>Ура работает</h4>
+    </div>
+    <div class="modal-body">
+        <p>На указанный электронный адрес отправлены дальнейшие инструкции по завершению регистрации</p>
+    </div>
+</div>*@
+<div id="modal_form">
+    <!-- Само окно -->
+    <span id="modal_close"></span> <!-- Кнопка закрыть -->
+    <!-- Тут любое содержимое -->
+    <h2>Письмо отправлено</h2>
+    <p>На указанный Email отправлены дальнейшие инструкции по завершению регистрации</p>
+    <h3>Не получили письмо?</h3>
+    <p>Сначала проверьте папки спама или нежелательной почты</p>
+    <p>Если же вы все равно не нашли письмо, обратитесь в отдел обслуживания клиентов</p>
+    <input type="button" value="Войти" onclick="location.href = '@Url.Action("Login", "Account")'" />
+    <input type="button" value="На главную" onclick="location.href = '@Url.Action("Index", "Home")'" />
+</div>
+<div id="overlay">
+    <!-- Подложка -->
+</div>
+<script type="text/javascript">
+    /* Закрытие модального окна, тут делаем то же самое но в обратном порядке */
+    $('#modal_close').click(function (){ // ловим клик по крестику
+        $('body').css('overflow', 'auto'); // включаем скролл
+        $('#modal_form').animate(
+            {
+                opacity: 0
+            },
+            200,  // плавно меняем прозрачность на 0 и одновременно двигаем окно вверх
+            function ()
+            { // после анимации
+                $(this).css('display', 'none'); // делаем ему display: none;
+                $('#overlay').fadeOut(400); // скрываем подложку
+            }
+            );
+        $('#modal_form').css('overflow', 'hidden'); // выключаем скролл у модального окна
+    });
+</script>

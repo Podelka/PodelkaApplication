@@ -2,19 +2,21 @@
 <html lang="ru">
 <head>
     <meta charset="windows-1251">
-    <meta name="viewport" content="width=1240, user-scalable " />
-    @RenderSection("MetaKeywords", required: false)
+    <meta name="viewport" content="width=1240" />
+    @RenderSection("MetaKeywords", false)
     <title>Поделка.by | Уникальный каталог изделий ручной работы</title>
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link href="@Url.Content("http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic")" rel="stylesheet" type="text/css">
     @Styles.Render("~/Content/css/css_style_font-awesome")
 
     <link href="@Url.Content("~/Content/css/IMAGE.css")" rel="stylesheet" />
     <link href="@Url.Content("~/Content/css/jquery.Jcrop.css")" rel="stylesheet" />
 
+    <link href="@Url.Content("~/Content/StyleSheet1.css")" rel="stylesheet" />
+
     @Scripts.Render("~/bundles/jqueryMin_main")
 </head>
 <body>
-    <div class="menuMain">
+    <div class="menuMain" id="header">
         <div class="menuLevel first">
             <div class="center">
                 <ul>
@@ -30,7 +32,8 @@
             <div class="center">
                 <div class="logo">
                     <a href="@Url.Action("Index", "Home")">
-                        <img src="@Url.Content("~/Content/img/logo.svg")" />
+                        @*<img src="@Url.Content("~/Content/img/logo.svg")" alt="" />*@
+                        <img src="@Url.Content("~/Content/img/logo.png")" alt="" />
                     </a>
                 </div>
                 <ul>
@@ -80,16 +83,18 @@
                     <li class="pets">@Html.ActionLink("Для животных", "Section", "Product", new { id = 7 }, null)</li>
                     <li class="stationery">@Html.ActionLink("Канцелярские товары", "Section", "Product", new { id = 8 }, null)</li>
                     <li class="care">@Html.ActionLink("Средства по уходу", "Section", "Product", new { id = 9 }, null)</li>
-                    <li class="other">@Html.ActionLink("Другое", "Section", "Product", new { id = 10 }, null)</li> 
+                    <li class="other">@Html.ActionLink("Другое", "Section", "Product", new { id = 10 }, null)</li>
                 </ul>
             </div>
         </div>
     </div>
-    @RenderBody()
-    <footer class="clearfix">
+    <div id="mainContent">
+        @RenderBody()
+    </div>
+    <footer class="clearfix" id="footer">
         <div class="center">
             <div class="footerLeft">
-                <img src="~/Content/img/logo_footer.png" />
+                <img src="@Url.Content("~/Content/img/logo_footer.png")" alt="" />
                 <p>Поделка - предмет, изготовленный ручным способом.<br />Белорусский каталог изделий ручной работы.</p>
             </div>
             <div class="footerRight">
@@ -98,6 +103,6 @@
             </div>
         </div>
     </footer>
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", false)
 </body>
 </html>

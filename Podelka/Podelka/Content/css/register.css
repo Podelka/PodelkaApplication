@@ -43,7 +43,6 @@ body {
 
 .container {
     position: absolute;
-    opacity: 0;
     transition: 1s;
 }
 .container h3 {
@@ -220,11 +219,12 @@ input:focus {
 
 /*Я добавил*/
 .text-danger {
-    font-size: 10px;
+    font-size: 13px;
     color: #B94A48;
-    position: absolute;
-    margin-top: 38px;
+    display: inline-block;
+    position: relative;
     border-radius: 3px;
+    top: -4px;
 }
 .text-danger span[for="name"], .text-danger span[for="mail"], .text-danger span[for="password"] {
     position: absolute;

@@ -7,17 +7,17 @@
 <html>
 <head>
     <meta charset="windows-1251">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=400">
     <title>Поделка.by | Уникальный каталог изделий ручной работы</title>
-    <link rel="stylesheet" href="~/Content/css/login.css">
-    <link rel="stylesheet" href="~/Content/css/font-awesome.css">
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/login.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/font-awesome.css")">
+    <link href="@Url.Content("http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic")" rel="stylesheet" type="text/css">
     @Scripts.Render("~/bundles/jqueryMin_main")
     @Scripts.Render("~/bundles/jqueryValidate")
 </head>
 <body>
     <div id="bg">
-        <img src="~/Content/img/registr.jpg" alt="">
+        <img src="@Url.Content("~/Content/img/registr.jpg")" alt="" />
     </div>
     <div class="container" id="container">
         <h3>Добро пожаловать!</h3>
@@ -35,7 +35,7 @@
                     <option>Минск</option>
                 </datalist>*@
                 @Html.AntiForgeryToken()
-                <p class="input-data">Введите данные для авторизации:</p>
+                <p class="input-data">Введите данные для входа в профиль:</p>
                 @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
                 <div class="block-input">
                     <div class="block-icon">
@@ -61,7 +61,7 @@
             }
             @Html.ActionLink("Зарегистрироваться", "Register", null, new { id = "reg" })
         </div>
-        <p class="sub">* передаваемая вами информация служит только для авторизации,<br />либо для обратной связи с вами.
+        <p class="sub">* передаваемая вами информация служит только для входа,<br />либо для обратной связи с вами
     </div>
 </body>
 </html>

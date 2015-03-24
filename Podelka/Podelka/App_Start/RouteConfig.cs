@@ -18,15 +18,15 @@ namespace Podelka
             //ДЛя сортировки добавить вконец /sort/id
             //routes.MapRoute(
             //name: "Products",
-            //url: "{section}/{id}/{Category}/{CategoryId}/{product}",
+            //url: "{action}/{id}/{Category}/{CategoryId}/{controller}",
             //defaults: new { controller = "Product", action = "Section", id = 1, Category = UrlParameter.Optional, CategoryId = UrlParameter.Optional }
             //);
 
             //Путь на любое изделие
             //routes.MapRoute(
             //name: "Product",
-            //url: "{Section}/{SectionId}/{Category}/{CategoryId}/{controller}/{action}/{ProductId}",
-            //defaults: new { controller = "Product", action = "Profile", SectionId = 1, CategoryId = 1, ProductId = 1 }
+            //url: "{Section}/{SectionId}/{Category}/{CategoryId}/{controller}/{action}/{id}",
+            //defaults: new { controller = "Product", action = "Profile", SectionId = 1, CategoryId = 1, id = 1 }
             //);
 
             routes.MapRoute(

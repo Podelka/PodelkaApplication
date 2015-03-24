@@ -13,6 +13,21 @@ namespace Podelka.Models
         {
         }
 
+        public UserProfileModel(long userId, string firstName, string secondName, string profileImage, string email, string city, string skype, string socialNetwork, string personalWebsite, string phone, DateTime dateRegistration)
+        {
+            UserId = userId;
+            FirstName = firstName;
+            SecondName = secondName;
+            ProfileImage = profileImage;
+            Email = email;
+            City = city;
+            Skype = skype;
+            SocialNetwork = socialNetwork;
+            PersonalWebsite = personalWebsite;
+            Phone = phone;
+            DateRegistration = dateRegistration;
+        }
+
         public UserProfileModel(long userId, string firstName, string secondName, string email, string city, string skype, string socialNetwork, string personalWebsite, string phone, DateTime dateRegistration)
         {
             UserId = userId;
@@ -30,6 +45,7 @@ namespace Podelka.Models
         public long UserId { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
+        public string ProfileImage { get; set; }
         public string Email { get; set; }
         public string City { get; set; }
         public string Skype { get; set; }

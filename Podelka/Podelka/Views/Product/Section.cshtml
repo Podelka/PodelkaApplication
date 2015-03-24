@@ -9,8 +9,8 @@
                 <div id="rightMenu" class="rightMenu">
                     <ul></ul>
                     <div class="productViewButton">
-                        <img src="~/Content/img/icon/three-view.png" title="Три товара в ряд" onclick="Preview3()" id="previewProdTheree" />
-                        <img src="~/Content/img/icon/four-view.png" title="Четыре товара в ряд" onclick="Preview4()" id="previewProdFour" />
+                        <img src="@Url.Content("~/Content/img/icon/three-view.png")" alt="" title="Три товара в ряд" id="previewProdThree" />
+                        <img src="@Url.Content("~/Content/img/icon/four-view.png")" alt="" title="Четыре товара в ряд" id="previewProdFour" />
                     </div>
                 </div>
                 <div id="rightBody" class="rightBody clearfix">
@@ -21,5 +21,5 @@
     </div>
 @section Scripts
 {
-    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
 }

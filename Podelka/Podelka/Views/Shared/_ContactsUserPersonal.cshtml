@@ -1,7 +1,7 @@
 ﻿@model Podelka.Models.UserProfileModel
 @if (Model.City != null)
 {
-    <p class="sbCity"><img src="~/Content/img/icon/map.png">@Model.City</p>
+    <p class="sbCity"><img src="@Url.Content("~/Content/img/icon/map.png")" alt="" />@Model.City</p>
 }
 @if (Model.Phone != null || Model.PersonalWebsite != null || Model.SocialNetwork != null || Model.Skype != null)
 {

@@ -7,17 +7,17 @@
 <html>
 <head>
     <meta charset="windows-1251">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=700">
     <title>Поделка.by | Уникальный каталог изделий ручной работы</title>
-    <link rel="stylesheet" href="~/Content/css/register.css">
-    <link rel="stylesheet" href="~/Content/css/font-awesome.css">
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/register.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/font-awesome.css")">
+    <link href="@Url.Content("http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic&subset=latin,cyrillic")" rel="stylesheet" type="text/css">
     @Scripts.Render("~/bundles/jqueryMin_main")
     @Scripts.Render("~/bundles/jqueryValidate")
 </head>
 <body>
     <div id="bg">
-        <img src="~/Content/img/registr.jpg" alt="">
+        <img src="@Url.Content("~/Content/img/registr.jpg")" alt="" />
     </div>
     <div class="container" id="container">
         <h3>Придётся немного заполнить...</h3>
@@ -45,7 +45,7 @@
                     <div class="block-icon">
                         <i class="fa fa-ml fa-envelope"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.Email, new { type = "email", id = "mail", placeholder = Html.DisplayNameFor(m => m.Email) })
+                    @Html.TextBoxFor(m => m.Email, new { id = "mail", placeholder = Html.DisplayNameFor(m => m.Email) })
                     @Html.ValidationMessageFor(m => m.Email, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input position-right">
@@ -75,14 +75,14 @@
                     <div class="block-icon">
                         <i class="fa fa-lg fa-globe"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.PersonalWebsite, new { type = "url", @class = "position-left", id = "site", placeholder = Html.DisplayNameFor(m => m.PersonalWebsite) })
+                    @Html.TextBoxFor(m => m.PersonalWebsite, new { id = "site", placeholder = Html.DisplayNameFor(m => m.PersonalWebsite) })
                     @Html.ValidationMessageFor(m => m.PersonalWebsite, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input position-right">
                     <div class="block-icon">
                         <i class="fa fa-ml fa-users"></i>
                     </div>
-                    @Html.TextBoxFor(m => m.SocialNetwork, new { type = "url", id = "social", placeholder = Html.DisplayNameFor(m => m.SocialNetwork) })
+                    @Html.TextBoxFor(m => m.SocialNetwork, new { id = "social", placeholder = Html.DisplayNameFor(m => m.SocialNetwork) })
                     @Html.ValidationMessageFor(m => m.SocialNetwork, String.Empty, new { @class = "text-danger" })
                 </div>
                 <div class="block-input position-left">
@@ -110,7 +110,7 @@
                 <p class="regAddText"><font color="#fc6060">*</font> дополнительная информация не обязательна.</p>
             }
         </div>
-        <p class="sub">* передаваемая вами информация служит только для регистрации,<br />либо для обратной связи с вами.
+        <p class="sub">* передаваемая вами информация служит только для входа,<br />либо для обратной связи с вами
     </div>
 </body>
 </html>

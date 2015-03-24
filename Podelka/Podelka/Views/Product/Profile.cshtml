@@ -16,11 +16,11 @@
             }
             @if (isWorkroomImage)
             {
-                <img class="sbAvater" src='~/Files/Workrooms/@Model.WorkroomId-workroom.jpg'>
+                <img class="sbAvater" src="@Url.Content(String.Format("~/Files/Workrooms/{0}-workroom.jpg", Model.WorkroomId))" alt="" />
             }
             else
             {
-                <img class="sbAvater" src='~/Content/img/image-workroom.jpg'>
+                <img class="sbAvater" src="@Url.Content("~/Content/img/image-workroom.jpg")" alt="" />
             }
             <span class="sbMakerAfter">Мастерская</span>
             <h3 class="sbName">@Html.ActionLink("" + Model.Workroom.Name + "", "Profile", "Workroom", new { id = Model.WorkroomId }, null)</h3>
@@ -31,7 +31,7 @@
                 <span class="breadcrumbs">@Html.ActionLink(Model.SectionName, "Section", "Product", new { id = Model.SectionId }, null) / @Model.CategoryName / @Model.Name</span>
                 <h1>@Model.Name</h1>
                 <div class="productInfo">
-                    <img src="~/Content/img/500x350.gif">
+                    <img src="@Url.Content("~/Content/img/500x350.gif")" alt="" />
                     <div class="productText">
                         @if (Model.Price != null)
                         {

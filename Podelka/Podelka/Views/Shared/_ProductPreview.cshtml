@@ -11,11 +11,11 @@
                 }
                 @if (isProductImage)
                 {
-                    <img src='~/Files/Products/@item.ProductId-product.profile.jpg'>
+                    <img src="@Url.Content(String.Format("~/Files/Products/{0}-product.profile.jpg", item.ProductId))" alt="" />
                 }
                 else
                 {
-                    <img src="~/Content/img/product.image.jpg" />
+                    <img src="@Url.Content("~/Content/img/product.image.jpg")" alt="" />
                 }
                 <span id="workInfo" class="workInfo fourElement">
                     <h3>@item.Name</h3>

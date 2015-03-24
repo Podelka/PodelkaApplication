@@ -14,24 +14,25 @@
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
         @Html.LabelFor(model => model.File)
-        @Html.FileFor(model => model.File)
-        @Html.ValidationMessageFor(model => model.File)
+        @Html.FileFor(model => model.File)//@Html.File("Image")
+        @Html.ValidationMessageFor(model => model.File, String.Empty, new { @class = "text-danger" })
         @*<input type="file" name="files" /><br>*@
         <div class="upload-file-notice">Максимальный размер: <span id="avatar-max-size"></span> MB</div>
+
+        <div class="upload-progress hidden">
+            <div class="upload-percent-value">0%</div>
+            <div class="upload-percent-bar"></div>
+        </div>
+        <div id="upload-status"></div>
     }
-    <div class="upload-progress hidden">
-        <div class="upload-percent-value">0%</div>
-        <div class="upload-percent-bar"></div>
-    </div>
-    <div id="upload-status"></div>
 </div>
 <div id="avatar-crop-box" class="hidden">
     <div class="jc-demo-box">
         <div class="col-md-12">
-            <img src="" id="crop-avatar-target" alt="Uploaded image" />
+            <img src="@Url.Content(" ")" id="crop-avatar-target" alt="Uploaded image" />
             <div id="preview-pane">
                 <div class="preview-container">
-                    <img src="" class="jcrop-preview" alt="Preview" />
+                    <img src="@Url.Content(" ")" class="jcrop-preview" alt="Preview" />
                 </div>
             </div>
         </div>
@@ -43,13 +44,13 @@
     </div>
 </div>
 <div id="avatar-result" class="hidden">
-    <img src="" alt="Final Image" />
+    <img src="@Url.Content(" ")" alt="Final Image" />
 </div>
 @section Scripts
 {
-    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/jquery.form.min.js")"></script>
-    <script src="@Url.Content("~/Scripts/jquery.Jcrop.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.form.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.Jcrop.min.js")" type="text/javascript"></script>
     <script>
         var jcrop_api, boundx, boundy, xsize, ysize;
         $(function ()

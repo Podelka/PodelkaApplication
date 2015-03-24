@@ -220,6 +220,52 @@ namespace Podelka.Controllers
             }
             else
             {
+                var workroomRegisterTypesDb = new List<RegisterTypeWorkroom>();
+                var payMethodsDb = new List<PayMethod>();
+                var deliveryMethodsDb = new List<DeliveryMethod>();
+                var sectionsDb = new List<Section>();
+
+                using (var db = new Context())
+                {
+                    workroomRegisterTypesDb = db.WorkroomRegisterTypes.ToList();
+                    payMethodsDb = db.PayMethods.ToList();
+                    deliveryMethodsDb = db.DeliveryMethods.ToList();
+                    sectionsDb = db.Sections.ToList();
+                }
+
+                var sectionDbModel = new List<SectionDbModel>();
+                var defaultSection = new SectionDbModel(0, "--Выберите--");
+                sectionDbModel.Add(defaultSection);
+                foreach (var item in sectionsDb)
+                {
+                    var section = new SectionDbModel(item.SectionId, item.Name);
+                    sectionDbModel.Add(section);
+                }
+
+                var registerTypeDbModel = new List<RegisterTypeDbModel>();
+                foreach (var item in workroomRegisterTypesDb)
+                {
+                    var regType = new RegisterTypeDbModel(item.WorkroomRegisterTypeId, item.Name);
+                    registerTypeDbModel.Add(regType);
+                }
+
+                var payMethodsModel = new Collection<PayMethodDbModel>();
+                foreach (var item in payMethodsDb)
+                {
+                    var payMet = new PayMethodDbModel(item.PayMethodId, item.Name);
+                    payMethodsModel.Add(payMet);
+                }
+
+                var deliveryMethodsModel = new Collection<DeliveryMethodDbModel>();
+                foreach (var item in deliveryMethodsDb)
+                {
+                    var deliveryMet = new DeliveryMethodDbModel(item.DeliveryMethodId, item.Name);
+                    deliveryMethodsModel.Add(deliveryMet);
+                }
+                model.DeliveryMethods = deliveryMethodsModel;
+                model.RegisterTypes = registerTypeDbModel;
+                model.PayMethods = payMethodsModel;
+                model.Sections = sectionDbModel;
                 return View(model);
             }
         }

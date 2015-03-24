@@ -10,11 +10,11 @@
             }
             @if (isWorkroomImage)
             {
-                <img class="sbAvater" src='~/Files/Workrooms/@item.WorkroomId-workroom.small.jpg'>
+                <img class="sbAvater" src="@Url.Content(String.Format("~/Files/Workrooms/{0}-workroom.small.jpg", item.WorkroomId))" alt="" />
             }
             else
             {
-                <img class="sbAvater" src='~/Content/img/image-workroom.small.jpg'>
+                <img class="sbAvater" src="@Url.Content("~/Content/img/image-workroom.small.jpg")" alt="" />
             }
             <div class="workroomInfo">
                 <h3>@item.Name</h3>
@@ -70,11 +70,11 @@
                                 }
                                 @if (isProductImage)
                                 {
-                                    <img src='~/Files/Products/@product.ProductId-product.profile.small.jpg' title="@product.Name" />
+                                    <img src="@Url.Content(String.Format("~/Files/Products/{0}-product.profile.small.jpg", product.ProductId))" alt="" title="@product.Name" />
                                 }
                                 else
                                 {
-                                    <img src="@Url.Content("~/Content/img/product.image.small.jpg")" title="@product.Name" />
+                                    <img src="@Url.Content("~/Content/img/product.image.small.jpg")" alt="" title="@product.Name" />
                                 }
                                 <div class="lastProductView">
                                     <i class="fa fa-eye"></i>

@@ -12,11 +12,11 @@
             }
             @if (isUserImage)
             {
-                <img class="sbAvater" src='~/Files/Users/@Model.UserId-avatar.jpg'>
+                <img class="sbAvater" src="@Url.Content(String.Format("~/Files/Users/{0}-avatar.jpg", Model.UserId))" alt="" />
             }
             else
             {
-                <img class="sbAvater" src='~/Content/img/user-avatar.jpg'>
+                <img class="sbAvater" src="@Url.Content("~/Content/img/user-avatar.jpg")" alt="" />
             }
             <h3 class="sbName">@Model.FirstName @Model.SecondName</h3>
             <p class="uLabel">(это Вы)</p>
@@ -34,28 +34,28 @@
                 <ul>
                     @if (ViewBag.Menu == null || ViewBag.Menu == "Workrooms")
                     {
-                        <li id="workrooms" class="active">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_workrooms({0});", Model.UserId) })</li>
-                        <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_adverts({0});", Model.UserId) })</li>
-                        <li id="bookmarks">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_bookmarks({0});", Model.UserId) })</li>
+                        <li id="workrooms" class="active">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_workrooms({0});", Model.UserId) })</li>
+                        <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId) })</li>
+                        <li id="bookmarks">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_bookmarks({0});", Model.UserId), OnSuccess = "review()" })</li>
                     }
                     else
                     {
-                        <li id="workrooms">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_workrooms({0});", Model.UserId) })</li>
+                        <li id="workrooms">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_workrooms({0});", Model.UserId) })</li>
                         if (ViewBag.Menu == "Adverts")
                         {
-                            <li id="adverts" class="active">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_adverts({0});", Model.UserId) })</li>
-                            <li id="bookmarks">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_bookmarks({0});", Model.UserId) })</li>
+                            <li id="adverts" class="active">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId) })</li>
+                            <li id="bookmarks">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_bookmarks({0});", Model.UserId), OnSuccess = "review()" })</li>
                         }
                         else
                         {
-                            <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_adverts({0});", Model.UserId) })</li>
-                            <li id="bookmarks" class="active">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = string.Format("active_menu_bookmarks({0});", Model.UserId) })</li>
+                            <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId) })</li>
+                            <li id="bookmarks" class="active">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_bookmarks({0});", Model.UserId), OnSuccess = "review()" })</li>
                         }
                     }
                 </ul>
                 <div class="productViewButton">
-                    <img src="~/Content/img/icon/three-view.png" title="Три товара в ряд" onclick="Preview3()" id="previewProdTheree" />
-                    <img src="~/Content/img/icon/four-view.png" title="Четыре товара в ряд" onclick="Preview4()" id="previewProdFour" />
+                    <img src="@Url.Content("~/Content/img/icon/three-view.png")" alt="" title="Три товара в ряд" id="previewProdThree" />
+                    <img src="@Url.Content("~/Content/img/icon/four-view.png")" alt="" title="Четыре товара в ряд" id="previewProdFour" />
                 </div>
             </div>
             <div id="rightBody" class="rightBody clearfix">
@@ -77,37 +77,6 @@
 </div>
 @section Scripts
 {
-    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
-    <script>
-        function active_menu_workrooms(UserId)
-        {
-            $('#rightMenu li').removeClass('active');
-            $('#workrooms').addClass('active');
-            window.history.pushState(
-            null, // any object, that can be retrieved
-            'Мастерские пользователя', // new page title
-            '/User/Profile/'+UserId+'/Workrooms' // new url
-            );
-        };
-        function active_menu_adverts(UserId)
-        {
-            $('#rightMenu li').removeClass('active');
-            $('#adverts').addClass('active');
-            window.history.pushState(
-            null, // any object, that can be retrieved
-            'Заказы пользователя', // new page title
-            '/User/Profile/' + UserId + '/Adverts' // new url
-            );
-        };
-        function active_menu_bookmarks(UserId)
-        {
-            $('#rightMenu li').removeClass('active');
-            $('#bookmarks').addClass('active');
-            window.history.pushState(
-            null, // any object, that can be retrieved
-            'Заказы пользователя', // new page title
-            '/User/Profile/' + UserId + '/Bookmarks' // new url
-            );
-        };
-    </script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/generalFunctionsForProfileUW.js")" type="text/javascript"></script>
 }

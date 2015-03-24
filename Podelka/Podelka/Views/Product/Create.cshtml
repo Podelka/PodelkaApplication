@@ -11,7 +11,7 @@
             @Html.ValidationSummary(true, String.Empty, new { @class = "text-danger" })
             <div class="leftSidebar createSidebar">
                 <h2>Добавление изделия</h2>
-                <img class="leftImg" src="~/Content/img/shop.png">
+                <img class="leftImg" src="@Url.Content("~/Content/img/shop.png")" alt="" />
                 <hr class="dashedHr" />
                 <p class="content">Здесь будет краткий мануал и ссылки на туториалы по добавлению изделия.</p>
                 @Html.CheckBoxFor(m => m.AgreeRules, new { @class = "agreeRulesLabel", id = "agreeRules" })
@@ -20,7 +20,7 @@
                 <input type="submit" name="buttonCreate" id="buttonCreate" value="Добавить товар" />
             </div>
             <div class="rightContentBlockSmall createBody">
-                <img src="~/Content/img/280x280.gif">
+                <img src="@Url.Content("~/Content/img/280x280.gif")" alt="" />
                 @Html.TextBoxFor(m => m.Name, new { placeholder = "Название" })
                 @Html.ValidationMessageFor(m => m.Name, String.Empty, new { @class = "text-danger" })<br />
                 @if (Model.RegisterTypeWorkroom == "Отсутсвует")

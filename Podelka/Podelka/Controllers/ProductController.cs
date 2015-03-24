@@ -239,6 +239,61 @@ namespace Podelka.Controllers
             }
             else
             {
+                var workroom = new Workroom();
+                var categoriesDb = new List<Category>();
+                var statusReadyDb = new List<StatusReadyProduct>();
+                var genderTypeDb = new List<GenderTypeProduct>();
+                var materialsDb = new List<Material>();
+
+                using (var db = new Context())
+                {
+                    workroom = db.Workrooms.Find(id);
+                    categoriesDb = db.Categories.Where(c => c.SectionId == workroom.SectionId).ToList();
+                    if (workroom.Section.Gender)
+                    {
+                        genderTypeDb = db.GenderTypeProducts.ToList();
+                    }
+                    statusReadyDb = db.StatusReadyProducts.ToList();
+                    materialsDb = db.Materials.ToList();
+                }
+
+                var categoriesDbModel = new Collection<CategoriesDbModel>();
+                var categoryDefault = new CategoriesDbModel(0, "--Выбрать--", false);
+                categoriesDbModel.Add(categoryDefault);
+                foreach (var item in categoriesDb)
+                {
+                    var category = new CategoriesDbModel(item.CategoryId, item.Name, item.Gender);
+                    categoriesDbModel.Add(category);
+                }
+
+                var statusReadyDbModel = new Collection<StatusReadyProductDbModel>();
+                foreach (var item in statusReadyDb)
+                {
+                    var status = new StatusReadyProductDbModel(item.ProductStatusReadyId, item.Name);
+                    statusReadyDbModel.Add(status);
+                }
+
+                var genderTypeDbModel = new Collection<GenderTypeDbModel>();
+                if (genderTypeDb != null && genderTypeDb.Any())
+                {
+                    foreach (var item in genderTypeDb)
+                    {
+                        var genderType = new GenderTypeDbModel(item.ProductGenderTypeId, item.Name);
+                        genderTypeDbModel.Add(genderType);
+                    }
+                }
+
+                var materialsDbModel = new Collection<MaterialsDbModel>();
+                foreach (var item in materialsDb)
+                {
+                    var material = new MaterialsDbModel(item.MaterialId, item.Name);
+                    materialsDbModel.Add(material);
+                }
+
+                model.Categories = categoriesDbModel;
+                model.StatusReady = statusReadyDbModel;
+                model.GenderTypes = genderTypeDbModel;
+                model.Materials = materialsDbModel;
                 return View(model);
             }
         }
@@ -292,7 +347,7 @@ namespace Podelka.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult FavoriteRemove(long? id, string returnUrl)
+        public ActionResult FavoriteRemove(long? id)
         {
             if (id != null)
             {
@@ -309,18 +364,18 @@ namespace Podelka.Controllers
                             db.SaveChanges();
                         }
 
-                        return Redirect(returnUrl);
+                        return RedirectToAction("Profile", "User", new { id = HttpContext.User.Identity.GetUserId(), menu = "Bookmarks" });
                     }
                     else
                     {
                         //удалили изделие
-                        return Redirect(returnUrl);
+                        return RedirectToAction("Profile", "User", new { id = HttpContext.User.Identity.GetUserId(), menu = "Bookmarks" });
                     }
                 }
             }
             else
             {
-                return Redirect(returnUrl);//В ссылке отсутвует идентификатор изделия (id)
+                return RedirectToAction("Profile", "User", new { id = HttpContext.User.Identity.GetUserId(), menu = "Bookmarks" });//В ссылке отсутвует идентификатор изделия (id)
             }
         }
 

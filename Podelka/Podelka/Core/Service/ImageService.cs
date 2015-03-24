@@ -16,15 +16,15 @@ namespace Podelka.Core.Service
                 return true;
             }
 
-            var extensions = new string[] { ".jpg", ".png", ".gif", ".jpeg" };// ToDo - add more if you like...
+            var extensions = new string[] { ".jpg", ".jpeg", ".jpe", ".jfif" };
 
-            // linq from Henrik Stenbæk
+            //LINQ от Henrik Stenbæk
             return extensions.Any(item => file.FileName.EndsWith(item, StringComparison.OrdinalIgnoreCase));
         }
 
-        public string SaveTemporaryFile(HttpPostedFileBase file, HttpContext server) // string server)
+        public string SaveTemporaryFile(HttpPostedFileBase file, HttpContext server)
         {
-            // Define destination
+            //Устанавка пункта назначения временного файла
             var folderName = "/Temp";
             var serverPath = server.Server.MapPath("/Temp");
             if (Directory.Exists(serverPath) == false)
@@ -32,11 +32,11 @@ namespace Podelka.Core.Service
                 Directory.CreateDirectory(serverPath);
             }
 
-            // Generate unique file name
+            //Создание уникального имени файла
             var fileName = Path.GetFileName(file.FileName);
             fileName = SaveTemporaryAvatarFileImage(file, serverPath, fileName);
 
-            // Clean up old files after every save
+            //Очистка старых файлов после каждого сохранения
             CleanUpTempFolder(1, server);
 
             return Path.Combine(folderName, fileName);
@@ -63,7 +63,8 @@ namespace Podelka.Core.Service
                     newHeight = (int)(800 * ratio2);
                 }
 
-                img.Resize(newWidth, newHeight); // ToDo - Change the value of the width of the image on the screen
+                //Измените значение ширины изображения на экране
+                img.Resize(newWidth, newHeight);
             }
 
             string fullFileName = Path.Combine(serverPath, fileName);
@@ -78,7 +79,7 @@ namespace Podelka.Core.Service
             return Path.GetFileName(img.FileName);
         }
 
-        private void CleanUpTempFolder(int hoursOld, HttpContext server) //string server)
+        private void CleanUpTempFolder(int hoursOld, HttpContext server)
         {
             try
             {
