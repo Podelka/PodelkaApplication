@@ -247,7 +247,6 @@
     <Content Include="Content\img\back.jpg" />
     <Content Include="Content\img\icon\add.png" />
     <Content Include="Content\img\icon\backToMenu.png" />
-    <Content Include="Content\img\icon\close.gif" />
     <Content Include="Content\img\icon\exitProfile.png" />
     <Content Include="Content\img\icon\find.png" />
     <Content Include="Content\img\icon\four-view.png" />
