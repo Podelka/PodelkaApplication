@@ -1,31 +1,12 @@
-﻿using Podelka.AttributeValidation;
-using Podelka.Resources;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
-using System.ComponentModel.DataAnnotations;
+using Podelka.AttributeValidation;
+using Podelka.Resources;
 
 namespace Podelka.Models
 {
-    public class UploadImageModel
-    {
-
-        [Display(Name = "Local file")]
-        public HttpPostedFileBase File { get; set; }
-
-        [Range(0, int.MaxValue)]
-        public int X { get; set; }
-
-        [Range(0, int.MaxValue)]
-        public int Y { get; set; }
-
-        [Range(1, int.MaxValue)]
-        public int Width { get; set; }
-
-        [Range(1, int.MaxValue)]
-        public int Height { get; set; }
-    }
-
     public class LoginModel
     {
         [Display(ResourceType = typeof(AccountConDisplayNamesVal), Name = "Email")]

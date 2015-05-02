@@ -8,6 +8,10 @@ using Podelka.Models;
 using System.Collections.ObjectModel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using System.Threading;
+using Podelka.Core.Service;
+using System.IO;
+using System.Web.Helpers;
 
 namespace Podelka.Controllers
 {
@@ -345,6 +349,7 @@ namespace Podelka.Controllers
         [AllowAnonymous]
         public ActionResult Products(long? id)
         {
+            Thread.Sleep(5000);
             if (id != null)
             {
                 var workroom = new Workroom();
@@ -388,6 +393,7 @@ namespace Podelka.Controllers
         [AllowAnonymous]
         public ActionResult Reviews(long? id)
         {
+            Thread.Sleep(5000);
             if (id != null)
             {
                 return PartialView("_WorkroomReviews");
@@ -395,6 +401,94 @@ namespace Podelka.Controllers
             else
             {
                 return View("_Error"); //В ссылке отсутвует идентификатор мастерской (id)
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult Photo(long id)
+        {
+            var model = new UploadWorkroomImageModel { WorkroomId = id };
+            return View(model);
+        }
+
+        private int _avatarWidth = 300;//Изменить размер (ширину) хранимого изображения
+        private int _avatarHeight = 300;//Изменить размер (высоту) хранимого изображения
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult _Upload(IEnumerable<HttpPostedFileBase> File)
+        {
+            ImageService imageService = new ImageService();
+            string errorMessage = String.Empty;
+
+            if (File != null && File.Count() > 0)
+            {
+                //Получить только один файл
+                var file = File.FirstOrDefault();
+                // Проверка, является ли файл изображением с нужным нам расширением
+                if (file != null && imageService.IsImage(file))
+                {
+                    //Убедитесь, что пользователь выбрал файл
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var webPath = imageService.SaveTemporaryFile(file, System.Web.HttpContext.Current);
+                        return Json(new { success = true, fileName = webPath.Replace("\\", "/") });//успех
+                    }
+                    errorMessage = "File cannot be zero length.";//ошибка
+                }
+                errorMessage = "File is of wrong format.";//ошибка
+            }
+            errorMessage = "No file uploaded.";//ошибка
+
+            return Json(new { success = false, errorMessage = errorMessage });
+        }
+
+        [HttpPost]
+        public ActionResult Save(string t, string l, string h, string w, string fileName, long workroomId)
+        {
+            try
+            {
+                //Получение файла из временной папки
+                var fn = Path.Combine(Server.MapPath("~/Temp"), Path.GetFileName(fileName));
+
+                //Рассчет размеров
+                int top = Convert.ToInt32(t.Replace("-", String.Empty).Replace("px", String.Empty));
+                int left = Convert.ToInt32(l.Replace("-", String.Empty).Replace("px", String.Empty));
+                int height = Convert.ToInt32(h.Replace("-", String.Empty).Replace("px", String.Empty));
+                int width = Convert.ToInt32(w.Replace("-", String.Empty).Replace("px", String.Empty));
+
+                //Получение изображения и изменение его размеров
+                var img = new WebImage(fn);
+                img.Resize(width, height);
+                //Обрезать часть изображения, выбранной пользователем
+                img.Crop(top, left, img.Height - top - _avatarHeight, img.Width - left - _avatarWidth);
+                //Удалить временные файлы
+                System.IO.File.Delete(fn);
+                //Сохранить новое изображение
+                var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+                //проверить пренадлежит ли workroomId текущему пользователю
+                string newFileName = "/Files/Workrooms/" + workroomId + "-workroom.jpg";
+                string newFileLocation = HttpContext.Server.MapPath(newFileName);
+                if (Directory.Exists(Path.GetDirectoryName(newFileLocation)) == false)
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(newFileLocation));
+                }
+
+                img.Save(newFileLocation);
+
+                //Сделать миниатюрное изображение для Preview
+                img.Resize(90, 90);
+                string newFileNameSmall = "/Files/Workrooms/" + workroomId + "-workroom.small.jpg";
+                string newFileLocationSmall = HttpContext.Server.MapPath(newFileNameSmall);
+                img.Save(newFileLocationSmall);
+
+                return Json(new { success = true, avatarFileLocation = newFileName });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMessage = "Unable to upload file.\nERRORINFO: " + ex.Message });
             }
         }
     }

@@ -25,7 +25,6 @@
 <script type="text/javascript">
     /* Закрытие модального окна, тут делаем то же самое но в обратном порядке */
     $('#modal_close').click(function (){ // ловим клик по крестику
-        $('body').css('overflow', 'auto'); // включаем скролл
         $('#modal_form').animate(
             {
                 opacity: 0
@@ -38,5 +37,6 @@
             }
             );
         $('#modal_form').css('overflow', 'hidden'); // выключаем скролл у модального окна
+        $('body').css('overflow', 'auto'); // включаем скролл
     });
 </script>

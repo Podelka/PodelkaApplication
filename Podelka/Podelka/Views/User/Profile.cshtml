@@ -15,15 +15,18 @@
                 <ul>
                     @if (ViewBag.Menu == null || ViewBag.Menu == "Workrooms")
                     {
-                        <li id="workrooms" class="active">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_workrooms({0});", Model.UserId) })</li>
-                        <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId) })</li>
+                        <li id="workrooms" class="active">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_workrooms({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200 })</li>
+                        <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200 })</li>
                     }
                     else
                     {
-                        <li id="workrooms">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_workrooms({0});", Model.UserId) })</li>
-                        <li id="adverts" class="active">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId) })</li>
+                        <li id="workrooms">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_workrooms({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200 })</li>
+                        <li id="adverts" class="active">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200 })</li>
                     }
                 </ul>
+            </div>
+            <div id="loading" style="display:none;">
+                <img src="@Url.Content("~/Content/img/icon/loading.gif")" alt=""/>
             </div>
             <div id="rightBody" class="rightBody clearfix">
                 @if (ViewBag.Menu == null || ViewBag.Menu == "Workrooms")

@@ -11,6 +11,10 @@ using Microsoft.Owin.Security;
 using Podelka.Models;
 using Podelka.Core.DataBase;
 using System.Collections.Generic;
+using System.Threading;
+using Podelka.Core.Service;
+using System.IO;
+using System.Web.Helpers;
 
 namespace Podelka.Controllers
 {
@@ -54,7 +58,6 @@ namespace Podelka.Controllers
                     }
 
                     var model = new UserProfileModel(user.Id, user.FirstName, user.SecondName, profileImageSrc, user.Email, user.City, user.Skype, user.SocialNetwork, user.PersonalWebsite, user.Phone, user.DateRegistration);
-
                     var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                     if (userId != 0 && id == userId)
                     {
@@ -134,6 +137,7 @@ namespace Podelka.Controllers
         [AllowAnonymous]
         public ActionResult Workrooms(long? id)
         {
+            Thread.Sleep(5000);
             if (id != null)
             {
                 var user = UserManager.FindById((long)id);
@@ -188,6 +192,7 @@ namespace Podelka.Controllers
         [Authorize]
         public ActionResult Bookmarks()
         {
+            Thread.Sleep(5000);
             var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
             var user = UserManager.FindById(userId);
 
@@ -204,7 +209,6 @@ namespace Podelka.Controllers
                         productsCollection.Add(product);
                     }
                 }
-
                 //return PartialView("_ProductPreview", productsCollection);
                 return PartialView("_ProductPreviewRemove", productsCollection);
             }
@@ -218,6 +222,7 @@ namespace Podelka.Controllers
         [AllowAnonymous]
         public ActionResult Adverts()
         {
+            Thread.Sleep(5000);
             //var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
             //var user = UserManager.FindById(userId);
 
@@ -242,7 +247,119 @@ namespace Podelka.Controllers
             //}
         }
 
+        [HttpGet]
+        [Authorize]
+        public ActionResult Photo()
+        {
+            var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+            var model = new UploadImageModel { UserId = userId };
+            return View(model);
+        }
 
+        //[HttpPost]
+        //[Authorize]
+        //public ActionResult Photo(UploadImageModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var userId = Convert.ToUInt64(HttpContext.User.Identity.GetUserId());
+        //        var name = userId.ToString() + "avatar";
+
+        //        Bitmap original = Bitmap.FromStream(model.File.InputStream) as Bitmap;
+
+        //        if (original != null)
+        //        {
+        //            var imgService = new ImageApplication();
+        //            var img = imgService.CreateImage(original, model.X, model.Y, model.Width, model.Height);
+        //            var fn = Server.MapPath("~/Content/img/" + name + ".jpg");
+
+        //            img.Save(fn, System.Drawing.Imaging.ImageFormat.Jpeg);
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError(String.Empty, "Your upload did not seem valid. Please try again using only correct images!");
+        //            return View(model);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return View(model);
+        //    }
+        //}
+
+        private int _avatarWidth = 300;//Изменить размер (ширину) хранимого изображения
+        private int _avatarHeight = 300;//Изменить размер (высоту) хранимого изображения
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult _Upload(IEnumerable<HttpPostedFileBase> File)
+        {
+            ImageService imageService = new ImageService();
+            string errorMessage = String.Empty;
+
+            if (File != null && File.Count() > 0)
+            {
+                //Получить только один файл
+                var file = File.FirstOrDefault();
+                // Проверка, является ли файл изображением с нужным нам расширением
+                if (file != null && imageService.IsImage(file))
+                {
+                    //Убедитесь, что пользователь выбрал файл
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var webPath = imageService.SaveTemporaryFile(file, System.Web.HttpContext.Current);
+                        return Json(new { success = true, fileName = webPath.Replace("\\", "/") });//успех
+                    }
+                    errorMessage = "File cannot be zero length.";//ошибка
+                }
+                errorMessage = "File is of wrong format.";//ошибка
+            }
+            errorMessage = "No file uploaded.";//ошибка
+
+            return Json(new { success = false, errorMessage = errorMessage });
+        }
+
+        [HttpPost]
+        public ActionResult Save(string t, string l, string h, string w, string fileName)
+        {
+            try
+            {
+                //Получение файла из временной папки
+                var fn = Path.Combine(Server.MapPath("~/Temp"), Path.GetFileName(fileName));
+
+                //Рассчет размеров
+                int top = Convert.ToInt32(t.Replace("-", String.Empty).Replace("px", String.Empty));
+                int left = Convert.ToInt32(l.Replace("-", String.Empty).Replace("px", String.Empty));
+                int height = Convert.ToInt32(h.Replace("-", String.Empty).Replace("px", String.Empty));
+                int width = Convert.ToInt32(w.Replace("-", String.Empty).Replace("px", String.Empty));
+
+                //Получение изображения и изменение его размеров
+                var img = new WebImage(fn);
+                img.Resize(width, height);
+                //Обрезать часть изображения, выбранной пользователем
+                img.Crop(top, left, img.Height - top - _avatarHeight, img.Width - left - _avatarWidth);
+                //Удалить временные файлы
+                System.IO.File.Delete(fn);
+                //Сохранить новое изображение
+                var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
+                string newFileName = "/Files/Users/" + userId.ToString() + "-avatar.jpg";
+                string newFileLocation = HttpContext.Server.MapPath(newFileName);
+                if (Directory.Exists(Path.GetDirectoryName(newFileLocation)) == false)
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(newFileLocation));
+                }
+
+                img.Save(newFileLocation);
+
+                return Json(new { success = true, avatarFileLocation = newFileName });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMessage = "Unable to upload file.\nERRORINFO: " + ex.Message });
+            }
+        }
 
 
         //[HttpGet]

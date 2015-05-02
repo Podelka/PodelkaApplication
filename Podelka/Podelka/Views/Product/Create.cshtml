@@ -36,17 +36,17 @@
                 @Html.ValidationMessageFor(m => m.SelectedStatusReady, String.Empty, new { @class = "text-danger" })<br />
             </div>
             <div class="rightContentBlockBig createBody">
-                @Html.TextAreaFor(m => m.Description, new { placeholder = "Введите краткое, но детальное описание изделия...", maxlength = "200" })
+                @Html.TextAreaFor(m => m.Description, new { placeholder = "Введите краткое, но детальное описание изделия..." })
                 @Html.ValidationMessageFor(m => m.Description, String.Empty, new { @class = "text-danger" })<br />
                 <div class="sizeLabel">Размеры:</div>
-                @Html.TextBoxFor(m => m.Size1, new { @class = "sizeProduct", maxlength = "4", placeholder = "В" })
+                @Html.TextBoxFor(m => m.Size1, new { @class = "sizeProduct", placeholder = "В" })
                 <div class="sizeLabel">x</div>
-                @Html.TextBoxFor(m => m.Size2, new { @class = "sizeProduct", maxlength = "4", placeholder = "Ш" })
+                @Html.TextBoxFor(m => m.Size2, new { @class = "sizeProduct", placeholder = "Ш" })
                 <div class="sizeLabel">x</div>
-                @Html.TextBoxFor(m => m.Size3, new { @class = "sizeProduct last", maxlength = "4", placeholder = "Г" })
+                @Html.TextBoxFor(m => m.Size3, new { @class = "sizeProduct last", placeholder = "Г" })
                 <div class="metricLabel">см</div>
                 <div class="weightLabel">Масса:</div>
-                @Html.TextBoxFor(m => m.Weight, new { @class = "weightProduct last", maxlength = "5" })<div class="metricLabel">г</div>
+                @Html.TextBoxFor(m => m.Weight, new { @class = "weightProduct last" })<div class="metricLabel">г</div>
                 @Html.ValidationMessageFor(m => m.Size1, String.Empty, new { @class = "text-danger" })<br />
                 @Html.ValidationMessageFor(m => m.Size2, String.Empty, new { @class = "text-danger" })<br />
                 @Html.ValidationMessageFor(m => m.Size3, String.Empty, new { @class = "text-danger" })<br />
@@ -64,7 +64,7 @@
                 <div class="fontLavel">Материал <i style="color:#9a9a9a;">(для выбора нескольких удерживайте Ctrl)</i>:</div>
                 @Html.ListBoxFor(m => m.SelectedMaterials, new MultiSelectList(Model.Materials, "MaterialId", "Name"))
                 @Html.ValidationMessageFor(m => m.SelectedMaterials, String.Empty, new { @class = "text-danger" })<br />
-                @Html.TextAreaFor(m => m.KeyWords, new { @class ="second", placeholder = "Введите ключевые слова, описывающие ваше изделие (через запятую)...", maxlength = "160" })
+                @Html.TextAreaFor(m => m.KeyWords, new { @class ="second", placeholder = "Введите ключевые слова, описывающие ваше изделие (через запятую)..." })
                 @Html.ValidationMessageFor(m => m.KeyWords, String.Empty, new { @class = "text-danger" })<br />
             </div>
         }

@@ -175,7 +175,17 @@ namespace Podelka.Controllers
             if (ModelState.IsValid)
             {
                 var size = new StringBuilder();
-                size.Append(model.Size1).Append(" x ").Append(model.Size2).Append(" x ").Append(model.Size3);
+                string size_finally;
+                if (model.Size1 != null || model.Size2 != null || model.Size3 != null)
+                {
+                    size.Append(model.Size1).Append(" x ").Append(model.Size2).Append(" x ").Append(model.Size3);
+                    size_finally = size.ToString();
+                }
+                else
+                {
+                    size_finally = null;
+                }
+
                 var product = new Product();
                 if (model.SelectedGenderType != null)
                 {
@@ -213,7 +223,7 @@ namespace Podelka.Controllers
                         CountMedium = 0,
                         CountBad = 0,
                         ResultRating = 0,
-                        Size = size.ToString(),
+                        Size = size_finally,
                         Weight = model.Weight,
                         DateCreate = DateTime.Now
                     };

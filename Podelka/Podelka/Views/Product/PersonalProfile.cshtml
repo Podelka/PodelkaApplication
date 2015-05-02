@@ -49,8 +49,14 @@
                         </div>
                         <hr class="dashedHr" />
                         <strong>Материалы:</strong> @Model.Materials<br />
-                        <strong>Габариты:</strong> @Model.Size см<br />
-                        <strong>Масса:</strong> @Model.Weight г<br />
+                        @if (Model.Size != null)
+                        {
+                            <strong>Размеры:</strong> @Model.Size @:см<br />
+                        }
+                        @if (Model.Weight != null)
+                        {
+                            <strong>Масса:</strong> @Model.Weight @:г<br />
+                        }
                     </div>
                 </div>
             </div>

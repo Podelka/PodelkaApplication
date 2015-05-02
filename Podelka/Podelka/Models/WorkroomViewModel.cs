@@ -8,6 +8,26 @@ using System.Web;
 
 namespace Podelka.Models
 {
+    public class UploadWorkroomImageModel
+    {
+        public long WorkroomId { get; set; }
+
+        [Display(Name = "Фотография")]
+        public HttpPostedFileBase File { get; set; }
+
+        [Range(0, int.MaxValue)]
+        public int X { get; set; }
+
+        [Range(0, int.MaxValue)]
+        public int Y { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int Width { get; set; }
+
+        [Range(1, int.MaxValue)]
+        public int Height { get; set; }
+    }
+
     public class WorkroomProfileModel
     {
         public WorkroomProfileModel()

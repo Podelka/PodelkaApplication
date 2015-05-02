@@ -128,19 +128,19 @@ namespace Podelka.Models
         [Display(Name = "Цена")]
         public double? Price { get; set; }
 
-        [Required(ErrorMessage = "Пожалуйста, введите Высоту")]
+        //[Required(ErrorMessage = "Пожалуйста, введите Высоту")] //Вообще то необязательный атрибут
         [Display(Name = "Высота")]
         public string Size1 { get; set; }
 
-        [Required(ErrorMessage = "Пожалуйста, введите Ширину")]
+        //[Required(ErrorMessage = "Пожалуйста, введите Ширину")] //Вообще то необязательный атрибут
         [Display(Name = "Ширина")]
         public string Size2 { get; set; }
 
-        [Required(ErrorMessage = "Пожалуйста, введите Глубину")]
+        //[Required(ErrorMessage = "Пожалуйста, введите Глубину")] //Вообще то необязательный атрибут
         [Display(Name = "Глубина")]
         public string Size3 { get; set; }
 
-        [Required(ErrorMessage = "Пожалуйста, введите Массу")]
+        //[Required(ErrorMessage = "Пожалуйста, введите Массу")] //Вообще то необязательный атрибут
         [Display(Name = "Масса")]
         public string Weight { get; set; }
 
