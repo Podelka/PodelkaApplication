@@ -1,0 +1,9 @@
+﻿@using Podelka.Core.Source
+@model Podelka.Models.ProductsPaginationModel
+@Html.Partial("_ProductPreview", Model.Products)
+@if (Model.PageInfo.TotalPages != null && Model.PageInfo.TotalPages != 1)
+{
+    <div class="pagination">
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("Section", new { page = x }))
+    </div>
+}

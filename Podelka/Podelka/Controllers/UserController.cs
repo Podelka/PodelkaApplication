@@ -135,9 +135,14 @@ namespace Podelka.Controllers
 
         //[ChildActionOnly]
         [AllowAnonymous]
-        public ActionResult Workrooms(long? id)
+        public ActionResult Workrooms(long? id, int page =  1)
         {
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
+
+            int pageSize = 4; // количество объектов на страницу
+            int count;
+            WorkroomsPaginationModelUserProfile model = null;
+
             if (id != null)
             {
                 var user = UserManager.FindById((long)id);
@@ -158,7 +163,8 @@ namespace Podelka.Controllers
                     var workroomCollection = new Collection<WorkroomPreviewModel>();
                     if (user.Workrooms != null)
                     {
-                        foreach (var item in user.Workrooms)
+                        count = user.Workrooms.ToList().Count;
+                        foreach (var item in user.Workrooms.OrderBy(workroom => workroom.DateCreate).Skip((page - 1) * pageSize).Take(pageSize))
                         {
                             var lastProductsCollection = new Collection<ProductSmallPreviewModel>();
                             var products = item.Products.OrderByDescending(p => p.ProductId).Take(4);
@@ -174,8 +180,10 @@ namespace Podelka.Controllers
                             var workroom = new WorkroomPreviewModel(item.WorkroomId, item.UserId, item.User.Email, item.Name, item.Description, item.CountGood, item.CountMedium, item.CountBad, viewType, lastProductsCollection);
                             workroomCollection.Add(workroom);
                         }
+                        PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = count };
+                        model = new WorkroomsPaginationModelUserProfile { PageInfo = pageInfo, Workrooms = workroomCollection, UserId = (long)id };
                     }
-                    return PartialView("_WorkroomPreview", workroomCollection);
+                    return PartialView("_WorkroomPreviewUserProfile", model);
                 }
                 else
                 {
@@ -190,27 +198,34 @@ namespace Podelka.Controllers
 
         //[ChildActionOnly]
         [Authorize]
-        public ActionResult Bookmarks()
+        public ActionResult Bookmarks(int id = 1)
         {
-            Thread.Sleep(5000);
+            int page = id;
+            //Thread.Sleep(5000);
             var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
             var user = UserManager.FindById(userId);
 
             if (user != null)
             {
                 var productsCollection = new Collection<ProductPreviewModel>();
+                ProductsPaginationModelBookmarks model = null;
+                int pageSize = 12; // количество объектов на страницу
+                int count;
 
                 if (user.Bookmarks != null)
                 {
-                    var products = user.Bookmarks.OrderByDescending(p => p.DateAdd).ToList();
+                    var products = user.Bookmarks.OrderByDescending(p => p.DateAdd).ToList().Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                    count = user.Bookmarks.ToList().Count;
                     foreach (var item in products)
                     {
                         var product = new ProductPreviewModel(item.Product.ProductId, item.Product.Name, item.Product.Price, item.Product.PriceDiscount);
                         productsCollection.Add(product);
                     }
+
+                    PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = count };
+                    model = new ProductsPaginationModelBookmarks { PageInfo = pageInfo, Products = productsCollection, UserId = userId };
                 }
-                //return PartialView("_ProductPreview", productsCollection);
-                return PartialView("_ProductPreviewRemove", productsCollection);
+                return PartialView("_ProductPreviewRemove", model);
             }
             else
             {
@@ -222,7 +237,7 @@ namespace Podelka.Controllers
         [AllowAnonymous]
         public ActionResult Adverts()
         {
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
             //var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
             //var user = UserManager.FindById(userId);
 

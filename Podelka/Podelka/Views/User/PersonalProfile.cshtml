@@ -37,22 +37,22 @@
                 <ul>
                     @if (ViewBag.Menu == null || ViewBag.Menu == "Workrooms")
                     {
-                        <li id="workrooms" class="active">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_workrooms({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200 })</li>
-                        <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200 })</li>
-                        <li id="bookmarks">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_bookmarks({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200, OnSuccess = "review()" })</li>
+                        <li id="workrooms" class="active">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_workrooms({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 500 })</li>
+                        <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 500 })</li>
+                        <li id="bookmarks">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_bookmarks({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 500, OnSuccess = "review()" })</li>
                     }
                     else
                     {
-                        <li id="workrooms">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_workrooms({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200 })</li>
+                        <li id="workrooms">@Ajax.ActionLink("Мастерские", "Workrooms", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_workrooms({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 500 })</li>
                         if (ViewBag.Menu == "Adverts")
                         {
-                            <li id="adverts" class="active">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200 })</li>
-                            <li id="bookmarks">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_bookmarks({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200, OnSuccess = "review()" })</li>
+                            <li id="adverts" class="active">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 500 })</li>
+                            <li id="bookmarks">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_bookmarks({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 500, OnSuccess = "review()" })</li>
                         }
                         else
                         {
-                            <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200 })</li>
-                            <li id="bookmarks" class="active">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_bookmarks({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 200, OnSuccess = "review()" })</li>
+                            <li id="adverts">@Ajax.ActionLink("Заказы", "Adverts", "User", new { id = Model.UserId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_adverts({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 500 })</li>
+                            <li id="bookmarks" class="active">@Ajax.ActionLink("Избранное", "Bookmarks", "User", new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_bookmarks({0});", Model.UserId), LoadingElementId = "loading", LoadingElementDuration = 500, OnSuccess = "review()" })</li>
                         }
                     }
                 </ul>
@@ -75,7 +75,7 @@
                 }
                 @if (ViewBag.Menu == "Bookmarks")
                 {
-                    @Html.Action("Bookmarks", "User")
+                    @Html.Action("Bookmarks", "User", new { id = 1 })
                 }
             </div>
         </div>

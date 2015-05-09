@@ -1,0 +1,9 @@
+﻿@using Podelka.Core.Source
+@model Podelka.Models.WorkroomsPaginationModelUserProfile
+@Html.Partial("_WorkroomPreview", Model.Workrooms)
+@if (Model.PageInfo.TotalPages != null && Model.PageInfo.TotalPages != 1)
+{
+    <div class="pagination">
+        @Html.PageLinksUserWorkrooms(Model.PageInfo, Model.UserId, x => Url.Action("Workrooms", "User", new { id = Model.UserId, page = x }))
+    </div>
+}

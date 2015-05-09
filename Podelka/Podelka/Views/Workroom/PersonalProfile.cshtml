@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 @model Podelka.Models.WorkroomProfileModel
+@using Podelka.Core.Source
 <div class="profileView clearfix">
     <div class="center">
         <div class="leftSidebar">
@@ -33,13 +34,13 @@
                 <ul>
                     @if (ViewBag.Menu == null || ViewBag.Menu == "Products")
                     {
-                        <li id="products" class="active">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_products({0});", Model.WorkroomId), LoadingElementId = "loading", LoadingElementDuration = 200, OnSuccess = "review()" })</li>
-                        <li id="reviews">@Ajax.ActionLink("Отзывы", "Reviews", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_reviews({0});", Model.WorkroomId), LoadingElementId = "loading", LoadingElementDuration = 200 })</li>
+                        <li id="products" class="active">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_products({0});", Model.WorkroomId), LoadingElementId = "loading", LoadingElementDuration = 500, OnSuccess = "review()" })</li>
+                        <li id="reviews">@Ajax.ActionLink("Отзывы", "Reviews", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_reviews({0});", Model.WorkroomId), LoadingElementId = "loading", LoadingElementDuration = 500 })</li>
                     }
                     else
                     {
-                        <li id="products">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_products({0});", Model.WorkroomId), LoadingElementId = "loading", LoadingElementDuration = 200, OnSuccess = "review()" })</li>
-                        <li id="reviews" class="active">@Ajax.ActionLink("Отзывы", "Reviews", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_reviews({0});", Model.WorkroomId), LoadingElementId = "loading", LoadingElementDuration = 200 })</li>
+                        <li id="products">@Ajax.ActionLink("Изделия", "Products", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_products({0});", Model.WorkroomId), LoadingElementId = "loading", LoadingElementDuration = 500, OnSuccess = "review()" })</li>
+                        <li id="reviews" class="active">@Ajax.ActionLink("Отзывы", "Reviews", "Workroom", new { id = Model.WorkroomId }, new AjaxOptions { UpdateTargetId = "rightBody", OnBegin = String.Format("active_menu_reviews({0});", Model.WorkroomId), LoadingElementId = "loading", LoadingElementDuration = 500 })</li>
                     }
                 </ul>
                 <div class="productViewButton">

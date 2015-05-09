@@ -359,6 +359,7 @@ namespace Podelka.Controllers
         [Authorize]
         public ActionResult FavoriteRemove(long? id)
         {
+            var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
             if (id != null)
             {
                 using (var db = new Context())
@@ -366,7 +367,6 @@ namespace Podelka.Controllers
                     var product = db.Products.Find(id);
                     if (product != null)
                     {
-                        var userId = Convert.ToInt64(HttpContext.User.Identity.GetUserId());
                         var favorite = db.Bookmarks.Where(p => p.ProductId == id && p.UserId == userId).FirstOrDefault();
                         if (favorite != null)
                         {
@@ -374,32 +374,36 @@ namespace Podelka.Controllers
                             db.SaveChanges();
                         }
 
-                        return RedirectToAction("Profile", "User", new { id = HttpContext.User.Identity.GetUserId(), menu = "Bookmarks" });
+                        return RedirectToAction("Profile", "User", new { id = userId, page = 1, menu = "Bookmarks" });
                     }
                     else
                     {
                         //удалили изделие
-                        return RedirectToAction("Profile", "User", new { id = HttpContext.User.Identity.GetUserId(), menu = "Bookmarks" });
+                        return RedirectToAction("Profile", "User", new { id = userId, page = 1, menu = "Bookmarks" });
                     }
                 }
             }
             else
             {
-                return RedirectToAction("Profile", "User", new { id = HttpContext.User.Identity.GetUserId(), menu = "Bookmarks" });//В ссылке отсутвует идентификатор изделия (id)
+                return RedirectToAction("Profile", "User", new { id = userId, page = 1, menu = "Bookmarks" });//В ссылке отсутвует идентификатор изделия (id)
             }
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Section(int? id)
+        public ActionResult Section(int? id, int page = 1)
         {
             if (id != null)
             {
+                int pageSize = 12; // количество объектов на страницу
+                int count;
+
                 var products = new List<Product>();
 
                 using (var db = new Context())
                 {
-                    products = db.Products.Where(p=>p.Category.SectionId == id).ToList();
+                    products = db.Products.Where(p => p.Category.SectionId == id).OrderBy(p => p.ProductId).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                    count = db.Products.Where(p => p.Category.SectionId == id).ToList().Count;
                 }
 
                 if (products != null)
@@ -412,7 +416,10 @@ namespace Podelka.Controllers
                         productsCollection.Add(product);
                     }
 
-                    return View(productsCollection);
+                    PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = count };
+                    ProductsPaginationModel model = new ProductsPaginationModel { PageInfo = pageInfo, Products = productsCollection };
+
+                    return View(model);
                 }
                 else
                 {

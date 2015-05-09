@@ -1,8 +1,15 @@
 ﻿@{
-    ViewBag.Title = "Завершение регистрации";
+    ViewBag.Title = "Проверка попап";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
-<div class="center">
-    <h2>@ViewBag.Title</h2>
-    <p>На указанный электронный адрес отправлены дальнейшие инструкции по завершению регистрации</p>
+<div class="modal-content">
+    <div class="modal-body">
+        <h2>Письмо отправлено</h2>
+        <p>На указанный Email отправлены дальнейшие инструкции по завершению регистрации</p>
+        <h3>Не получили письмо?</h3>
+        <p>Сначала проверьте папки спама или нежелательной почты</p>
+        <p>Если же вы все равно не нашли письмо, обратитесь в отдел обслуживания клиентов</p>
+        <input type="button" value="Войти" onclick="location.href = '@Url.Action("Login", "Account")'" />
+        <input type="button" value="На главную" onclick="location.href = '@Url.Action("Index", "Home")'" />
+    </div>
 </div>

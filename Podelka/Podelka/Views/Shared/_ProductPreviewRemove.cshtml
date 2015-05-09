@@ -1,7 +1,8 @@
-﻿@model ICollection<Podelka.Models.ProductPreviewModel>
-@if (Model != null)
+﻿@using Podelka.Core.Source
+@model Podelka.Models.ProductsPaginationModelBookmarks
+@if (Model.Products != null)
 {
-    foreach (var item in Model)
+    foreach (var item in Model.Products)
     {
         <div id="workElement" class="workElement fourElement clearfix">
             <a href="@Url.Action("Profile", "Product", new { id = item.ProductId })">
@@ -36,6 +37,12 @@
             <a class="likeButton" href="@Url.Action("FavoriteRemove", "Product", new { id = item.ProductId, returnUrl = Request.Url })">
                 <i class="fa fa-star-o"></i>
             </a>
+        </div>
+    }
+    if (Model.PageInfo.TotalPages != null && Model.PageInfo.TotalPages != 1)
+    {
+        <div class="pagination">
+            @Html.PageLinksBookmarks(Model.PageInfo, Model.UserId, x => Url.Action("Bookmarks", "User", new { id = x }))
         </div>
     }
 }

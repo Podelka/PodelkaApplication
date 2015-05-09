@@ -23,11 +23,11 @@ namespace Podelka
         public Task SendAsync(IdentityMessage message)
         {
             var smtpUserlName = "Podelka.by";
-            var smtpUserEmail = "podelka.service@gmail.com";
-            var smtpUserPass = "podelka2015";
+            var smtpUserEmail = "podelka2015@yandex.ru";//"podelka.service@gmail.com";
+            var smtpUserPass = "belarusina100";//"podelka2015";
 
-            var smtpHost = "smtp.gmail.com";
-            var smtpPort = 587;//25 порт для яндекса
+            var smtpHost = "smtp.yandex.ru";//"smtp.gmail.com";
+            var smtpPort = 25;//587;//25 порт для яндекса
 
             //Создание подключения и авторизация
             SmtpClient client = new SmtpClient(smtpHost, smtpPort);

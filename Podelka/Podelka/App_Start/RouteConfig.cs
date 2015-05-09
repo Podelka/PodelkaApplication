@@ -31,8 +31,8 @@ namespace Podelka
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}/{menu}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, menu = UrlParameter.Optional }
+                url: "{controller}/{action}/{id}/{page}/{menu}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, page = UrlParameter.Optional, menu = UrlParameter.Optional }
             );
         }
     }

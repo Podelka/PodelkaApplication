@@ -19,13 +19,17 @@ namespace Podelka.Controllers
     {
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Index()
+        public ActionResult Index(int id = 1)
         {
             var workrooms = new List<Workroom>();
+            int page = id;
+            int pageSize = 4; // количество объектов на страницу
+            int count;
 
             using (var db = new Context())
             {
-                workrooms = db.Workrooms.ToList();
+                workrooms = db.Workrooms.OrderBy(workroom => workroom.DateCreate).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                count = db.Workrooms.ToList().Count;
                 if (workrooms != null)
                 {
                     foreach(var item in workrooms)
@@ -67,7 +71,10 @@ namespace Podelka.Controllers
                     var workroom = new WorkroomPreviewModel(item.WorkroomId, item.UserId, item.User.Email, item.Name, item.Description, item.CountGood, item.CountMedium, item.CountBad, viewType, lastProductsCollection);
                     workroomsCollectoin.Add(workroom);
                 }
-                return View(workroomsCollectoin);
+
+                PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = count };
+                WorkroomsPaginationModel model = new WorkroomsPaginationModel { PageInfo = pageInfo, Workrooms = workroomsCollectoin };
+                return View(model);
             }
             else
             {
@@ -347,19 +354,25 @@ namespace Podelka.Controllers
 
         //[ChildActionOnly]
         [AllowAnonymous]
-        public ActionResult Products(long? id)
+        public ActionResult Products(long? id, int page = 1)
         {
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
             if (id != null)
             {
                 var workroom = new Workroom();
+                var products = new List<Product>();
+                int pageSize = 12; // количество объектов на страницу
+                int count = 0;
 
                 using (var db = new Context())
                 {
                     workroom = db.Workrooms.Find(id);
                     if (workroom != null)
                     {
-                        db.Entry(workroom).Collection(w => w.Products).Load();
+                        products = workroom.Products.OrderBy(p => p.ProductId).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                        count = workroom.Products.Count;
+
+                        //db.Entry(workroom).Collection(w => w.Products).Load();
                     }
                 }
 
@@ -367,16 +380,18 @@ namespace Podelka.Controllers
                 {
                     var productsCollection = new Collection<ProductPreviewModel>();
 
-                    if (workroom.Products != null)
+                    if (products != null)
                     {
-                        foreach (var item in workroom.Products)
+                        foreach (var item in products)
                         {
                             var product = new ProductPreviewModel(item.ProductId, item.Name, item.Price, item.PriceDiscount);
                             productsCollection.Add(product);
                         }
                     }
 
-                    return PartialView("_ProductPreview", productsCollection);
+                    PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = workroom.Products.Count };
+                    ProductsPaginationModelWorkroomProfile model = new ProductsPaginationModelWorkroomProfile { PageInfo = pageInfo, Products = productsCollection, WorkroomId = workroom.WorkroomId };
+                    return PartialView("_ProductPreviewWorkroomProfile", model);
                 }
                 else
                 {
@@ -393,7 +408,7 @@ namespace Podelka.Controllers
         [AllowAnonymous]
         public ActionResult Reviews(long? id)
         {
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
             if (id != null)
             {
                 return PartialView("_WorkroomReviews");

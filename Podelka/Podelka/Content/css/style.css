@@ -600,12 +600,12 @@ p.uLabel {
     margin: 8px;
     font-size: 1.23em;
 }
-.workElement:nth-of-type(3n), .workElement.fourElement:nth-of-type(4n) {
-    margin-right: 0px;
-} 
 .workElement:nth-of-type(4n), .workElement.fourElement:nth-of-type(3n) {
     margin-right: 20px;
 }
+.workElement:nth-of-type(3n), .workElement.fourElement:nth-of-type(4n) {
+    margin-right: 0px;
+} 
 
 .likeButton {
     position: absolute;
@@ -1081,4 +1081,41 @@ input[type="text"].weightProduct {
 .agreeRulesLabel a {
     color: #5a5a5a;
     text-decoration: underline;
+}
+
+/*Пагинация*/
+.pagination {
+    margin: 5px 0;
+    width: 100%;
+    float: left;
+}
+.pagination div {
+    text-align: center;
+    float: left;
+    margin: 0 20px 0 0; /* отступ справа */
+}
+.pagination div a {
+    padding-top: 2px; /* сдвигаем сверху, чтобы background выглядел  правильно */
+    width: 25px;
+    height: 25px;
+    display: block;
+}
+.pagination .prev a, .pagination .next a {
+    /* убираем влияние width:25px из правила .pagination div a */
+    width: auto; 
+}
+.pagination div a.active {
+    color: white;
+    /* задний фон для текущий страницы */
+    background-color: #fc6060;
+}
+.pagination div a:hover {
+    color: #e25656;
+    /* задний фон для для наведения */
+    background-color: white;
+}
+.pagination .prev a:hover, .pagination .next a:hover {
+    width: auto; /* автоматическая ширина */
+    color: #e25656;
+    background: none; /*  убираем задний фон при наведении */
 }

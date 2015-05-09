@@ -2,7 +2,8 @@
     ViewBag.Title = "Категории";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
-@model ICollection<Podelka.Models.ProductPreviewModel>
+@using Podelka.Core.Source
+@model Podelka.Models.ProductsPaginationModel
     <div class="profileView clearfix">
         <div id="rightBody" class="center">
             <div class="rightContent">
@@ -14,7 +15,7 @@
                     </div>
                 </div>
                 <div id="rightBody" class="rightBody clearfix">
-                    @Html.Partial("_ProductPreview", Model)
+                    @Html.Partial("_ProductPreviewSection", Model)
                 </div>
             </div>
         </div>

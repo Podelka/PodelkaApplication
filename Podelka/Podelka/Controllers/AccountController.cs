@@ -160,8 +160,7 @@ namespace Podelka.Controllers
                     await UserManager.SendEmailAsync(user.Id, "Подтверждение электронной почты",
                         "<h2 style=font-family:Georgia,serif;font-size:40px;font-weight:bold;font-style:italic>Всё готово</h2>"+
                         "Для завершения регистрации перейдите по ссылке: <a href=\"" + callbackUrl + "\">завершить регистрацию</a>");
-                    //return View("RegisterConfirmation");
-                    return PartialView("_RegisterConfirmation");
+                    return PartialView("RegisterConfirmation");
                 }
                 else
                 {

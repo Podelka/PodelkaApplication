@@ -13,6 +13,16 @@ namespace Podelka.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult Index2()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index2(String d)
+        {
+            return RedirectToAction("Par", "Popup");
+        }
         [HttpPost]
         public ActionResult Index(String d)
         {

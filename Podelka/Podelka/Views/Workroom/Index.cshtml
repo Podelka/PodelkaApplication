@@ -2,14 +2,21 @@
     ViewBag.Title = "Мастерские";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
-@model ICollection<Podelka.Models.WorkroomPreviewModel>
+@using Podelka.Core.Source
+@model Podelka.Models.WorkroomsPaginationModel
 <div class="profileView clearfix">
     <div class="center">
         <div class="leftSidebar">
             <h3>Подобрать мастера</h3>
         </div>
         <div class="rightContent">
-            @Html.Partial("_WorkroomPreview", Model)
+            @Html.Partial("_WorkroomPreview", Model.Workrooms)
+            @if (Model.PageInfo.TotalPages != null && Model.PageInfo.TotalPages != 1)
+            { 
+                <div class="pagination">
+                    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", "Workroom", new { id = x }))
+                </div>
+            }
         </div>
     </div>
 </div>
